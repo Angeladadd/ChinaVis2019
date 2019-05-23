@@ -26,7 +26,7 @@ git init
   git add <file>
   ```
   
-  这时如果想要把代码从暂存区删除，可以使用git checkout -- <file>
+  这时如果想要把代码从暂存区删除，可以使用git reset
  
 3. 提交修改，会提交所有暂存区的代码！在提交时请git status一下
   
