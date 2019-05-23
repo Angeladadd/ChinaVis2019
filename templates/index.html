@@ -3,22 +3,97 @@
     <head>
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.js"></script>
+        <script src = "../static/scripts/DrawRoute.js"></script>
         <script src = "../static/scripts/DrawFlow.js"></script>
         <script>
-             data_time_day1 = {{number_time_day1|tojson}};
-             data_time_day2 = {{number_time_day2|tojson}};
-             data_time_day3 = {{number_time_day3|tojson}};
+            sensor_deployment = {{sensor|tojson}}
+            data_time_day1 = {{number_time_day1|tojson}}
+            data_time_day2 = {{number_time_day2|tojson}}
+            data_time_day3 = {{number_time_day3|tojson}}
+            data_day1 = {{data_day1|tojson}}
+            data_day2 = {{data_day2|tojson}}
+            data_day3 = {{data_day3|tojson}}
+            //基本数据
+            var sensor = {x_max:15,x_min:0,y_max:28,y_min:0};
+            BASIC_DATA = {sensor:sensor};
+            var people_map = {};
+            var sensor_map = {};
+
+            for(var i=0;i<sensor_deployment.length;i++){
+                sensor_map[sensor_deployment[i].sid] = i;
+            }
+            //统计一天的people，目前只处理了第一天的，还不知道这个代码到时候放哪
+            //这个地方非常瓶颈，建议后端直接做成json，后端如果要加的话尽量把people做成这个数据结构8
+            people = new Array(3);
+            people[0] = new Array(0);
+            var cnt = -1;
+            for(var i=0;i<data_day1.length;i++){
+                let id = data_day1[i].id;
+                let sid = data_day1[i].sid;
+                let time = data_day1[i].time;
+                if(!people_map.hasOwnProperty(id)){
+                    cnt++;
+                    people_map[id] = cnt;
+                    people[0][cnt] = new Array(0);
+                }
+                var index = parseInt(people_map[id]);
+
+                var obj = {};
+                var sensor_tmp = sensor_deployment[sensor_map[sid]];
+                obj.x = parseInt(sensor_tmp.x);
+                obj.y = parseInt(sensor_tmp.y);
+                obj.floor = parseInt(sensor_tmp.floor);
+                obj.time = parseInt(time);
+
+                if(people[0][index]) people[0][index].push(obj);
+            }
+
+            MAP = {people_map:people_map,sensor_map:sensor_map};
+            //基本信息处理
+            //一楼的sensor
+            sensor_floor1 = new Array(0);
+            //二楼的sensor
+            sensor_floor2 = new Array(0);
+            for(let i=0;i<sensor_deployment.length;i++){
+                if(sensor_deployment[i].floor == "1")
+                    sensor_floor1.push(sensor_deployment[i]);
+                else
+                    sensor_floor2.push(sensor_deployment[i]);
+            }
+
+
         </script>
     </head>
 
     <body>
-        <div id="liuyuxiang">
+    <div id="liuyuxiang">
             <select id="selectButton"></select>
             <div id="vis1"></div>
-        </div>
+    </div>
+    <div id="main_active">
+        <svg id="day_route"></svg>
+    </div>
 
         <script>
         drawFlow();
+
+var route = drawMainActive(1,1);
+function Update(currentTime){
+    console.log(currentTime);
+    route.update(currentTime);
+}
+
         </script>
     </body>
+<script>
+
+  var currentTime = 25240;
+  setTimeout(function () {
+    if(currentTime<30632){
+      Update(currentTime);
+      currentTime++;
+      setTimeout(arguments.callee, 10)
+    }
+  },10);
+</script>
 </html>
