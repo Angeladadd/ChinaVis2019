@@ -17,7 +17,7 @@
             data_day3 = {{data_day3|tojson}}
             //基本数据
             var sensor = {x_max:15,x_min:0,y_max:28,y_min:0};
-            BASIC_DATA = {sensor:sensor};
+            BASIC_DATA = {sensor:sensor,people_MAX:20};
             var people_map = {};
             var sensor_map = {};
 
@@ -46,6 +46,7 @@
                 obj.y = parseInt(sensor_tmp.y);
                 obj.floor = parseInt(sensor_tmp.floor);
                 obj.time = parseInt(time);
+                obj.sensor_simple_id = sensor_map[sid];
 
                 if(people[0][index]) people[0][index].push(obj);
             }
@@ -91,7 +92,7 @@ function Update(currentTime){
 
   var currentTime = 25240;
   setTimeout(function () {
-    if(currentTime<30632){
+    if(currentTime<31270){
       Update(currentTime);
       currentTime++;
       setTimeout(arguments.callee, 10)
