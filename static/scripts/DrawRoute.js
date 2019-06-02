@@ -132,4 +132,4 @@ function drawMainActive(day_index, floor_index){
                         return 1;});
             };
             return obj;
-        }
+}
