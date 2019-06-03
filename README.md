@@ -15,9 +15,9 @@ js代码尽量写在.js里，在html里面调函数，在运行的时候chrome�
 处理一下直接保存成json吧
 
 ## 前后端交互说明
-*数据格式   sensor_number = {sid: number of people, ...}
-*url: /getSensorNumber
-*methods: GET 和 POST
-*后端获取day和time分别是：'day', 'time'（现在只有day=1用于测试）
-*前端获取 sensor_number
-*PS: 前端检查一下数据类型
+* 数据格式   sensor_number = {sid: number of people, ...}
+* url: /getSensorNumber
+* methods: GET 和 POST
+* 后端获取day和time分别是：'day', 'time'（现在只有day=1用于测试）
+* 前端获取 sensor_number
+* PS: 前端检查一下数据类型
