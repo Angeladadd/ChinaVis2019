@@ -21,7 +21,7 @@
             sensor_deployment = {{sensor|tojson}}
             //基本数据
             var sensor = {x_max:15,x_min:0,y_max:28,y_min:0};
-            BASIC_DATA = {sensor:sensor,people_MAX:10};
+            BASIC_DATA = {sensor:sensor,people_MAX:25};
             var people_map = {};
             var sensor_map = {};
 
@@ -106,8 +106,8 @@ function Update(currentTime){
     if(currentTime<31270){
       Update(currentTime);
       currentTime++;
-      setTimeout(arguments.callee, 10)
+      setTimeout(arguments.callee, 5)
     }
-  },10);
+  },5);
 </script>
 </html>

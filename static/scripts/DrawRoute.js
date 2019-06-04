@@ -52,7 +52,7 @@ function drawMainActive(day_index){
             for(var i =1;i<14;i++){
                 var r =Math.floor(200+Math.random()*55),g=Math.floor(200+Math.random()*55), b=Math.floor(200+Math.random()*55);
                 var color_light = d3.rgb(r,g,b);
-                var color_dark = d3.rgb(parseInt(r/5),parseInt(g/5),parseInt(b/5));
+                var color_dark = d3.rgb(parseInt(r/3),parseInt(g/3),parseInt(b/3));
                 compute[i] = d3.interpolate(color_light,color_dark);
                 color1[i] = color_light;
             }
