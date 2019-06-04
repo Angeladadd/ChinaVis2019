@@ -42,6 +42,7 @@ with open("./static/data/day3.csv", "r") as file:
             data_day3.append(datum)
         i = i + 1
 
+########################################################################
 # # CDF for day1
 # last_time = data_day1[0]['time']
 # set_id = [data_day1[0]['id']]
@@ -108,16 +109,18 @@ with open("./static/data/day3.csv", "r") as file:
 #     for line in number_time_day3:
 #         csv_write.writerow([line[0], line[1]])
 
-with open("./static/data/SensorDeployment.csv", "r") as csvfile:
-    sensorDeployment_csv = csv.reader(csvfile)
-    sensors = []
-    i = 0
-    for line in sensorDeployment_csv:
-        if i != 0:
-            sensors.append(line[0])
-        i += 1
 
-print(len(sensors))
+#####################################################################
+# with open("./static/data/SensorDeployment.csv", "r") as csvfile:
+#     sensorDeployment_csv = csv.reader(csvfile)
+#     sensors = []
+#     i = 0
+#     for line in sensorDeployment_csv:
+#         if i != 0:
+#             sensors.append(line[0])
+#         i += 1
+#
+# print(len(sensors))
 
 # # time_sensor_number for day1
 # sensor_people = {}
@@ -314,3 +317,27 @@ print(len(sensors))
 #
 #     for line in time_sensor_number[1406806:]:
 #         csv_write.writerow(line)
+
+
+with open("./static/data/SensorDeployment.csv", "r") as csvfile:
+    sensorDeployment_csv = csv.reader(csvfile)
+    sensors_placement = {}
+    i = 0
+    for line in sensorDeployment_csv:
+        if i != 0:
+            sensors_placement[line[0]] = {'floor': line[1], 'x': line[2], 'y': line[3]}
+        i += 1
+
+# print(sensors_placement)
+print(len(sensors_placement.items()))
+# print(sensors_placement.keys())
+
+# time_people_sensor for day1
+people_sensor = {}
+time__people_sensor_day1 = {}
+for item in data_day1[:5]:
+    time = item['time']
+    people_sensor[item['id']] = item['sid']
+    time__people_sensor_day1[time] = people_sensor
+
+print(time__people_sensor_day1)
