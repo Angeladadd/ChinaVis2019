@@ -1,6 +1,6 @@
 import csv
-import numpy as np
 
+# day1 data
 with open("./static/data/day1.csv", "r") as file:
     day1_csv = csv.reader(file)
     i = 0
@@ -14,34 +14,34 @@ with open("./static/data/day1.csv", "r") as file:
             data_day1.append(datum)
         i = i + 1
 
-# print(data_day1)
+# day2 data
+with open("./static/data/day2.csv", "r") as file:
+    day2_csv = csv.reader(file)
+    i = 0
+    data_day2 = []
+    head_day = []
+    for line in day2_csv:
+        if i == 0:
+            head_day = line
+        else:
+            datum = {head_day[0]: line[0], head_day[1]: line[1], head_day[2]: line[2]}
+            data_day2.append(datum)
+        i = i + 1
 
-# with open("./static/data/day2.csv", "r") as file:
-#     day2_csv = csv.reader(file)
-#     i = 0
-#     data_day2 = []
-#     head_day = []
-#     for line in day2_csv:
-#         if i == 0:
-#             head_day = line
-#         else:
-#             datum = {head_day[0]: line[0], head_day[1]: line[1], head_day[2]: line[2]}
-#             data_day2.append(datum)
-#         i = i + 1
-#
-# with open("./static/data/day3.csv", "r") as file:
-#     day3_csv = csv.reader(file)
-#     i = 0
-#     data_day3 = []
-#     head_day =[]
-#     for line in day3_csv:
-#         if i == 0:
-#             head_day = line
-#         else:
-#             datum = {head_day[0]: line[0], head_day[1]: line[1], head_day[2]: line[2]}
-#             data_day3.append(datum)
-#         i = i + 1
-#
+# day3 data
+with open("./static/data/day3.csv", "r") as file:
+    day3_csv = csv.reader(file)
+    i = 0
+    data_day3 = []
+    head_day =[]
+    for line in day3_csv:
+        if i == 0:
+            head_day = line
+        else:
+            datum = {head_day[0]: line[0], head_day[1]: line[1], head_day[2]: line[2]}
+            data_day3.append(datum)
+        i = i + 1
+
 # # CDF for day1
 # last_time = data_day1[0]['time']
 # set_id = [data_day1[0]['id']]
@@ -63,7 +63,7 @@ with open("./static/data/day1.csv", "r") as file:
 #     csv_write = csv.writer(csvfile)
 #     for line in number_time_day1:
 #         csv_write.writerow([line[0], line[1]])
-#
+
 # # CDF for day2
 # last_time = data_day2[0]['time']
 # set_id = [data_day2[0]['id']]
@@ -85,7 +85,7 @@ with open("./static/data/day1.csv", "r") as file:
 #     csv_write = csv.writer(csvfile)
 #     for line in number_time_day2:
 #         csv_write.writerow([line[0], line[1]])
-#
+
 # # CDF for day3
 # last_time = data_day3[0]['time']
 # set_id = [data_day3[0]['id']]
@@ -113,60 +113,204 @@ with open("./static/data/SensorDeployment.csv", "r") as csvfile:
     sensors = []
     i = 0
     for line in sensorDeployment_csv:
-        if i is not 0:
+        if i != 0:
             sensors.append(line[0])
         i += 1
 
-# print(sensors)
 print(len(sensors))
 
-sensor_people = {}
-for sensor in sensors:
-    sensor_people[sensor] = []
+# # time_sensor_number for day1
+# sensor_people = {}
+# for sensor in sensors:
+#     sensor_people[sensor] = []
+#
+# time__sensor_people_day1 = {}
+# for item in data_day1:
+#     time = item['time']
+#     for value in sensor_people.values():
+#         if item['id'] in value:
+#             value.remove(item['id'])
+#             break
+#     sensor_people[item['sid']].append(item['id'])
+#     current_sensor_people = {}
+#     for sensor, people in sensor_people.items():
+#         current_sensor_people[sensor] = []
+#         current_sensor_people[sensor].extend(people)
+#     time__sensor_people_day1[time] = current_sensor_people
+#
+# # test: 检测每个时刻每个人是否只出现在一个传感器的位置
+# test = True
+# for key_time, value_sensor_people in time__sensor_people_day1.items():
+#     id_times = {}
+#     for key, value in value_sensor_people.items():
+#         for id in value:
+#             if id not in id_times.keys():
+#                 id_times[id] = 1
+#             else:
+#                 id_times[id] += 1
+#     for key, value in id_times.items():
+#         if value != 1:
+#             test = False
+# print(test)
+#
+# time_sensor_number = []
+# for time, sensor_people in time__sensor_people_day1.items():
+#     for sensor, people in sensor_people.items():
+#         if len(people) > 0:
+#             time_sensor_number.append([time, sensor, len(people)])
+# print(len(time_sensor_number))
+# # 6473517
+#
+# with open("./static/data/time_sensor_number_day1_1.csv", "w", newline="") as csvfile:
+#     csv_write = csv.writer(csvfile)
+#     csv_write.writerow(['time', 'sid', 'number'])
+#
+#     for line in time_sensor_number[:1618379]:
+#         csv_write.writerow(line)
+#
+# with open("./static/data/time_sensor_number_day1_2.csv", "w", newline="") as csvfile:
+#     csv_write = csv.writer(csvfile)
+#     csv_write.writerow(['time', 'sid', 'number'])
+#
+#     for line in time_sensor_number[1618379:3236758]:
+#         csv_write.writerow(line)
+#
+# with open("./static/data/time_sensor_number_day1_3.csv", "w", newline="") as csvfile:
+#     csv_write = csv.writer(csvfile)
+#     csv_write.writerow(['time', 'sid', 'number'])
+#
+#     for line in time_sensor_number[3236758:4855137]:
+#         csv_write.writerow(line)
+#
+# with open("./static/data/time_sensor_number_day1_4.csv", "w", newline="") as csvfile:
+#     csv_write = csv.writer(csvfile)
+#     csv_write.writerow(['time', 'sid', 'number'])
+#
+#     for line in time_sensor_number[4855137:]:
+#         csv_write.writerow(line)
 
-time__sensor_people_day1 = {}
-for item in data_day1:
-    time = item['time']
-    # 特定时刻传感器的人数
-    for value in sensor_people.values():
-        if item['id'] in value:
-            value.remove(item['id'])
-            break
-    sensor_people[item['sid']].append(item['id'])
-    # print(sensor_people)
-    current_sensor_people = {}
-    for k, vs in sensor_people.items():
-        current_vs = []
-        for v in vs:
-            current_vs.append(v)
-        current_sensor_people[k] = current_vs
-    time__sensor_people_day1[time] = current_sensor_people
+# # time_sensor_number for day2
+# sensor_people = {}
+# for sensor in sensors:
+#     sensor_people[sensor] = []
+#
+# time__sensor_people_day2 = {}
+# for item in data_day2:
+#     time = item['time']
+#     for value in sensor_people.values():
+#         if item['id'] in value:
+#             value.remove(item['id'])
+#             break
+#     sensor_people[item['sid']].append(item['id'])
+#     current_sensor_people = {}
+#     for sensor, people in sensor_people.items():
+#         current_sensor_people[sensor] = []
+#         current_sensor_people[sensor].extend(people)
+#     time__sensor_people_day2[time] = current_sensor_people
+#
+# # test: 检测每个时刻每个人是否只出现在一个传感器的位置
+# test = True
+# for key_time, value_sensor_people in time__sensor_people_day2.items():
+#     id_times = {}
+#     for key, value in value_sensor_people.items():
+#         for id in value:
+#             if id not in id_times.keys():
+#                 id_times[id] = 1
+#             else:
+#                 id_times[id] += 1
+#     for key, value in id_times.items():
+#         if value != 1:
+#             test = False
+# print(test)
+#
+# time_sensor_number = []
+# for time, sensor_people in time__sensor_people_day2.items():
+#     for sensor, people in sensor_people.items():
+#         if len(people) > 0:
+#             time_sensor_number.append([time, sensor, len(people)])
+# print(len(time_sensor_number))
+# # 6736759
+#
+# with open("./static/data/time_sensor_number_day2_1.csv", "w", newline="") as csvfile:
+#     csv_write = csv.writer(csvfile)
+#     csv_write.writerow(['time', 'sid', 'number'])
+#
+#     for line in time_sensor_number[:1684189]:
+#         csv_write.writerow(line)
+#
+# with open("./static/data/time_sensor_number_day2_2.csv", "w", newline="") as csvfile:
+#     csv_write = csv.writer(csvfile)
+#     csv_write.writerow(['time', 'sid', 'number'])
+#
+#     for line in time_sensor_number[1684189:3368379]:
+#         csv_write.writerow(line)
+#
+# with open("./static/data/time_sensor_number_day2_3.csv", "w", newline="") as csvfile:
+#     csv_write = csv.writer(csvfile)
+#     csv_write.writerow(['time', 'sid', 'number'])
+#
+#     for line in time_sensor_number[3368379:5052569]:
+#         csv_write.writerow(line)
+#
+# with open("./static/data/time_sensor_number_day2_4.csv", "w", newline="") as csvfile:
+#     csv_write = csv.writer(csvfile)
+#     csv_write.writerow(['time', 'sid', 'number'])
+#
+#     for line in time_sensor_number[5052569:]:
+#         csv_write.writerow(line)
 
-# print(time__sensor_people_day1)
-
-# test: 检测每个时刻每个人是否只出现在一个传感器的位置
-test = True
-for key_time, value_sensor_people in time__sensor_people_day1.items():
-    id_times = {}
-    for key, value in value_sensor_people.items():
-        for id in value:
-            if id not in id_times.keys():
-                id_times[id] = 1
-            else:
-                id_times[id] += 1
-    for key, value in id_times.items():
-        if value is not 1:
-            test = False
-print(test)
-
-with open("./static/data/time__sensor_number_day1.csv", "w", newline="") as csvfile:
-    csv_write = csv.writer(csvfile)
-    csv_write.writerow(['time', 'sid', 'number'])
-
-    for time, sensor_people in time__sensor_people_day1.items():
-        sensor_number = {}
-        for sensor, people in sensor_people.items():
-            sensor_number[sensor] = len(people)
-            if len(people) > 0:
-                print(time + " " + sensor + " " + str(len(people)))
-                csv_write.writerow([time, sensor, len(people)])
+# # time_sensor_number for day3
+# sensor_people = {}
+# for sensor in sensors:
+#     sensor_people[sensor] = []
+#
+# time__sensor_people_day3 = {}
+# for item in data_day3:
+#     time = item['time']
+#     for value in sensor_people.values():
+#         if item['id'] in value:
+#             value.remove(item['id'])
+#             break
+#     sensor_people[item['sid']].append(item['id'])
+#     current_sensor_people = {}
+#     for sensor, people in sensor_people.items():
+#         current_sensor_people[sensor] = []
+#         current_sensor_people[sensor].extend(people)
+#     time__sensor_people_day3[time] = current_sensor_people
+#
+# # test: 检测每个时刻每个人是否只出现在一个传感器的位置
+# test = True
+# for key_time, value_sensor_people in time__sensor_people_day3.items():
+#     id_times = {}
+#     for key, value in value_sensor_people.items():
+#         for id in value:
+#             if id not in id_times.keys():
+#                 id_times[id] = 1
+#             else:
+#                 id_times[id] += 1
+#     for key, value in id_times.items():
+#         if value != 1:
+#             test = False
+# print(test)
+#
+# time_sensor_number = []
+# for time, sensor_people in time__sensor_people_day3.items():
+#     for sensor, people in sensor_people.items():
+#         if len(people) > 0:
+#             time_sensor_number.append([time, sensor, len(people)])
+# print(len(time_sensor_number))
+# # 2813612
+#
+# with open("./static/data/time_sensor_number_day3_1.csv", "w", newline="") as csvfile:
+#     csv_write = csv.writer(csvfile)
+#     csv_write.writerow(['time', 'sid', 'number'])
+#
+#     for line in time_sensor_number[:1406806]:
+#         csv_write.writerow(line)
+#
+# with open("./static/data/time_sensor_number_day3_2.csv", "w", newline="") as csvfile:
+#     csv_write = csv.writer(csvfile)
+#     csv_write.writerow(['time', 'sid', 'number'])
+#
+#     for line in time_sensor_number[1406806:]:
+#         csv_write.writerow(line)
