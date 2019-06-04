@@ -91,13 +91,14 @@ def getSensorNumber():
     else:
         day = request.args.get('day')
         time = request.args.get('time')
+    day = 1
+    time = 30000
     find_begin = False
     find_end = False
     sensor_number = {}
     phases = [4, 4, 2]
     for phase in range(1, phases[day - 1]):
         if not find_end:
-            print(phase)
             sub_sensor_number, find_end = read_time_sensor_number(phase=phase)
             sensor_number.update(sub_sensor_number)
     # print(sensor_number)
@@ -122,8 +123,6 @@ def getPeoplePlacement():
             if i != 0:
                 sensors_placement[line[0]] = {'floor': line[1], 'x': line[2], 'y': line[3]}
             i += 1
-    day = 1
-    time = 60000
 
     if day == 1:
         data = data_day1
@@ -136,7 +135,6 @@ def getPeoplePlacement():
     for item in data:
         if int(item['time']) <= time:
             people_placement[item['id']] = sensors_placement[item['sid']]
-    print(people_placement)
 
     return jsonify({"people_placement": people_placement})
 
