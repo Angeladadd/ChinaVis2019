@@ -9,19 +9,20 @@
         <script src = "../static/scripts/number_time_day1.js"></script>
         <script src = "../static/scripts/number_time_day2.js"></script>
         <script src = "../static/scripts/number_time_day3.js"></script>
-    	<script src = "../static/scripts/sensor_deployment.js"></script>
+    	<!--<script src = "../static/scripts/sensor_deployment.js"></script>-->
         <script>
          
             data_day1 = {{data_day1|tojson}}
             data_day2 = {{data_day2|tojson}}
             data_day3 = {{data_day3|tojson}}
+            sensor_deployment = {{sensor|tojson}}
             //基本数据
             var sensor = {x_max:15,x_min:0,y_max:28,y_min:0};
-            BASIC_DATA = {sensor:sensor,people_MAX:20};
+            BASIC_DATA = {sensor:sensor,people_MAX:10};
             var people_map = {};
             var sensor_map = {};
 
-            for(var i=0;i<Object.keys(sensor_deployment).length;i++){
+            for(var i=0;i<sensor_deployment.length;i++){
                 sensor_map[sensor_deployment[i].sid] = i;
             }
             //统计一天的people，目前只处理了第一天的，还不知道这个代码到时候放哪
@@ -54,14 +55,12 @@
             MAP = {people_map:people_map,sensor_map:sensor_map};
             //基本信息处理
             //一楼的sensor
-            sensor_floor1 = new Array(0);
+            //sensor_floor1 = new Array(0);
             //二楼的sensor
-            sensor_floor2 = new Array(0);
-            for(let i=0;i<Object.keys(sensor_deployment).length;i++){
-                if(sensor_deployment[i].floor == "1")
-                    sensor_floor1.push(sensor_deployment[i]);
-                else
-                    sensor_floor2.push(sensor_deployment[i]);
+            //sensor_floor2 = new Array(0);
+            sensor_all_floor = new Array(0);
+            for(let i=0;i<sensor_deployment.length;i++){
+                sensor_all_floor.push(sensor_deployment[i]);
             }
 
 
@@ -69,17 +68,17 @@
     </head>
 
     <body>
-    <div id="liuyuxiang">
-            <select id="selectButton"></select>
-            <div id="vis1"></div>
-    </div>
+    <!--<div id="liuyuxiang">-->
+            <!--<select id="selectButton"></select>-->
+            <!--<div id="vis1"></div>-->
+    <!--</div>-->
     <div id="main_active">
         <svg id="day_route"></svg>
     </div>
 
         <script>
         drawFlow();
-var route = drawMainActive(1,1);
+var route = drawMainActive(1);
 function Update(currentTime){
     console.log(currentTime);
     route.update(currentTime);
