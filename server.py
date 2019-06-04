@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, jsonify
 import csv
 
 app = Flask(__name__)
@@ -46,10 +46,41 @@ with open("./static/data/number_time_day3.csv", "r") as file:
     for line in csvfile:
         number_time_day3.append({'time': line[0], 'proportion': line[1]})
 
-@app.route('/', methods=['GET', 'POST'])
+# 
+# @app.route('/', methods=['GET', 'POST'])
+# def select():
+#     return render_template('index.html', number_time_day1=number_time_day1, number_time_day2=number_time_day2, number_time_day3=number_time_day3,
+#                            sensor=sensor[1:], data_day1=data_day1[1:],data_day2=data_day2[1:],data_day3=data_day3[1:])
+
+
+day = 1
+time = 25240
+
+
+@app.route('/getSensorNumber', methods=['GET', 'POST'])
 def select():
-    return render_template('index.html', number_time_day1=number_time_day1, number_time_day2=number_time_day2, number_time_day3=number_time_day3,
-                           sensor=sensor[1:], data_day1=data_day1[1:],data_day2=data_day2[1:],data_day3=data_day3[1:])
+    global day
+    global time
+    if request.method == "POST":
+        day = request.form.get('day')
+        time = request.form.get('time')
+    else:
+        day = request.args.get('day')
+        time = request.args.get('time')
+    day = 1
+    time = 25240
+    with open('./static/data/time__sensor_number_day%s' % day, 'r') as csvfile:
+        time__sensor_number_csv = csv.reader(csvfile)
+        sensor_number = {}
+        i = 0
+        for line in time__sensor_number_csv:
+            if i is not 0:
+                if str(line[0]) == str(time):
+                    sensor_number[line[1]] = line[2]
+            i += 1
+        print(sensor_number)
+
+    return jsonify({'sensor_number': sensor_number})
 
 
 if __name__ == '__main__':

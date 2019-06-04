@@ -5,11 +5,11 @@ function drawMainActive(day_index, floor_index){
         case 1:
             day = 0;
             break;
-            case 2:
-                day = 1;
-                break;
-                case 3:
-                    day = 2;
+        case 2:
+            day = 1;
+            break;
+        case 3:
+            day = 2;
                     break;
             }
             var sensor;
