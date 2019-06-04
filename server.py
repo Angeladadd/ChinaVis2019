@@ -91,8 +91,7 @@ def getSensorNumber():
     else:
         day = request.args.get('day')
         time = request.args.get('time')
-    day = 1
-    time = 30000
+    
     find_begin = False
     find_end = False
     sensor_number = {}
