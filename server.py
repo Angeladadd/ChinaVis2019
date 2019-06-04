@@ -69,7 +69,6 @@ def read_time_sensor_number(phase):
         for line in time__sensor_number_csv:
             if i != 0:
                 if str(line[0]) == str(time):
-                    print(str(line[0]) + " " + str(time))
                     find_begin = True
                     sub_sensor_number[line[1]] = line[2]
                 if find_begin and (str(line[0]) != str(time)):
