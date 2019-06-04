@@ -24,3 +24,8 @@ js代码尽量写在.js里，在html里面调函数，在运行的时候chrome�
 * 前端获取后端传过来的数据之后先检查一下数据类型
 
 ### 获取特定时间每个人的位置
+* "people_placement": {id: {"floor": ##, "x": ##, "y": ##}, ...}
+* url: /getPeoplePlacement
+* method: GET, POST
+* 前端传 "day" (1, 2, 3), "time" 给后端
+* 前端获取后端传过来的数据之后先检查一下数据类型

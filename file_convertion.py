@@ -317,35 +317,3 @@ with open("./static/data/day3.csv", "r") as file:
 #
 #     for line in time_sensor_number[1406806:]:
 #         csv_write.writerow(line)
-
-
-with open("./static/data/SensorDeployment.csv", "r") as csvfile:
-    sensorDeployment_csv = csv.reader(csvfile)
-    sensors_placement = {}
-    i = 0
-    for line in sensorDeployment_csv:
-        if i != 0:
-            sensors_placement[line[0]] = {'floor': line[1], 'x': line[2], 'y': line[3]}
-        i += 1
-print(len(sensors_placement.items()))
-
-# time_people_sensor for day1
-people_sensor = {}
-time__people_sensor_day1 = {}
-for item in data_day1:
-    people_sensor[item['id']] = item['sid']
-    time__people_sensor_day1[item['time']] = people_sensor.copy()
-
-# time_people_sensor = []
-# for time, people_sensor in time__people_sensor_day1.items():
-#     for people, sensor in people_sensor.items():
-#         time_people_sensor.append([time, people, sensor])
-# print(len(time_people_sensor))
-
-with open("./static/data/time_people_sensor_day1.csv", "w", newline="") as csvfile:
-    csv_write = csv.writer(csvfile)
-    csv_write.writerow(["time", "people", "sensor"])
-
-    for time, people_sensor in time__people_sensor_day1.items():
-        for people, sensor in people_sensor.items():
-            csv_write.writerow([time, people, sensor])
