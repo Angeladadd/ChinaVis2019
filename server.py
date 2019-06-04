@@ -122,6 +122,8 @@ def getPeoplePlacement():
             if i != 0:
                 sensors_placement[line[0]] = {'floor': line[1], 'x': line[2], 'y': line[3]}
             i += 1
+    day = 1
+    time = 60000
 
     if day == 1:
         data = data_day1
