@@ -12,6 +12,7 @@
         <script src = "../static/scripts/number_time_day3.js"></script>
     	<script src = "../static/scripts/sensor_deployment.js"></script>
         <script src = "../static/scripts/DrawBubble.js"></script>
+        <script src = "../static/scripts/DrawChord.js"></script>
         <script>
          
             data_day1 = {{data_day1|tojson}}
@@ -87,22 +88,27 @@
     <div id="main_active">
         <svg id="day_route"></svg>
     </div>
+        <svg width="960" height="960"></svg>
+    <div id="chord">
+        
+    </div>
 
         <script>
         drawFlow();
 var route = drawMainActive(1,1);
 function Update(currentTime){
-    {#console.log(currentTime);#}
+    // {#console.log(currentTime);#}
     route.update(currentTime);
 }
         drawBubble();
+        drawChord();
 
         </script>
     </body>
 <script>
 
   var currentTime = 25240;
-  setTimeout(function () {
+    setTimeout(function () {
     if(currentTime<31270){
       Update(currentTime);
       currentTime++;
