@@ -41,7 +41,7 @@ function drawBubble(){
 				desc: ``
 			}];
 	let svg = d3.select('#bubble').select('svg');
-		let width = document.body.clientWidth; // get width in pixels
+		let width = +svg.attr('width'); // get width in pixels
 		let height = +svg.attr('height');
 		let centerX = width * 0.5;
 		let centerY = height * 0.5;
