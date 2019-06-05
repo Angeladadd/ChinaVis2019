@@ -11,10 +11,22 @@
         <script src = "../static/scripts/number_time_day2.js"></script>
         <script src = "../static/scripts/number_time_day3.js"></script>
     	<script src = "../static/scripts/sensor_deployment.js"></script>
+        <script src = "../static/scripts/id_label.js"></script>
     	<!-- <script src = "../static/scripts/sensor_deployment.js"></script> -->
         <script src = "../static/scripts/DrawBubble.js"></script>
         <script src = "../static/scripts/DrawChord.js"></script>
         <script>
+            // var label = [];
+            // for (var key in id_label){
+            //     var tmp = id_label[key];
+            //     if(label.indexOf(tmp)>=0){
+            //         continue;
+            //     }
+            //     else{
+            //         label.push(tmp);
+            //         document.write(tmp+" ");
+            //     }
+            // }
             data_day1 = {{data_day1|tojson}}
             data_day2 = {{data_day2|tojson}}
             data_day3 = {{data_day3|tojson}}
@@ -37,10 +49,20 @@
                 let id = data_day1[i].id;
                 let sid = data_day1[i].sid;
                 let time = data_day1[i].time;
+                var d_obj;
                 if(!people_map.hasOwnProperty(id)){
                     cnt++;
                     people_map[id] = cnt;
                     people[0][cnt] = new Array(0);
+                    d_obj = {};
+                    var sensor_tmp = sensor_deployment[sensor_map[sid]];
+                    d_obj.x = parseInt(-1);
+                    d_obj.y = parseInt(-1);
+                    d_obj.floor = parseInt(sensor_tmp.floor);
+                    d_obj.time = parseInt(time);
+                    d_obj.id = parseInt(id);
+                    d_obj.sensor_simple_id = sensor_map[sid];
+                    people[0][cnt].push(d_obj);
                 }
                 var index = parseInt(people_map[id]);
 
@@ -50,10 +72,13 @@
                 obj.y = parseInt(sensor_tmp.y);
                 obj.floor = parseInt(sensor_tmp.floor);
                 obj.time = parseInt(time);
+                obj.id = parseInt(id);
                 obj.sensor_simple_id = sensor_map[sid];
 
                 if(people[0][index]) people[0][index].push(obj);
             }
+            for(var i=0;i<people[0].length;i++)
+                people[0][i].push(d_obj);
 
             MAP = {people_map:people_map,sensor_map:sensor_map};
             //基本信息处理

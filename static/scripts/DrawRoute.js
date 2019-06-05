@@ -56,6 +56,8 @@ function drawMainActive(day_index){
                 compute[i] = d3.interpolate(color_light,color_dark);
                 color1[i] = color_light;
             }
+            var label_color = {'attendee':	'#000000','conference manager':'#FF0000','reporter':'#00FF00',
+            'worker':'#0000FF','guest':'#999900','cleaner':'#990099'};
 
             svg.selectAll(".sensor")
                 .data(sensor)
@@ -94,7 +96,11 @@ function drawMainActive(day_index){
                 .attr("cx", function (d,i) {
                     return yLinear(d[0].y);})
                 .attr("r",2)
-                .style("fill", "blue")
+                .style("fill", function (d,i) {
+                    var id = d[0].id;
+                    var label = id_label[id];
+                    return label_color[label];
+                })
                 .style("opacity",function (d,i) {
                     return 1;});
 
@@ -132,13 +138,7 @@ function drawMainActive(day_index){
                             base+=width/2;
                         return base+ xLinear(d[point[i]].x);})
                     .attr("cx", function (d,i) {
-                        return yLinear(d[point[i]].y);})
-                    .attr("r",function (d,i) {
-                        return 2;
-                    })
-                    .style("fill", "blue")
-                    .style("opacity",function (d,i) {
-                        return 1;});
+                        return yLinear(d[point[i]].y);});
             };
             return obj;
 }
