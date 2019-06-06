@@ -48,7 +48,7 @@ function drawMainActive(day_index){
             var compute= new Array(14);
             var color1 = new Array(14);
             compute[0] = d3.interpolate(d3.rgb(200,200,200),d3.rgb(80,80,80));
-            color1[0] = d3.rgb(220,220,220);
+            color1[0] = d3.rgb(200,200,200);
             for(var i =1;i<14;i++){
                 var r =Math.floor(180+Math.random()*75),g=Math.floor(180+Math.random()*75), b=Math.floor(180+Math.random()*75);
                 var color_light = d3.rgb(r,g,b);
@@ -90,7 +90,7 @@ function drawMainActive(day_index){
                 .attr("class","position")
                 .attr("cy", function (d,i) {
                     var base = 0;
-                        if(sensor[d[0].sensor_simple_id].floor != "2")
+                        if(d[0].floor != "2")
                             base+=width/2;
                         return base+ xLinear(d[0].x);})
                 .attr("cx", function (d,i) {
@@ -109,6 +109,33 @@ function drawMainActive(day_index){
                     else return 0;
                 });
 
+            function path(d){
+                var path = d3.path();
+                var x = yLinear(d[1].y);
+                var y = xLinear(d[1].x);
+                if(d[1].floor == '1')
+                    y+=width/2;
+                path.moveTo(x,y);
+                for(var i=2;i<d.length-1;i++){
+                    var x = yLinear(d[i].y);
+                    var y = xLinear(d[i].x);
+                    if(d[i].floor == '1')
+                        y+=width/2;
+                    path.lineTo(x,y);
+                }
+                return path;
+            }
+            svg.selectAll(".path")
+            .data(people[day])
+                .enter()
+                .append("path")
+                .attr("class","path")
+                .attr("fill","none")
+                .attr("stroke","lightgray")
+                .attr("stroke-width",.5)
+                .attr("opacity",1)
+                .attr("d",path);
+
             var obj = {};
             obj.svg = svg;
             obj.people = people[day];
@@ -118,7 +145,6 @@ function drawMainActive(day_index){
                 obj.point[i] = 0;
             }
             obj.update = function (currentTime){
-                //console.log("!");
                 for(var i=0;i<this.people.length;i++){
                     if(!this.people[i][this.point[i]+1]) continue;
                     if(this.people[i][this.point[i]+1].time == currentTime) {
@@ -139,7 +165,7 @@ function drawMainActive(day_index){
                     .duration(100)
                     .attr("cy", function (d,i) {
                         var base = 0;
-                        if(sensor[d[point[i]].sensor_simple_id].floor != "2")
+                        if(d[point[i]].floor != "2")
                             base+=width/2;
                         return base+ xLinear(d[point[i]].x);})
                     .attr("cx", function (d,i) {
