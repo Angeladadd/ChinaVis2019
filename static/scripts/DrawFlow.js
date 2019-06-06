@@ -28,7 +28,6 @@ function drawFlow() {
 
             // add the x Axis
             var x = d3.scaleLinear()
-              // .domain([25240, 64858])
               .domain([25240, 72091])
               .range([0, width]);
             svg.append("g")
@@ -47,7 +46,7 @@ function drawFlow() {
               .append("path")
                 .attr("class", "mypath")
                 .datum(data)
-                .attr("fill", "#69b3a2")
+                .attr("fill", "#725D82")
                 .attr("opacity", ".8")
                 .attr("stroke", "#000")
                 .attr("stroke-width", 1)
@@ -56,7 +55,8 @@ function drawFlow() {
                   .curve(d3.curveBasis)
                     .x(function(d) { return x(+d.time); })
                     .y(function(d) { return y(+d.proportion); })
-                );
+                )
+                .interpolate("cardinal");
 
               // A function that update the chart when slider is moved?
               function updateChart(selectedGroup) {
