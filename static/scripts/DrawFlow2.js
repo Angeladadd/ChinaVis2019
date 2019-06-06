@@ -1,4 +1,4 @@
-var dom = document.getElementById("amiddboxtbott2");
+var dom = document.getElementById("container");
 var myChart = echarts.init(dom);
 var app = {};
 option = null;
