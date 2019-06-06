@@ -15,6 +15,7 @@
     	<!-- <script src = "../static/scripts/sensor_deployment.js"></script> -->
         <script src = "../static/scripts/DrawBubble.js"></script>
         <script src = "../static/scripts/DrawChord.js"></script>
+        <link href="../static/css/style.css"  rel="stylesheet" type="text/css" media="all" />
         <script>
             // var label = [];
             // for (var key in id_label){
@@ -93,34 +94,83 @@
             label_choose = 'all';
 
         </script>
-        <style>
-            body{
-                background-color: ;
-            }
-            div{
-                float: left;
-            }
-        </style>
+
     </head>
 
     <body>
-    <!--<div id="liuyuxiang">-->
-            <!--<select id="selectButton"></select>-->
-            <!--<div id="vis1"></div>-->
-    <!--</div>-->
-    <div>
+    <div class="wpbox">
+<div class="bnt">
+  <div class="topbnt_left fl">
+      <!--这里是可以跳新页面的操作-->
+   <ul><li class="active"><a href="#">警情警力</a></li>
+      <li><a href="#">实有人口</a></li>
+      <li><a href="#">流动人口</a></li>
+      <li><a href="#">实名制</a></li>
+   </ul>
+  </div>
+  <h1 class="tith1 fl">China Vis 2019</h1>
+  <div class=" fr topbnt_right">
+    <ul>
+       <li><a href="#">返回</a></li>
+       <li><a href="#">分析报告</a></li>
+       <li><a href="#">交通</a></li>
+       <li><a href="#">舆情</a></li>
+    </ul>
+   </ul>
+  </div>
+</div>
+<!-- bnt end -->
+<div class="left1">
+    <div class="aleftboxttop"><h2 class="tith2">今日矛盾纠纷数据统计</h2>
+    <div class="lefttoday_tit" style=" height:8%"><p class="fl">地区：甘孜</p><p class="fr">2018-06-14</p></div>
+    <div class="lefttoday_number">
+      <div class="widget-inline-box text-center fl">
+        <p>矛盾纠纷</p>
+        <h3 class="ceeb1fd">54</h3>
+        <h4 class="text-muted pt6">环比<img src="img/iconup.png" height="16" />2%</h4>
+      </div>
+      <div class="widget-inline-box text-center fl">
+         <p>已调节</p>
+        <h3 class="c24c9ff">54</h3>
+        <h4 class="text-muted pt6">环比<img src="img/icondown.png" height="16" />3%</h4>
+      </div>
+      <div class="widget-inline-box text-center fl">
+         <p>未调节</p>
+        <h3 class="cffff00">4</h3>
+        <h4 class="text-muted pt6">环比<img src="img/icondown.png" height="16" />3%</h4>
+      </div>
+      <div class="widget-inline-box text-center fl">
+         <p>处理中</p>
+        <h3 class="c11e2dd">4</h3>
+        <h4 class="text-muted pt6">环比<img src="img/icondown.png" height="16" />3%</h4>
+      </div>
+    </div>
+    <!-- lefttoday_number end -->
+    </div>
+    <div class="aleftboxtmidd">
+      <h2 class="tith2">矛盾纠纷地区统计</h2>
         <div id="liuyuxiang">
             <select id="selectButton"></select>
             <div id="vis1"></div>
         </div>
-        <br>
-         <div id="chord">
-         <svg width="400" height="400"></svg>
+      <div id="aleftboxtmidd" class="aleftboxtmiddcont"></div>
+  </div>
+  <div class="aleftboxtbott">
+    <h2 class="tith2">矛盾纠纷类型统计</h2>
+    <div id="aleftboxtbott" class="aleftboxtbott_cont" >
+        <div id="chord">
+         <svg width="280" height="280"></svg>
         </div>
     </div>
-
-
-     <div id="main_active">
+</div>
+</div>
+<!--  left1 end -->
+<div class="mrbox">
+      <div class="mrbox_topmidd" style="width: 69%;">
+          <div class="amiddboxttop">
+              <h2 class="tith2 pt1">实时监控统计</h2>
+                <div class="amiddboxttop_map" style="">
+                    <div id="main_active">
         <svg id="day_route"></svg>
          <br>
         <button value="all" onclick="ChangeLabelChoose(value)">all</button>
@@ -130,10 +180,123 @@
         <button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>
         <button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>
         <button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>
+        </div>
+                </div>
+            </div>
+            <!--  amiddboxttop end-->
+                <div class="amidd_bott">
+                  <div class="amiddboxtbott1 fl" >
+                    <h2 class="tith2 pt1">矛盾纠纷环比分析</h2>
+                    <div id="amiddboxtbott1" class="amiddboxtbott1content" >
+                        <div id="bubble">
+		<svg width="350" height="250" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+                        </div>
+                    </div>
+                  </div>
+
+                <div class="amiddboxtbott2 fl"><h2 class="tith2 pt1">案件统计</h2>
+                    <div id="amiddboxtbott2" class="amiddboxtbott2content"></div>
+                </div>
+            </div>
+            <!-- amidd_bott end -->
+          </div>
+        <!-- mrbox_top end -->
+        <div class="mrbox_top_right">
+          <div class="arightboxtop"><h2 class="tith2">警力分析</h2>
+            <div class="lefttoday_tit"><p class="fl">状态：已调节</p><p class="fr">时间段：2018-06-10</p></div>
+            <div class="left2_table">
+               <ul>
+                    <li>
+                    <p class="fl"><b>康定市公安局</b><br>
+                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
+                    </p>
+                    <p class="fr pt17">2018-06-22</p>
+                    </li>
+                    <li class="bg">
+                    <p class="fl"><b>康定市公安局</b><br>
+                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
+                    </p>
+                    <p class="fr pt17">2018-06-22</p>
+                    </li>
+                    <li>
+                    <p class="fl"><b>康定市公安局</b><br>
+                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
+                    </p>
+                    <p class="fr pt17">2018-06-22</p>
+                    </li>
+                    <li class="bg">
+                    <p class="fl"><b>康定市公安局</b><br>
+                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
+                    </p>
+                    <p class="fr pt17">2018-06-22</p>
+                    </li>
+                    <li>
+                    <p class="fl"><b>康定市公安局</b><br>
+                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
+                    </p>
+                    <p class="fr pt17">2018-06-22</p>
+                    </li>
+                    <li class="bg">
+                    <p class="fl"><b>康定市公安局</b><br>
+                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
+                    </p>
+                    <p class="fr pt17">2018-06-22</p>
+                    </li>
+                    <li>
+                    <p class="fl"><b>康定市公安局</b><br>
+                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
+                    </p>
+                    <p class="fr pt17">2018-06-22</p>
+                    </li>
+                    <li class="bg">
+                    <p class="fl"><b>康定市公安局</b><br>
+                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
+                    </p>
+                    <p class="fr pt17">2018-06-22</p>
+                    </li>
+
+               </ul>
+            </div>
+
+          </div>
+            <div class="arightboxbott"><h2 class="tith2 ">矛盾纠纷七日数据分析</h2>
+              <div class="lefttoday_tit"><p class="fl">状态：已调节</p><p class="fr">时间：2018-06-14</p></div>
+              <div id="arightboxbott" class="arightboxbottcont" style=""></div>
+            </div>
+        </div>
+        <!-- mrbox_top_right end -->
+      </div>
+
     </div>
-<div id="bubble">
-		<svg width="600" height="400" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
 </div>
+    <!--<div id="liuyuxiang">-->
+            <!--<select id="selectButton"></select>-->
+            <!--<div id="vis1"></div>-->
+    <!--</div>-->
+    <!--<div>-->
+        <!--<div id="liuyuxiang">-->
+            <!--<select id="selectButton"></select>-->
+            <!--<div id="vis1"></div>-->
+        <!--</div>-->
+        <!--<br>-->
+         <!--<div id="chord">-->
+         <!--<svg width="400" height="400"></svg>-->
+        <!--</div>-->
+    <!--</div>-->
+
+
+     <!--<div id="main_active">-->
+        <!--<svg id="day_route"></svg>-->
+         <!--<br>-->
+        <!--<button value="all" onclick="ChangeLabelChoose(value)">all</button>-->
+        <!--<button value = 'cleaner' onclick="ChangeLabelChoose(value)">cleaner</button>-->
+        <!--<button value = 'worker' onclick="ChangeLabelChoose(value)">worker</button>-->
+        <!--<button value = 'conference manager' onclick="ChangeLabelChoose(value)">conference manager</button>-->
+        <!--<button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>-->
+        <!--<button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>-->
+        <!--<button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>-->
+    <!--</div>-->
+
 
         <script>
             function ChangeLabelChoose(val){
@@ -142,7 +305,7 @@
             drawFlow();
             drawBubble();
             drawChord();
-
+            //
             var route = drawMainActive(1);
             function Update(currentTime){
                 // {#console.log(currentTime);#}
@@ -159,6 +322,7 @@
       currentTime++;
       setTimeout(arguments.callee, 0.1)
     }
+    else currentTime = 25240;
   },0.1);
 </script>
 </html>

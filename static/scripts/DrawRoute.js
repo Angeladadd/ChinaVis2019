@@ -15,18 +15,19 @@ function drawMainActive(day_index){
             var sensor = sensor_all_floor;
             //布局
             //给的地图太智障了，我强行把x换成了y
-            let margin = {top: 10, right: 30, bottom: 5, left: 60},
-                width = 800 - margin.left - margin.right,
-                height = 600 - margin.top - margin.bottom;
+            let margin = {top: 5, right: 5, bottom: 5, left: 5},
+                width = 320 - margin.left - margin.right,
+                height = 850 - margin.top - margin.bottom
+                ,bias = height/3*2+20;
             let svg = d3.select("#day_route")
                 .attr("height", width + margin.left + margin.right)
                 .attr("width", height + margin.top + margin.bottom);
             let xLinear = d3.scaleLinear()
                 .domain([BASIC_DATA.sensor.x_min, BASIC_DATA.sensor.x_max])
-                .range([10,width/2]);
+                .range([10,width]);
             let yLinear = d3.scaleLinear()
                 .domain([BASIC_DATA.sensor.y_min,BASIC_DATA.sensor.y_max])
-                .range([10,height]);
+                .range([10,height/3*2]);
             var sensor_people = new Array(0);
             var sensor_width= 15;
             //var color1=d3.rgb(255,220,220);
@@ -69,13 +70,14 @@ function drawMainActive(day_index){
                     return "sensor"+i.toString();
                 })
                 .attr("y",function (d) {
-                    var base = 0;
-                    if(d.floor != "2")
-                        base += width/2;
-                    return base+xLinear(d.x)-sensor_width/2;
+
+                    return xLinear(d.x)-sensor_width/2;
                 })
                 .attr("x",function (d) {
-                    return yLinear(d.y)-sensor_width/2;
+                    var base = 0;
+                    if(d.floor != "1")
+                        base += bias;
+                    return base+yLinear(d.y)-sensor_width/2;
                 })
                 .attr("width",sensor_width)
                 .attr("height",sensor_width)
@@ -89,12 +91,13 @@ function drawMainActive(day_index){
                 .append("circle")
                 .attr("class","position")
                 .attr("cy", function (d,i) {
-                    var base = 0;
-                        if(d[0].floor != "2")
-                            base+=width/2;
-                        return base+ xLinear(d[0].x);})
+
+                        return xLinear(d[0].x);})
                 .attr("cx", function (d,i) {
-                    return yLinear(d[0].y);})
+                    var base = 0;
+                        if(d[0].floor != "1")
+                            base+=bias;
+                    return base + yLinear(d[0].y);})
                 .attr("r",2)
                 .style("fill", function (d,i) {
                     var id = d[0].id;
@@ -109,32 +112,32 @@ function drawMainActive(day_index){
                     else return 0;
                 });
 
-            function path(d){
-                var path = d3.path();
-                var x = yLinear(d[1].y);
-                var y = xLinear(d[1].x);
-                if(d[1].floor == '1')
-                    y+=width/2;
-                path.moveTo(x,y);
-                for(var i=2;i<d.length-1;i++){
-                    var x = yLinear(d[i].y);
-                    var y = xLinear(d[i].x);
-                    if(d[i].floor == '1')
-                        y+=width/2;
-                    path.lineTo(x,y);
-                }
-                return path;
-            }
-            svg.selectAll(".path")
-            .data(people[day])
-                .enter()
-                .append("path")
-                .attr("class","path")
-                .attr("fill","none")
-                .attr("stroke","lightgray")
-                .attr("stroke-width",.5)
-                .attr("opacity",1)
-                .attr("d",path);
+            // function path(d){
+            //     var path = d3.path();
+            //     var x = yLinear(d[1].y);
+            //     var y = xLinear(d[1].x);
+            //     if(d[1].floor == '2')
+            //         x+=bias;
+            //     path.moveTo(x,y);
+            //     for(var i=2;i<d.length-1;i++){
+            //         var x = yLinear(d[i].y);
+            //         var y = xLinear(d[i].x);
+            //         if(d[i].floor == '2')
+            //             x+=bias;
+            //         path.lineTo(x,y);
+            //     }
+            //     return path;
+            // }
+            // svg.selectAll(".path")
+            // .data(people[day])
+            //     .enter()
+            //     .append("path")
+            //     .attr("class","path")
+            //     .attr("fill","none")
+            //     .attr("stroke","lightgray")
+            //     .attr("stroke-width",.5)
+            //     .attr("opacity",1)
+            //     .attr("d",path);
 
             var obj = {};
             obj.svg = svg;
@@ -164,12 +167,12 @@ function drawMainActive(day_index){
                     .transition()
                     .duration(100)
                     .attr("cy", function (d,i) {
-                        var base = 0;
-                        if(d[point[i]].floor != "2")
-                            base+=width/2;
-                        return base+ xLinear(d[point[i]].x);})
+                        return xLinear(d[point[i]].x);})
                     .attr("cx", function (d,i) {
-                        return yLinear(d[point[i]].y);})
+                        var base = 0;
+                        if(d[point[i]].floor != "1")
+                            base+=bias;
+                        return base + yLinear(d[point[i]].y);})
                     .style("opacity",function (d,i) {
                     if(label_choose == 'all') return 1;
                     var id = d[0].id;

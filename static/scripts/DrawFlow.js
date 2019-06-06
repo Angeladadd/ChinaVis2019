@@ -2,8 +2,8 @@
 function drawFlow() {
      // set the dimensions and margins of the graph
             var margin = {top: 30, right: 30, bottom: 30, left: 50},
-                width = 400 - margin.left - margin.right,
-                height = 300 - margin.top - margin.bottom;
+                width = 300 - margin.left - margin.right,
+                height = 170 - margin.top - margin.bottom;
 
             // append the svg object to the body of the page
             var svg = d3.select("#liuyuxiang").select("#vis1")
