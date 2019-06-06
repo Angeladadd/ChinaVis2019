@@ -93,6 +93,14 @@
             label_choose = 'all';
 
         </script>
+        <style>
+            body{
+                background-color: ;
+            }
+            div{
+                float: left;
+            }
+        </style>
     </head>
 
     <body>
@@ -100,17 +108,21 @@
             <!--<select id="selectButton"></select>-->
             <!--<div id="vis1"></div>-->
     <!--</div>-->
-    <div id="liuyuxiang">
+    <div>
+        <div id="liuyuxiang">
             <select id="selectButton"></select>
             <div id="vis1"></div>
+        </div>
+        <br>
+         <div id="chord">
+         <svg width="400" height="400"></svg>
+        </div>
     </div>
 
-    <div id="bubble">
-		<svg width="1000" height="700" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
-	</div>
 
-    <div id="main_active">
+     <div id="main_active">
         <svg id="day_route"></svg>
+         <br>
         <button value="all" onclick="ChangeLabelChoose(value)">all</button>
         <button value = 'cleaner' onclick="ChangeLabelChoose(value)">cleaner</button>
         <button value = 'worker' onclick="ChangeLabelChoose(value)">worker</button>
@@ -119,10 +131,9 @@
         <button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>
         <button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>
     </div>
-       
-    <div id="chord">
-         <svg width="960" height="960"></svg>
-    </div>
+<div id="bubble">
+		<svg width="600" height="400" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+</div>
 
         <script>
             function ChangeLabelChoose(val){

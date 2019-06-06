@@ -15,7 +15,7 @@ function drawMainActive(day_index){
             var sensor = sensor_all_floor;
             //布局
             //给的地图太智障了，我强行把x换成了y
-            let margin = {top: 10, right: 30, bottom: 30, left: 60},
+            let margin = {top: 10, right: 30, bottom: 5, left: 60},
                 width = 800 - margin.left - margin.right,
                 height = 600 - margin.top - margin.bottom;
             let svg = d3.select("#day_route")
@@ -47,10 +47,10 @@ function drawMainActive(day_index){
             //color_pair[0] = {c1:d3.rgb(220,220,220),c2:d3.rgb(80,80,80)};
             var compute= new Array(14);
             var color1 = new Array(14);
-            compute[0] = d3.interpolate(d3.rgb(220,220,220),d3.rgb(80,80,80));
+            compute[0] = d3.interpolate(d3.rgb(200,200,200),d3.rgb(80,80,80));
             color1[0] = d3.rgb(220,220,220);
             for(var i =1;i<14;i++){
-                var r =Math.floor(200+Math.random()*55),g=Math.floor(200+Math.random()*55), b=Math.floor(200+Math.random()*55);
+                var r =Math.floor(180+Math.random()*75),g=Math.floor(180+Math.random()*75), b=Math.floor(180+Math.random()*75);
                 var color_light = d3.rgb(r,g,b);
                 var color_dark = d3.rgb(parseInt(r/3),parseInt(g/3),parseInt(b/3));
                 compute[i] = d3.interpolate(color_light,color_dark);
@@ -70,7 +70,7 @@ function drawMainActive(day_index){
                 })
                 .attr("y",function (d) {
                     var base = 0;
-                    if(d.floor != "1")
+                    if(d.floor != "2")
                         base += width/2;
                     return base+xLinear(d.x)-sensor_width/2;
                 })
@@ -90,7 +90,7 @@ function drawMainActive(day_index){
                 .attr("class","position")
                 .attr("cy", function (d,i) {
                     var base = 0;
-                        if(sensor[d[0].sensor_simple_id].floor != "1")
+                        if(sensor[d[0].sensor_simple_id].floor != "2")
                             base+=width/2;
                         return base+ xLinear(d[0].x);})
                 .attr("cx", function (d,i) {
@@ -139,7 +139,7 @@ function drawMainActive(day_index){
                     .duration(100)
                     .attr("cy", function (d,i) {
                         var base = 0;
-                        if(sensor[d[point[i]].sensor_simple_id].floor != "1")
+                        if(sensor[d[point[i]].sensor_simple_id].floor != "2")
                             base+=width/2;
                         return base+ xLinear(d[point[i]].x);})
                     .attr("cx", function (d,i) {

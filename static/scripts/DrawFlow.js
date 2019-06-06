@@ -2,8 +2,8 @@
 function drawFlow() {
      // set the dimensions and margins of the graph
             var margin = {top: 30, right: 30, bottom: 30, left: 50},
-                width = 460 - margin.left - margin.right,
-                height = 400 - margin.top - margin.bottom;
+                width = 400 - margin.left - margin.right,
+                height = 300 - margin.top - margin.bottom;
 
             // append the svg object to the body of the page
             var svg = d3.select("#liuyuxiang").select("#vis1")
@@ -83,7 +83,7 @@ function drawFlow() {
 
               // Listen to the slider?
               d3.select("#selectButton").on("change", function(d){
-                selectedGroup = this.value
+                selectedGroup = this.value;
                 updateChart(selectedGroup)
               })
 }

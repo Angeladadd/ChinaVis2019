@@ -149,7 +149,7 @@ function drawBubble(){
 				.attr('x', 0)
 				.attr('y', (d, i, nodes) => (13 + (i - nodes.length / 2 - 0.5) * 10))
 				.text(name => name)
-				.attr("font-size",20);
+				.attr("font-size",12);
 
 		// display image as circle icon
 		node.filter(d => String(d.icon).includes('img/'))
