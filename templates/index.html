@@ -90,7 +90,7 @@
             for(let i=0;i<sensor_deployment.length;i++){
                 sensor_all_floor.push(sensor_deployment[i]);
             }
-
+            label_choose = 'all';
 
         </script>
     </head>
@@ -111,6 +111,13 @@
 
     <div id="main_active">
         <svg id="day_route"></svg>
+        <button value="all" onclick="ChangeLabelChoose(value)">all</button>
+        <button value = 'cleaner' onclick="ChangeLabelChoose(value)">cleaner</button>
+        <button value = 'worker' onclick="ChangeLabelChoose(value)">worker</button>
+        <button value = 'conference manager' onclick="ChangeLabelChoose(value)">conference manager</button>
+        <button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>
+        <button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>
+        <button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>
     </div>
        
     <div id="chord">
@@ -118,6 +125,9 @@
     </div>
 
         <script>
+            function ChangeLabelChoose(val){
+                label_choose = val;
+            }
             drawFlow();
             drawBubble();
             drawChord();

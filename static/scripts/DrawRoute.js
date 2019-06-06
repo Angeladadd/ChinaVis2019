@@ -102,7 +102,12 @@ function drawMainActive(day_index){
                     return label_color[label];
                 })
                 .style("opacity",function (d,i) {
-                    return 1;});
+                    if(label_choose == 'all') return 1;
+                    var id = d[0].id;
+                    var label = id_label[id];
+                    if(label == label_choose) return 1;
+                    else return 0;
+                });
 
             var obj = {};
             obj.svg = svg;
@@ -138,7 +143,14 @@ function drawMainActive(day_index){
                             base+=width/2;
                         return base+ xLinear(d[point[i]].x);})
                     .attr("cx", function (d,i) {
-                        return yLinear(d[point[i]].y);});
+                        return yLinear(d[point[i]].y);})
+                    .style("opacity",function (d,i) {
+                    if(label_choose == 'all') return 1;
+                    var id = d[0].id;
+                    var label = id_label[id];
+                    if(label == label_choose) return 1;
+                    else return 0;
+                });
             };
             return obj;
 }
