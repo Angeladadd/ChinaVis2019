@@ -82,11 +82,6 @@
                 people[0][i].push(d_obj);
 
             MAP = {people_map:people_map,sensor_map:sensor_map};
-            //基本信息处理
-            //一楼的sensor
-            //sensor_floor1 = new Array(0);
-            //二楼的sensor
-            //sensor_floor2 = new Array(0);
             sensor_all_floor = new Array(0);
             for(let i=0;i<sensor_deployment.length;i++){
                 sensor_all_floor.push(sensor_deployment[i]);
@@ -269,35 +264,6 @@
 
     </div>
 </div>
-    <!--<div id="liuyuxiang">-->
-            <!--<select id="selectButton"></select>-->
-            <!--<div id="vis1"></div>-->
-    <!--</div>-->
-    <!--<div>-->
-        <!--<div id="liuyuxiang">-->
-            <!--<select id="selectButton"></select>-->
-            <!--<div id="vis1"></div>-->
-        <!--</div>-->
-        <!--<br>-->
-         <!--<div id="chord">-->
-         <!--<svg width="400" height="400"></svg>-->
-        <!--</div>-->
-    <!--</div>-->
-
-
-     <!--<div id="main_active">-->
-        <!--<svg id="day_route"></svg>-->
-         <!--<br>-->
-        <!--<button value="all" onclick="ChangeLabelChoose(value)">all</button>-->
-        <!--<button value = 'cleaner' onclick="ChangeLabelChoose(value)">cleaner</button>-->
-        <!--<button value = 'worker' onclick="ChangeLabelChoose(value)">worker</button>-->
-        <!--<button value = 'conference manager' onclick="ChangeLabelChoose(value)">conference manager</button>-->
-        <!--<button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>-->
-        <!--<button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>-->
-        <!--<button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>-->
-    <!--</div>-->
-
-
         <script>
             function ChangeLabelChoose(val){
                 label_choose = val;
