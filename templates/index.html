@@ -4,11 +4,17 @@
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.js"></script> 
         <script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
-	    <script src="https://cdn.bootcss.com/wordcloud2.js/1.1.0/wordcloud2.js"></script>
-	    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/wordcloud2.js/1.1.0/wordcloud2.js"></script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
         <script src="../static/scripts/d3-legend.min.js"></script>
 	    <script src="../static/scripts/DrawFlow.js"></script>
         <script src = "../static/scripts/DrawRoute.js"></script>
+ 	<script src = "../static/scripts/d1labelcountper10min.js"></script>
+ 	<script src = "../static/scripts/d2labelcountper10min.js"></script>
+ 	<script src = "../static/scripts/d3labelcountper10min.js"></script>
+ 	<script src = "../static/scripts/d1labelcountpermin.js"></script>
+ 	<script src = "../static/scripts/d2labelcountpermin.js"></script>
+ 	<script src = "../static/scripts/d3labelcountpermin.js"></script>
         <script src = "../static/scripts/number_time_day1.js"></script>
         <script src = "../static/scripts/number_time_day2.js"></script>
         <script src = "../static/scripts/number_time_day3.js"></script>
@@ -305,36 +311,30 @@
           </div>
         <!-- mrbox_top end -->
         <div class="mrbox_top_right">
-          
-            <div id="canvas-container" align="center">
-    		<canvas id="canvas" width="300px" height="200px"><script>
-    		var options = eval({
-        	"list": [['海报区', 0], ['扶梯1', 1], ['room5', 2], ['扶梯3', 3], ['exit1', 4], ['厕所1', 5], ['entry4', 6], ['服务台', 7], ['room4', 8], ['B', 9], ['exit4', 10], ['餐厅', 11], ['C', 12], ['扶梯4', 13], ['0', 14], ['休闲区', 15], ['entry2', 16], ['A', 17], ['room3', 18], ['exit2', 19], ['展厅', 20], ['entry1', 21], ['room1', 22], ['厕所3', 23], ['exit3', 24], ['厕所2', 25], ['room6', 26], ['主会场', 27], ['room2', 28], ['entry3', 29], ['签到处', 30]],
-        	"gridSize": 5, // size of the grid in pixels
-        	"weightFactor": 1, // number to multiply for size of each word in the list
-        	"fontWeight": 'normal', // 'normal', 'bold' or a callback
-        	"fontFamily": 'Times, serif', // font to use
-        	"color": 'random-light', // 'random-dark' or 'random-light'
-       	 	"backgroundColor": '#000', // the color of canvas
-       	 	"rotateRatio": 1 // probability for the word to rotate. 1 means always rotate
-    		});
-    		var canvas = document.getElementById('canvas');
-    		WordCloud(canvas, options);
-		</script></canvas>
+		<div id="canvas-container" align="center">
+   			 <canvas id="canvas" width="600px" height="400px"></canvas>
+  				<script>
+   					 var options = eval({
+       						 "list": d1idlabelcountpermin[0],
+     				   "gridSize": 16, // size of the grid in pixels
+      				  "weightFactor": 10, // number to multiply for size of each word in the list
+       				 "fontWeight": 'normal', // 'normal', 'bold' or a callback
+       				 "fontFamily": 'Times, serif', // font to use
+       				 "color": 'random-light', // 'random-dark' or 'random-light'
+       				 "backgroundColor": '#333', // the color of canvas
+       				 "rotateRatio": 1 // probability for the word to rotate. 1 means always rotate
+   				 });
+    				var canvas = document.getElementById('canvas');
+   				 WordCloud(canvas, options);
+				</script>
 		</div>
-           
-
-          </div>
             <div class="arightboxbott"><h2 class="tith2 ">矛盾纠纷七日数据分析</h2>
               <div class="lefttoday_tit"><p class="fl">状态：已调节</p><p class="fr">时间：2018-06-14</p></div>
               <div id="arightboxbott" class="arightboxbottcont" style=""></div>
             </div>
         </div>
         <!-- mrbox_top_right end -->
-      </div>
-
-    </div>
-</div>
+  
         <script>
             function ChangeLabelChoose(val){
                 label_choose = val;
