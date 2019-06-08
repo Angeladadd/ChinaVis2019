@@ -1,4 +1,17 @@
 function drawBubble(){
+
+    dat = [];
+    for(i in D1per10min){
+        console.log(i);
+        for(j in D1per10min[i].sidcount){
+            console.log(j);
+            if(j != "0"){
+                tmp = {cat:j , name: j, value: D1per10min[i].sidcount[j],
+				icon: j, desc: ``};
+                dat.push(tmp);
+            }
+        }
+    }
 	let data = [{
 				cat: 'Guest展厅', name: 'Guest展厅', value: 30,
 				icon: 'Guest展厅',
@@ -81,7 +94,7 @@ function drawBubble(){
 		// we use pack() to automatically calculate radius conveniently only
 		// and get only the leaves
 		let nodes = pack(root).leaves().map(node => {
-			console.log('node:', node.x, (node.x - centerX) * 2);
+			// console.log('node:', node.x, (node.x - centerX) * 2);
 			const data = node.data;
 			return {
 				x: centerX + (node.x - centerX) * 3, // magnify start position to have transition to center movement
