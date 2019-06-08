@@ -15,7 +15,6 @@
         <script src="../static/scripts/d3.layout.cloud.js"></script>
         <script src="../static/scripts/d3-legend.min.js"></script>
         <script scr="../static/scripts/D1per10min.js"></script>
-	    <script src="../static/scripts/DrawFlow.js"></script>
         <script src = "../static/scripts/DrawRoute.js"></script>
 		<script src = "../static/scripts/d1labelcountper10min.js"></script>
 		<script src = "../static/scripts/d2labelcountper10min.js"></script>
@@ -34,7 +33,7 @@
     	<!-- <script src = "../static/scripts/sensor_deployment.js"></script> -->
         <script src = "../static/scripts/DrawBubble.js"></script>
         <script src = "../static/scripts/DrawChord.js"></script>
-        <script src = "../static/scripts/DrawWordCloud.js"></script>
+				<script src = "../static/scripts/DrawWordCloud.js"></script>
         <link href="../static/css/style.css"  rel="stylesheet" type="text/css" media="all" />
         <style>
             /*#day_route{*/
@@ -75,15 +74,15 @@
             var cnt = -1;
             //为了加载快，这里只计算一天
             //第二天修改所有的people[0]为 people[1], data_day1为data_day2
-            for(var i=0;i<data_day1.length;i++){
-                let id = data_day1[i].id;
-                let sid = data_day1[i].sid;
-                let time = data_day1[i].time;
+            for(var i=0;i<data_day3.length;i++){
+                let id = data_day3[i].id;
+                let sid = data_day3[i].sid;
+                let time = data_day3[i].time;
                 var d_obj;
                 if(!people_map.hasOwnProperty(id)){
                     cnt++;
                     people_map[id] = cnt;
-                    people[0][cnt] = new Array(0);
+                    people[2][cnt] = new Array(0);
                     d_obj = {};
                     var sensor_tmp = sensor_deployment[sensor_map[sid]];
                     d_obj.x = parseInt(-1);
@@ -92,7 +91,7 @@
                     d_obj.time = parseInt(time);
                     d_obj.id = parseInt(id);
                     d_obj.sensor_simple_id = sensor_map[sid];
-                    people[0][cnt].push(d_obj);
+                    people[2][cnt].push(d_obj);
                 }
                 var index = parseInt(people_map[id]);
 
@@ -105,10 +104,10 @@
                 obj.id = parseInt(id);
                 obj.sensor_simple_id = sensor_map[sid];
 
-                if(people[0][index]) people[0][index].push(obj);
+                if(people[2][index]) people[2][index].push(obj);
             }
-            for(var i=0;i<people[0].length;i++)
-                people[0][i].push(d_obj);
+            for(var i=0;i<people[2].length;i++)
+                people[2][i].push(d_obj);
 
             MAP = {people_map:people_map,sensor_map:sensor_map};
             sensor_all_floor = new Array(0);
@@ -212,7 +211,7 @@
       </div>
         <!-- mrbox_top end -->
         <div class="mrbox_top_right">
-            <div class="arightboxtop"><h2 class="tith2">警力分析</h2>
+            <div class="arightboxtop"><h2 class="tith2">人员分布统计图</h2>
             <!-- <div class="lefttoday_tit"><p class="fl">状态：已调节</p><p class="fr">时间段：2018-06-10</p></div>
             <div class="left2_table">
                <ul>
@@ -268,310 +267,7 @@
                </ul>
 			</div> -->
 			<div id="container" style="height: 100%; margin-bottom: 10%"></div>
-				
-				<script type="text/javascript">
-					// console.log(D1per10min);
-					groups = [];
-					groupData = [];
-					time = [];
-					for(var i in Object.keys(D1per10min)){
-						groups.push(Object.keys(D1per10min)[i]);
-						groupData.push(D1per10min[Object.keys(D1per10min)[i]]);
-						
-					}
-					for(var j=0; j<groupData[0].length; j++){
-						time.push(j * 10);
-					}
-					console.log(time);
-					// console.log(groups);
-					// console.log(groupData);
-
-					var dom = document.getElementById("container");
-					var myChart = echarts.init(dom);
-					var app = {};
-					option = null;
-					app.title = '堆叠条形图';
-
-					option = {
-						tooltip : {
-							trigger: 'axis',
-							axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-								type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-							}
-						},
-						// legend: {
-						// 	// data: ['直接访问', '邮件营销','联盟广告','视频广告','搜索引擎']
-						// 	data: groups
-						// },
-						grid: {
-							left: '3%',
-							right: '5%',
-							bottom: '10%',
-							containLabel: true
-						},
-						yAxis:  {
-							type: 'value'
-						},
-						xAxis: {
-							type: 'category',
-							// data: ['周一','周二','周三','周四','周五','周六','周日']
-							data: time
-						},
-						series: [
-							{
-								// name: '直接访问',
-								name: groups[0],
-								type: 'bar',
-								stack: '总量',
-								// data: [320, 302, 301, 334, 390, 330, 320]
-								data: groupData[0]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[1],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[1]
-							},
-							{
-								// name: '联盟广告',
-								name: groups[2],
-								type: 'bar',
-								stack: '总量',
-								// data: [220, 182, 191, 234, 290, 330, 310]
-								data: groupData[2]
-							},
-							{
-								// name: '视频广告',
-								name: groups[3],
-								type: 'bar',
-								stack: '总量',
-								// data: [150, 212, 201, 154, 190, 330, 410]
-								data: groupData[3]
-							},
-							{
-								// name: '搜索引擎',
-								name: groups[4],
-								type: 'bar',
-								stack: '总量',
-								// data: [820, 832, 901, 934, 1290, 1330, 1320]
-								data: groupData[4]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[5],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[5]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[6],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[6]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[7],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[7]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[8],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[8]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[9],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[9]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[10],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[10]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[11],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[11]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[12],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[12]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[13],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[13]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[14],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[14]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[15],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[15]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[16],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[16]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[17],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[17]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[18],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[18]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[19],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[19]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[20],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[20]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[21],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[21]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[22],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[22]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[23],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[23]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[24],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[24]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[25],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[25]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[26],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[26]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[27],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[27]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[28],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[28]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[29],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[29]
-							},
-							{
-								// name: '邮件营销',
-								name: groups[30],
-								type: 'bar',
-								stack: '总量',
-								// data: [120, 132, 101, 134, 90, 230, 210]
-								data: groupData[30]
-							}
-						]
-					};
-					if (option && typeof option === "object") {
-						myChart.setOption(option, true);
-					}
-				</script>
+			<script src="../static/scripts/DrawBar.js"></script>
             </div>
             <div class="arightboxbott"><h2 class="tith2 ">人员构成</h2>
               <div id="arightboxbott" class="arightboxbottcont" style="">
@@ -602,7 +298,7 @@
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
             //第二天修改为2
-            var route = drawMainActive(1);
+            var route = drawMainActive(3);
             function Update(currentTime){
                 // {#console.log(currentTime);#}
                 //console.log(currentTime);
@@ -612,12 +308,12 @@
     </body>
 <script>
     //当天的开始时间
-  var currentTime = 25240;
+  var currentTime = 27070;
   var currentDay = 2;
   drawBubble(currentDay,currentTime);
     setTimeout(function () {
         //当天的结束时间
-    if(currentTime<64859){
+    if(currentTime<45164){
         //console.log(currentTime);
         var p=document.getElementById("time");
         p.innerHTML = currentTime.toString();
@@ -625,7 +321,12 @@
       currentTime++;
       setTimeout(arguments.callee, 0.1)
     }
-    else currentTime = 25240;
+    else currentTime = 27070;
   },0.1);
+</script>
+
+
+<script type="text/javascript">
+	
 </script>
 </html>
