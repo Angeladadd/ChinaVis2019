@@ -75,7 +75,7 @@ function drawChord(){
         .style("fill", function(d) { return color(d.target.index); })
         .style("stroke", function(d) { return d3.rgb(color(d.target.index)).darker(); })
         .append('title')
-        .text(function(d){console.log(d);return region[d.source.index]+':'+d.source.value +','+ region[d.target.index]+':'+d.target.value;})
+        .text(function(d){return region[d.source.index]+':'+d.source.value +','+ region[d.target.index]+':'+d.target.value;})
     // Returns an array of tick angles and values for a given group and step.
     function groupTicks(d, step) {
     var k = (d.endAngle - d.startAngle) / d.value;
