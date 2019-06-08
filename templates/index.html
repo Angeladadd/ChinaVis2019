@@ -354,6 +354,9 @@
             <div class="arightboxbott"><h2 class="tith2 ">人员构成</h2>
               <div id="arightboxbott" class="arightboxbottcont" style="">
                   <div id="person_distribution"></div>
+                  <button value="0" onclick="ChangeDay(value)">day 1</button>
+                  <button value="1" onclick="ChangeDay(value)">day 2</button>
+                  <button value="2" onclick="ChangeDay(value)">day 3</button>
               </div>
             </div>
         </div>
@@ -365,10 +368,15 @@
             function ChangeLabelChoose(val){
                 label_choose = val;
             }
+            function ChangeDay(val){
+                val=parseInt(val);
+                world_cloud.update_by_day(val);
+            }
             drawFlow();
             drawBubble();
             drawChord();
-            DrawWorldCloud(0);
+            var world_cloud = DrawWorldCloud(0);
+            //world_cloud.update_by_day(1);
             //
             var route = drawMainActive(1);
             function Update(currentTime){

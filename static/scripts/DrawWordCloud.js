@@ -3,7 +3,7 @@ function DrawWorldCloud(dayx){
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 250 - margin.left - margin.right,
+    width = 350 - margin.left - margin.right,
     height = 250 - margin.top - margin.bottom;
 
 // append the svg object to the body of the page
@@ -14,9 +14,9 @@ var svg = d3.select("#person_distribution").append("svg")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 var day = new Array(3);
-    day[0] = [['ordinary worker',976],['attendee',2273],['manager',36],['guest',158],['reporter',121]];
-    day[1] = [['attendee',2634],['ordinary worker',1349],['manager',45],['reporter',142],['guest',264]];
-    day[2] = [['ordinary worker',887],['attendee',1741],['guest',227],['manager',37],['reporter',38]];
+    day[0] = [['worker',976],['attendee',2273],['manager',36],['guest',158],['reporter',121]];
+    day[1] = [['attendee',2634],['worker',1349],['manager',45],['reporter',142],['guest',264]];
+    day[2] = [['worker',887],['attendee',1741],['guest',227],['manager',37],['reporter',38]];
 
   var myWords = new Array(0);
     var freq = new Array(0);
@@ -47,10 +47,35 @@ var layout = d3.layout.cloud()
   .fontSize(function(d) { return d.size; })      // font size of words
   .on("end", draw);
 layout.start();
+var obj={};
+obj.layout = layout;
+obj.update_by_day=function (day_param){
+    var myWords = new Array(0);
+    var freq = new Array(0);
+        for(var i=0;i<day[day_param].length;i++){
+            freq[i] = parseInt(day[day_param][i][1]);
+            //console.log(freq[i]);
+        }
+        //var max_freq = Math.max.apply(Math,freq);
+        //var min_freq = Math.min.apply(Math,freq);
+        var linear = d3.scaleLinear()
+        .domain([Math.min.apply(Math,freq),Math.max.apply(Math,freq)])
+        .range([20,45]);
 
+        for(var i=0;i<day[day_param].length;i++){
+            myWords[i] = {};
+            myWords[i].word = day[day_param][i][0];
+            //console.log(myWords)
+            myWords[i].size = linear(freq[i]);
+        }
+        this.layout.words(myWords.map(function(d) { return {text: d.word, size:d.size}; }));
+        this.layout.start();
+    }
 // This function takes the output of 'layout' above and draw the words
 // Wordcloud features that are THE SAME from one word to the other can be here
 function draw(words) {
+    var old = svg.select('g');
+    if(old!=null) old.remove();
   svg
     .append("g")
       .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
@@ -66,6 +91,6 @@ function draw(words) {
         })
         .text(function(d) { return d.text; });
 }
-
+return obj;
 
 }
