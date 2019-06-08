@@ -105,6 +105,7 @@
 
                 if(people[0][index]) people[0][index].push(obj);
             }
+            d_obj.time=1000000;
             for(var i=0;i<people[0].length;i++)
                 people[0][i].push(d_obj);
 
@@ -208,15 +209,15 @@
                       for(var i=0; i<Object.keys(D1per10min).length; i++){
                           // console.log(D1per10min[i].sidcount);
                           sidcountGroup = D1per10min[i].sidcount;
-                          console.log(sidcountGroup);
-                          console.log(Object.keys(sidcountGroup));
+                          // console.log(sidcountGroup);
+                          // console.log(Object.keys(sidcountGroup));
                           for(var j in Object.keys(sidcountGroup)){
                             if(Object.keys(sidcountGroup)[j] in sidcountGroup){
                             }
                             else{groups.push(Object.keys(sidcountGroup)[j])}
 
-                            console.log(Object.keys(sidcountGroup)[j]);
-                            console.log(sidcountGroup[Object.keys(sidcountGroup)[j]]);
+                            // console.log(Object.keys(sidcountGroup)[j]);
+                            // console.log(sidcountGroup[Object.keys(sidcountGroup)[j]]);
                           }
                       }
                         var dom = document.getElementById("container");
@@ -376,7 +377,7 @@
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
             //第二天修改为2
-            var route = drawMainActive(1);
+            var route = drawMainActive(1,37000);
             function Update(currentTime){
                 // {#console.log(currentTime);#}
                 //console.log(currentTime);
@@ -386,7 +387,7 @@
     </body>
 <script>
     //当天的开始时间
-  var currentTime = 25240;
+  var currentTime = 37000;
     setTimeout(function () {
         //当天的结束时间
     if(currentTime<64859){
