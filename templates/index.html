@@ -20,6 +20,8 @@
     	<script src = "../static/scripts/sensor_deployment.js"></script>
         <script src = "../static/scripts/id_label.js"></script>
         <script src = "../static/scripts/D1per10min.js"></script>
+        <script src = "../static/scripts/D2per10min.js"></script>
+        <script src = "../static/scripts/D3per10min.js"></script>
     	<!-- <script src = "../static/scripts/sensor_deployment.js"></script> -->
         <script src = "../static/scripts/DrawBubble.js"></script>
         <script src = "../static/scripts/DrawChord.js"></script>
@@ -370,10 +372,11 @@
             }
             function ChangeDay(val){
                 val=parseInt(val);
+                currentDay = val;
                 world_cloud.update_by_day(val);
             }
             drawFlow();
-            drawBubble();
+            {#drawBubble(1,currentTime);#}
             drawChord();
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
@@ -388,6 +391,8 @@
     </body>
 <script>
   var currentTime = 25240;
+  var currentDay = 2;
+  drawBubble(currentDay,currentTime);
     setTimeout(function () {
     if(currentTime<31270){
       Update(currentTime);

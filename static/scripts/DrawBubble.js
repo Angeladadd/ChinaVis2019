@@ -1,58 +1,31 @@
-function drawBubble(){
+function drawBubble(date,currentTime){
 
+	if(date == 3) all_data = D3per10min;
+	else if (date == 2) all_data = D2per10min;
+	else all_data = D1per10min;
+	if(currentTime < 27000) t = 0;
+	else t = (currentTime - 27000)/6000;
     dat = [];
-    for(i in D1per10min){
+    for(i in all_data){
         console.log(i);
-        for(j in D1per10min[i].sidcount){
-            console.log(j);
-            if(j != "0"){
-                tmp = {cat:j , name: j, value: D1per10min[i].sidcount[j],
-				icon: j, desc: ``};
-                dat.push(tmp);
-            }
-        }
+
+        if(i != 0){
+        	if(all_data[i][t] != 0){
+        		tmp = {cat:i , name: i, value: all_data[i][t],icon: i, desc: ``};
+        		dat.push(tmp);
+			}
+        	// for(j in all_data[i].sidcount){
+            // // console.log(j);
+			// 	if(j != "0"){
+			// 		tmp = {cat:j , name: j, value: all_data[i].sidcount[j],
+			// 		icon: j, desc: ``};
+			// 		dat.push(tmp);
+			// 	}
+        	// }
+		}
     }
-	let data = [{
-				cat: 'Guest展厅', name: 'Guest展厅', value: 30,
-				icon: 'Guest展厅',
-				desc: ``
-			}, {
-				cat: 'Cleaner', name: 'Cleaner', value: 80,
-				icon: 'Cleaner',
-				desc: ``
-			},{
-				cat: 'Worker', name: 'Worker', value: 100,
-				icon: 'Worker',
-				desc: ``
-			}, {
-				cat: 'Guest海报', name: 'Guest海报', value: 30,
-				icon: 'Guest海报',
-				desc: ``
-			}, {
-				cat: 'Guest主会场', name: 'Guest主会场', value: 100,
-				icon: 'Guest主会场',
-				desc: ``
-			}, {
-				cat: 'Guest分会场A', name: 'Guest分会场A', value: 30,
-				icon: 'Guest分会场A',
-				desc: ``
-			}, {
-				cat: 'Guest分会场B', name: 'Guest分会场B', value: 30,
-				icon: 'Guest分会场B',
-				desc: ``
-			}, {
-				cat: 'Guest分会场C', name: 'Guest分会场C', value: 30,
-				icon: 'Guest分会场C',
-				desc: ``
-			},{
-				cat: 'Guest分会场D', name: 'Guest分会场D', value: 30,
-				icon: 'Guest分会场D',
-				desc: ``
-			}, {
-				cat: 'Guest其他', name: 'Guest其他', value: 20,
-				icon: 'Guest其他',
-				desc: ``
-			}];
+    data = dat;
+
 	let svg = d3.select('#bubble').select('svg');
 		let width = +svg.attr('width'); // get width in pixels
 		let height = +svg.attr('height');
@@ -63,7 +36,7 @@ function drawBubble(){
 
 		let format = d3.format(',d');
 
-		let scaleColor = d3.scaleOrdinal(d3.schemeCategory20);
+		let scaleColor = d3.scaleOrdinal(['#99CC99','#99CCCC','#FFFFCC','#CCFFFF','#FFCCCC','#CCCCFF','#FF9966','#FF6666']);
 
 		// use pack to calculate radius of the circle
 		let pack = d3.pack()
@@ -111,7 +84,7 @@ function drawBubble(){
 		});
 		simulation.nodes(nodes).on('tick', ticked);
 
-		svg.style('background-color', '#eee');
+		// svg.style('background-color', '#eee');
 		let node = svg.selectAll('.node')
 			.data(nodes)
 			.enter().append('g')
@@ -176,7 +149,7 @@ function drawBubble(){
 			.attr('width', d => d.radius * 2 * 0.7)
 
 		node.append('title')
-			.text(d => (d.cat + '::' + d.name + '\n' + format(d.value)));
+			.text(d => (d.name + '\n' + format(d.value)));
 
 		let legendOrdinal = d3.legendColor()
 			.scale(scaleColor)
@@ -199,12 +172,12 @@ function drawBubble(){
 			.shapePadding(10)
 			.labelAlign('end');
 
-		let legend2 = svg.append('g')
-			.classed('legend-size', true)
-			.attr('text-anchor', 'start')
-			.attr('transform', 'translate(150, 25)')
-			.style('font-size', '12px')
-			.call(legendSize);
+		// let legend2 = svg.append('g')
+		// 	.classed('legend-size', true)
+		// 	.attr('text-anchor', 'start')
+		// 	.attr('transform', 'translate(150, 25)')
+		// 	.style('font-size', '12px')
+		// 	.call(legendSize);
 
 		let infoBox = node.append('foreignObject')
 			.classed('circle-overlay hidden', true)
@@ -224,73 +197,73 @@ function drawBubble(){
 			.html(d => d.desc);
 
 
-		node.on('click', (currentNode) => {
-			d3.event.stopPropagation();
-			console.log('currentNode', currentNode);
-			let currentTarget = d3.event.currentTarget; // the <g> el
-
-			if (currentNode === focusedNode) {
-				// no focusedNode or same focused node is clicked
-				return;
-			}
-			let lastNode = focusedNode;
-			focusedNode = currentNode;
-
-			simulation.alphaTarget(0.2).restart();
-			// hide all circle-overlay
-			d3.selectAll('.circle-overlay').classed('hidden', true);
-			d3.selectAll('.node-icon').classed('node-icon--faded', false);
-
-			// don't fix last node to center anymore
-			if (lastNode) {
-				lastNode.fx = null;
-				lastNode.fy = null;
-				node.filter((d, i) => i === lastNode.index)
-					.transition().duration(2000).ease(d3.easePolyOut)
-					.tween('circleOut', () => {
-						let irl = d3.interpolateNumber(lastNode.r, lastNode.radius);
-						return (t) => {
-							lastNode.r = irl(t);
-						}
-					})
-					.on('interrupt', () => {
-						lastNode.r = lastNode.radius;
-					});
-			}
-
-			// if (!d3.event.active) simulation.alphaTarget(0.5).restart();
-
-			d3.transition().duration(2000).ease(d3.easePolyOut)
-				.tween('moveIn', () => {
-					console.log('tweenMoveIn', currentNode);
-					let ix = d3.interpolateNumber(currentNode.x, centerX);
-					let iy = d3.interpolateNumber(currentNode.y, centerY);
-					let ir = d3.interpolateNumber(currentNode.r, centerY * 0.5);
-					return function (t) {
-						// console.log('i', ix(t), iy(t));
-						currentNode.fx = ix(t);
-						currentNode.fy = iy(t);
-						currentNode.r = ir(t);
-						simulation.force('collide', forceCollide);
-					};
-				})
-				.on('end', () => {
-					simulation.alphaTarget(0);
-					let $currentGroup = d3.select(currentTarget);
-					$currentGroup.select('.circle-overlay')
-						.classed('hidden', false);
-					$currentGroup.select('.node-icon')
-						.classed('node-icon--faded', true);
-
-				})
-				.on('interrupt', () => {
-					console.log('move interrupt', currentNode);
-					currentNode.fx = null;
-					currentNode.fy = null;
-					simulation.alphaTarget(0);
-				});
-
-		});
+		// node.on('click', (currentNode) => {
+		// 	d3.event.stopPropagation();
+		// 	console.log('currentNode', currentNode);
+		// 	let currentTarget = d3.event.currentTarget; // the <g> el
+		//
+		// 	if (currentNode === focusedNode) {
+		// 		// no focusedNode or same focused node is clicked
+		// 		return;
+		// 	}
+		// 	let lastNode = focusedNode;
+		// 	focusedNode = currentNode;
+		//
+		// 	simulation.alphaTarget(0.2).restart();
+		// 	// hide all circle-overlay
+		// 	d3.selectAll('.circle-overlay').classed('hidden', true);
+		// 	d3.selectAll('.node-icon').classed('node-icon--faded', false);
+		//
+		// 	// don't fix last node to center anymore
+		// 	if (lastNode) {
+		// 		lastNode.fx = null;
+		// 		lastNode.fy = null;
+		// 		node.filter((d, i) => i === lastNode.index)
+		// 			.transition().duration(2000).ease(d3.easePolyOut)
+		// 			.tween('circleOut', () => {
+		// 				let irl = d3.interpolateNumber(lastNode.r, lastNode.radius);
+		// 				return (t) => {
+		// 					lastNode.r = irl(t);
+		// 				}
+		// 			})
+		// 			.on('interrupt', () => {
+		// 				lastNode.r = lastNode.radius;
+		// 			});
+		// 	}
+		//
+		// 	// if (!d3.event.active) simulation.alphaTarget(0.5).restart();
+		//
+		// 	d3.transition().duration(2000).ease(d3.easePolyOut)
+		// 		.tween('moveIn', () => {
+		// 			console.log('tweenMoveIn', currentNode);
+		// 			let ix = d3.interpolateNumber(currentNode.x, centerX);
+		// 			let iy = d3.interpolateNumber(currentNode.y, centerY);
+		// 			let ir = d3.interpolateNumber(currentNode.r, centerY * 0.5);
+		// 			return function (t) {
+		// 				// console.log('i', ix(t), iy(t));
+		// 				currentNode.fx = ix(t);
+		// 				currentNode.fy = iy(t);
+		// 				currentNode.r = ir(t);
+		// 				simulation.force('collide', forceCollide);
+		// 			};
+		// 		})
+		// 		.on('end', () => {
+		// 			simulation.alphaTarget(0);
+		// 			let $currentGroup = d3.select(currentTarget);
+		// 			$currentGroup.select('.circle-overlay')
+		// 				.classed('hidden', false);
+		// 			$currentGroup.select('.node-icon')
+		// 				.classed('node-icon--faded', true);
+		//
+		// 		})
+		// 		.on('interrupt', () => {
+		// 			console.log('move interrupt', currentNode);
+		// 			currentNode.fx = null;
+		// 			currentNode.fy = null;
+		// 			simulation.alphaTarget(0);
+		// 		});
+		//
+		// });
 
 		// blur
 		d3.select(document).on('click', () => {
