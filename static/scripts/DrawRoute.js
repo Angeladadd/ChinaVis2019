@@ -1,3 +1,4 @@
+sensor_people_log = new Array(0);
 function drawMainActive(day_index){
     //处理参数
     var day = 0;
@@ -13,12 +14,15 @@ function drawMainActive(day_index){
                     break;
             }
             var sensor = sensor_all_floor;
+    for(var i=0;i<sensor.length;i++){
+           sensor_people_log[i] = new Array(0);
+    }
             //布局
             //给的地图太智障了，我强行把x换成了y
             let margin = {top: 5, right: 5, bottom: 5, left: 5},
                 width = 320 - margin.left - margin.right,
                 height = 850 - margin.top - margin.bottom
-                ,bias = height/3*2+20;
+                ,bias = height/3*2+30;
             let svg = d3.select("#day_route")
                 .attr("height", width + margin.left + margin.right)
                 .attr("width", height + margin.top + margin.bottom);
@@ -83,7 +87,19 @@ function drawMainActive(day_index){
                 .attr("fill", function (d,i) {
                     return color1[color_label[d.label]];
                 })
-                .style("opacity",0.5);
+                .style("opacity",0.5)
+                .on("mouseover",function (d,i) {
+                                Tooltip
+                                    .style("opacity", 1)
+                                    .text(sensor_people_log[i].toString())
+                                    .attr("x", (d3.mouse(this)[0]+20) + "px")
+                                    .attr("y", (d3.mouse(this)[1]) + "px");
+                                var p=document.getElementById("list");
+                                p.innerHTML = sensor_people_log[i].toString();
+                            })
+                .on("mouseout",function (d,i) {
+                                Tooltip.style("opacity",0);
+                            });
             svg.selectAll(".position")
                 .data(people[day])
                 .enter()
@@ -138,26 +154,50 @@ function drawMainActive(day_index){
             //     .attr("opacity",1)
             //     .attr("d",path);
 
+    var Tooltip = svg.append("text")
+            .style("opacity", 0)
+            .style("font-size",14)
+            .attr("class", "tooltip");
+
             var obj = {};
             obj.svg = svg;
             obj.people = people[day];
             obj.point = new Array(people[day].length);
             obj.sensor = sensor_deployment;
+            obj.sensor_people_log = new Array(sensor.length);
+            obj.Tooltip = Tooltip;
+
             for(var i=0;i<people[day].length;i++){
                 obj.point[i] = 0;
             }
             obj.update = function (currentTime){
+                var Tooltip = obj.Tooltip;
                 for(var i=0;i<this.people.length;i++){
                     if(!this.people[i][this.point[i]+1]) continue;
                     if(this.people[i][this.point[i]+1].time == currentTime) {
                         var old_sensor = this.people[i][this.point[i]].sensor_simple_id;
                         var new_sensor = this.people[i][this.point[i]+1].sensor_simple_id;
-                        if(this.point[i]!= 0) sensor_people[old_sensor] -= 1;
+                        if(this.point[i]!= 0) {sensor_people[old_sensor] -= 1;
+                        sensor_people_log[old_sensor].splice(sensor_people_log[old_sensor].indexOf(this.people[i][0].id),1);
+                        }
                         sensor_people[new_sensor] += 1;
+
+                        sensor_people_log[new_sensor].push(this.people[i][0].id);
+                        //console.log(this.sensor_people_log[new_sensor].toString());
                         d3.select("#sensor"+old_sensor.toString())
                             .attr("fill", compute[color_label[sensor[old_sensor].label]](color_linear(sensor_people[old_sensor])));
                         d3.select("#sensor"+new_sensor.toString())
                             .attr("fill", compute[color_label[sensor[new_sensor].label]](color_linear(sensor_people[new_sensor])));
+                            // .on("mouseover",function (d,i) {
+                            //     Tooltip
+                            //         .style("opacity", 1)
+                            //         .text(sensor_people_log[i].toString())
+                            //         .attr("x", (d3.mouse(this)[0] + 20) + "px")
+                            //         .attr("y", (d3.mouse(this)[1]) + "px");
+                            // })
+                            // .on("mouseout",function (d,i) {
+                            //     Tooltip.style("opacity",0);
+                            // });
                         this.point[i]+=1;
                     }
                 }

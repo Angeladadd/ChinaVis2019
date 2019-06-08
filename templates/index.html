@@ -3,17 +3,26 @@
     <head>
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.js"></script> 
-        <script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
+		<script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
         <script src="../static/scripts/d3.layout.cloud.js"></script>
         <script src="../static/scripts/d3-legend.min.js"></script>
+        <script scr="../static/scripts/D1per10min.js"></script>
 	    <script src="../static/scripts/DrawFlow.js"></script>
         <script src = "../static/scripts/DrawRoute.js"></script>
- 	<script src = "../static/scripts/d1labelcountper10min.js"></script>
- 	<script src = "../static/scripts/d2labelcountper10min.js"></script>
- 	<script src = "../static/scripts/d3labelcountper10min.js"></script>
- 	<script src = "../static/scripts/d1labelcountpermin.js"></script>
- 	<script src = "../static/scripts/d2labelcountpermin.js"></script>
- 	<script src = "../static/scripts/d3labelcountpermin.js"></script>
+		<script src = "../static/scripts/d1labelcountper10min.js"></script>
+		<script src = "../static/scripts/d2labelcountper10min.js"></script>
+		<script src = "../static/scripts/d3labelcountper10min.js"></script>
+		<script src = "../static/scripts/d1labelcountpermin.js"></script>
+		<script src = "../static/scripts/d2labelcountpermin.js"></script>
+		<script src = "../static/scripts/d3labelcountpermin.js"></script>
         <script src = "../static/scripts/number_time_day1.js"></script>
         <script src = "../static/scripts/number_time_day2.js"></script>
         <script src = "../static/scripts/number_time_day3.js"></script>
@@ -27,6 +36,11 @@
         <script src = "../static/scripts/DrawChord.js"></script>
         <script src = "../static/scripts/DrawWordCloud.js"></script>
         <link href="../static/css/style.css"  rel="stylesheet" type="text/css" media="all" />
+        <style>
+            /*#day_route{*/
+                /*background: url(https://github.com/Angeladadd/ChinaVis2019/blob/cc86772a65976d4ad933450d589f0790444a1042/static/img/background.png);*/
+            /*}*/
+        </style>
         <script>
             // var label = [];
             // for (var key in id_label){
@@ -56,7 +70,11 @@
             //这个地方非常瓶颈，建议后端直接做成json，后端如果要加的话尽量把people做成这个数据结构8
             people = new Array(3);
             people[0] = new Array(0);
+            people[1] = new Array(0);
+            people[2] = new Array(0);
             var cnt = -1;
+            //为了加载快，这里只计算一天
+            //第二天修改所有的people[0]为 people[1], data_day1为data_day2
             for(var i=0;i<data_day1.length;i++){
                 let id = data_day1[i].id;
                 let sid = data_day1[i].sid;
@@ -97,7 +115,6 @@
             for(let i=0;i<sensor_deployment.length;i++){
                 sensor_all_floor.push(sensor_deployment[i]);
             }
-            label_choose = 'all';
 
         </script>
 
@@ -137,10 +154,10 @@
     </div>
     <div class="aleftboxtmidd">
       <h2 class="tith2">矛盾纠纷地区统计</h2>
-{#        <div id="liuyuxiang">#}
+<!-- {#        <div id="liuyuxiang">#}
 {#            <select id="selectButton"></select>#}
 {#            <div id="vis1"></div>#}
-{#        </div>#}
+{#        </div>#} -->
       <div id="aleftboxtmidd" class="aleftboxtmiddcont"></div>
   </div>
   <div class="aleftboxtbott">
@@ -159,14 +176,16 @@
               <h2 class="tith2 pt1">实时监控统计</h2>
                 <div class="amiddboxttop_map" style="">
                     <div id="main_active">
-        <svg id="day_route"></svg>
+        <svg id="day_route" class="day_route"></svg>
          <br>
-        <button value="all" onclick="ChangeLabelChoose(value)">all</button>
-        <button value = 'ordinary worker' onclick="ChangeLabelChoose(value)">ordinary worker</button>
-        <button value = 'manager' onclick="ChangeLabelChoose(value)">manager</button>
-        <button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>
-        <button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>
-        <button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>
+                        <p id="time"></p>
+                        <p id ="list"></p>
+        <!--<button value="all" onclick="ChangeLabelChoose(value)">all</button>-->
+        <!--<button value = 'ordinary worker' onclick="ChangeLabelChoose(value)">ordinary worker</button>-->
+        <!--<button value = 'manager' onclick="ChangeLabelChoose(value)">manager</button>-->
+        <!--<button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>-->
+        <!--<button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>-->
+        <!--<button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>-->
         </div>
                 </div>
             </div>
@@ -184,16 +203,24 @@
                 <div class="amiddboxtbott2 fl"><h2 class="tith2 pt1">案件统计</h2>
                   <div class="amiddboxtbott2content">
                   <div id="container" style="height: 100%; margin-bottom: 10%"></div>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-                    <!--<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>-->
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
                     <script type="text/javascript">
+                      // console.log(D1per10min);
+                      groups = [];
+                      groupData = {};
+                      for(var i=0; i<Object.keys(D1per10min).length; i++){
+                          // console.log(D1per10min[i].sidcount);
+                          sidcountGroup = D1per10min[i].sidcount;
+                          console.log(sidcountGroup);
+                          console.log(Object.keys(sidcountGroup));
+                          for(var j in Object.keys(sidcountGroup)){
+                            if(Object.keys(sidcountGroup)[j] in sidcountGroup){
+                            }
+                            else{groups.push(Object.keys(sidcountGroup)[j])}
+
+                            console.log(Object.keys(sidcountGroup)[j]);
+                            console.log(sidcountGroup[Object.keys(sidcountGroup)[j]]);
+                          }
+                      }
                         var dom = document.getElementById("container");
                         var myChart = echarts.init(dom);
                         var app = {};
@@ -216,10 +243,10 @@
                                 bottom: '3%',
                                 containLabel: true
                             },
-                            xAxis:  {
+                            yAxis:  {
                                 type: 'value'
                             },
-                            yAxis: {
+                            xAxis: {
                                 type: 'category',
                                 data: ['周一','周二','周三','周四','周五','周六','周日']
                             },
@@ -228,64 +255,34 @@
                                     name: '直接访问',
                                     type: 'bar',
                                     stack: '总量',
-                                    label: {
-                                        normal: {
-                                            show: true,
-                                            position: 'insideRight'
-                                        }
-                                    },
                                     data: [320, 302, 301, 334, 390, 330, 320]
                                 },
                                 {
                                     name: '邮件营销',
                                     type: 'bar',
                                     stack: '总量',
-                                    label: {
-                                        normal: {
-                                            show: true,
-                                            position: 'insideRight'
-                                        }
-                                    },
                                     data: [120, 132, 101, 134, 90, 230, 210]
                                 },
                                 {
                                     name: '联盟广告',
                                     type: 'bar',
                                     stack: '总量',
-                                    label: {
-                                        normal: {
-                                            show: true,
-                                            position: 'insideRight'
-                                        }
-                                    },
                                     data: [220, 182, 191, 234, 290, 330, 310]
                                 },
                                 {
                                     name: '视频广告',
                                     type: 'bar',
                                     stack: '总量',
-                                    label: {
-                                        normal: {
-                                            show: true,
-                                            position: 'insideRight'
-                                        }
-                                    },
                                     data: [150, 212, 201, 154, 190, 330, 410]
                                 },
                                 {
                                     name: '搜索引擎',
                                     type: 'bar',
                                     stack: '总量',
-                                    label: {
-                                        normal: {
-                                            show: true,
-                                            position: 'insideRight'
-                                        }
-                                    },
                                     data: [820, 832, 901, 934, 1290, 1330, 1320]
                                 }
                             ]
-                        };;
+                        };
                         if (option && typeof option === "object") {
                             myChart.setOption(option, true);
                         }
@@ -367,6 +364,7 @@
     </div>
   
         <script>
+            label_choose = 'all';
             function ChangeLabelChoose(val){
                 label_choose = val;
             }
@@ -380,7 +378,7 @@
             drawChord();
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
-            //
+            //第二天修改为2
             var route = drawMainActive(1);
             function Update(currentTime){
                 // {#console.log(currentTime);#}
@@ -390,11 +388,16 @@
         </script>
     </body>
 <script>
+    //当天的开始时间
   var currentTime = 25240;
   var currentDay = 2;
   drawBubble(currentDay,currentTime);
     setTimeout(function () {
-    if(currentTime<31270){
+        //当天的结束时间
+    if(currentTime<64859){
+        //console.log(currentTime);
+        var p=document.getElementById("time");
+        p.innerHTML = currentTime.toString();
       Update(currentTime);
       currentTime++;
       setTimeout(arguments.callee, 0.1)
