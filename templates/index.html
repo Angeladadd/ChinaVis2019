@@ -4,8 +4,7 @@
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.js"></script> 
         <script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
-<script src="https://cdn.bootcss.com/wordcloud2.js/1.1.0/wordcloud2.js"></script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+        <script src="../static/scripts/d3.layout.cloud.js"></script>
         <script src="../static/scripts/d3-legend.min.js"></script>
 	    <script src="../static/scripts/DrawFlow.js"></script>
         <script src = "../static/scripts/DrawRoute.js"></script>
@@ -24,6 +23,7 @@
     	<!-- <script src = "../static/scripts/sensor_deployment.js"></script> -->
         <script src = "../static/scripts/DrawBubble.js"></script>
         <script src = "../static/scripts/DrawChord.js"></script>
+        <script src = "../static/scripts/DrawWordCloud.js"></script>
         <link href="../static/css/style.css"  rel="stylesheet" type="text/css" media="all" />
         <script>
             // var label = [];
@@ -129,24 +129,6 @@
     <div class="lefttoday_tit" style=" height:8%"><p class="fl">地区：甘孜</p><p class="fr">2018-06-14</p></div>
     <div class="lefttoday_number">
       <div class="widget-inline-box text-center fl">
-        <p>矛盾纠纷</p>
-        <h3 class="ceeb1fd">54</h3>
-        <h4 class="text-muted pt6">环比<img src="img/iconup.png" height="16" />2%</h4>
-      </div>
-      <div class="widget-inline-box text-center fl">
-         <p>已调节</p>
-        <h3 class="c24c9ff">54</h3>
-        <h4 class="text-muted pt6">环比<img src="img/icondown.png" height="16" />3%</h4>
-      </div>
-      <div class="widget-inline-box text-center fl">
-         <p>未调节</p>
-        <h3 class="cffff00">4</h3>
-        <h4 class="text-muted pt6">环比<img src="img/icondown.png" height="16" />3%</h4>
-      </div>
-      <div class="widget-inline-box text-center fl">
-         <p>处理中</p>
-        <h3 class="c11e2dd">4</h3>
-        <h4 class="text-muted pt6">环比<img src="img/icondown.png" height="16" />3%</h4>
       </div>
     </div>
     <!-- lefttoday_number end -->
@@ -206,7 +188,7 @@
                     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
                     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
                     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-                    <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>
+                    <!--<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>-->
                     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
                     <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
                     <script type="text/javascript">
@@ -369,13 +351,15 @@
                </ul>
             </div>
             </div>
-            <div class="arightboxbott"><h2 class="tith2 ">矛盾纠纷七日数据分析</h2>
-              <div class="lefttoday_tit"><p class="fl">状态：已调节</p><p class="fr">时间：2018-06-14</p></div>
-              <div id="arightboxbott" class="arightboxbottcont" style=""></div>
+            <div class="arightboxbott"><h2 class="tith2 ">人员构成</h2>
+              <div id="arightboxbott" class="arightboxbottcont" style="">
+                  <div id="person_distribution"></div>
+              </div>
             </div>
         </div>
         <!-- mrbox_top_right end -->
 </div>
+    </div>
   
         <script>
             function ChangeLabelChoose(val){
@@ -384,11 +368,12 @@
             drawFlow();
             drawBubble();
             drawChord();
+            DrawWorldCloud(0);
             //
             var route = drawMainActive(1);
             function Update(currentTime){
                 // {#console.log(currentTime);#}
-                console.log(currentTime);
+                //console.log(currentTime);
                 route.update(currentTime);
             }
         </script>
