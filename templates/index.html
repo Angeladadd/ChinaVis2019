@@ -25,6 +25,11 @@
         <script src = "../static/scripts/DrawChord.js"></script>
         <script src = "../static/scripts/DrawWordCloud.js"></script>
         <link href="../static/css/style.css"  rel="stylesheet" type="text/css" media="all" />
+        <style>
+            /*#day_route{*/
+                /*background: url(https://github.com/Angeladadd/ChinaVis2019/blob/cc86772a65976d4ad933450d589f0790444a1042/static/img/background.png);*/
+            /*}*/
+        </style>
         <script>
             // var label = [];
             // for (var key in id_label){
@@ -54,7 +59,11 @@
             //这个地方非常瓶颈，建议后端直接做成json，后端如果要加的话尽量把people做成这个数据结构8
             people = new Array(3);
             people[0] = new Array(0);
+            people[1] = new Array(0);
+            people[2] = new Array(0);
             var cnt = -1;
+            //为了加载快，这里只计算一天
+            //第二天修改所有的people[0]为 people[1], data_day1为data_day2
             for(var i=0;i<data_day1.length;i++){
                 let id = data_day1[i].id;
                 let sid = data_day1[i].sid;
@@ -95,7 +104,6 @@
             for(let i=0;i<sensor_deployment.length;i++){
                 sensor_all_floor.push(sensor_deployment[i]);
             }
-            label_choose = 'all';
 
         </script>
 
@@ -157,14 +165,16 @@
               <h2 class="tith2 pt1">实时监控统计</h2>
                 <div class="amiddboxttop_map" style="">
                     <div id="main_active">
-        <svg id="day_route"></svg>
+        <svg id="day_route" class="day_route"></svg>
          <br>
-        <button value="all" onclick="ChangeLabelChoose(value)">all</button>
-        <button value = 'ordinary worker' onclick="ChangeLabelChoose(value)">ordinary worker</button>
-        <button value = 'manager' onclick="ChangeLabelChoose(value)">manager</button>
-        <button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>
-        <button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>
-        <button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>
+                        <p id="time"></p>
+                        <p id ="list"></p>
+        <!--<button value="all" onclick="ChangeLabelChoose(value)">all</button>-->
+        <!--<button value = 'ordinary worker' onclick="ChangeLabelChoose(value)">ordinary worker</button>-->
+        <!--<button value = 'manager' onclick="ChangeLabelChoose(value)">manager</button>-->
+        <!--<button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>-->
+        <!--<button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>-->
+        <!--<button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>-->
         </div>
                 </div>
             </div>
@@ -365,6 +375,7 @@
     </div>
   
         <script>
+            label_choose = 'all';
             function ChangeLabelChoose(val){
                 label_choose = val;
             }
@@ -377,7 +388,7 @@
             drawChord();
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
-            //
+            //第二天修改为2
             var route = drawMainActive(1);
             function Update(currentTime){
                 // {#console.log(currentTime);#}
@@ -387,9 +398,14 @@
         </script>
     </body>
 <script>
+    //当天的开始时间
   var currentTime = 25240;
     setTimeout(function () {
-    if(currentTime<31270){
+        //当天的结束时间
+    if(currentTime<64859){
+        //console.log(currentTime);
+        var p=document.getElementById("time");
+        p.innerHTML = currentTime.toString();
       Update(currentTime);
       currentTime++;
       setTimeout(arguments.callee, 0.1)
