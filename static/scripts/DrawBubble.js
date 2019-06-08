@@ -2,9 +2,9 @@ function drawBubble(){
 
     dat = [];
     for(i in D1per10min){
-        console.log(i);
+        // console.log(i);
         for(j in D1per10min[i].sidcount){
-            console.log(j);
+            // console.log(j);
             if(j != "0"){
                 tmp = {cat:j , name: j, value: D1per10min[i].sidcount[j],
 				icon: j, desc: ``};

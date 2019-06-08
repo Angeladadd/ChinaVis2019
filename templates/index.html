@@ -3,17 +3,26 @@
     <head>
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.js"></script> 
-        <script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
+		<script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
         <script src="../static/scripts/d3.layout.cloud.js"></script>
         <script src="../static/scripts/d3-legend.min.js"></script>
+        <script scr="../static/scripts/D1per10min.js"></script>
 	    <script src="../static/scripts/DrawFlow.js"></script>
         <script src = "../static/scripts/DrawRoute.js"></script>
- 	<script src = "../static/scripts/d1labelcountper10min.js"></script>
- 	<script src = "../static/scripts/d2labelcountper10min.js"></script>
- 	<script src = "../static/scripts/d3labelcountper10min.js"></script>
- 	<script src = "../static/scripts/d1labelcountpermin.js"></script>
- 	<script src = "../static/scripts/d2labelcountpermin.js"></script>
- 	<script src = "../static/scripts/d3labelcountpermin.js"></script>
+		<script src = "../static/scripts/d1labelcountper10min.js"></script>
+		<script src = "../static/scripts/d2labelcountper10min.js"></script>
+		<script src = "../static/scripts/d3labelcountper10min.js"></script>
+		<script src = "../static/scripts/d1labelcountpermin.js"></script>
+		<script src = "../static/scripts/d2labelcountpermin.js"></script>
+		<script src = "../static/scripts/d3labelcountpermin.js"></script>
         <script src = "../static/scripts/number_time_day1.js"></script>
         <script src = "../static/scripts/number_time_day2.js"></script>
         <script src = "../static/scripts/number_time_day3.js"></script>
@@ -135,10 +144,10 @@
     </div>
     <div class="aleftboxtmidd">
       <h2 class="tith2">矛盾纠纷地区统计</h2>
-{#        <div id="liuyuxiang">#}
+<!-- {#        <div id="liuyuxiang">#}
 {#            <select id="selectButton"></select>#}
 {#            <div id="vis1"></div>#}
-{#        </div>#}
+{#        </div>#} -->
       <div id="aleftboxtmidd" class="aleftboxtmiddcont"></div>
   </div>
   <div class="aleftboxtbott">
@@ -182,16 +191,24 @@
                 <div class="amiddboxtbott2 fl"><h2 class="tith2 pt1">案件统计</h2>
                   <div class="amiddboxtbott2content">
                   <div id="container" style="height: 100%; margin-bottom: 10%"></div>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-                    <!--<script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>-->
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-                    <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
                     <script type="text/javascript">
+                      // console.log(D1per10min);
+                      groups = [];
+                      groupData = {};
+                      for(var i=0; i<Object.keys(D1per10min).length; i++){
+                          // console.log(D1per10min[i].sidcount);
+                          sidcountGroup = D1per10min[i].sidcount;
+                          console.log(sidcountGroup);
+                          console.log(Object.keys(sidcountGroup));
+                          for(var j in Object.keys(sidcountGroup)){
+                            if(Object.keys(sidcountGroup)[j] in sidcountGroup){
+                            }
+                            else{groups.push(Object.keys(sidcountGroup)[j])}
+
+                            console.log(Object.keys(sidcountGroup)[j]);
+                            console.log(sidcountGroup[Object.keys(sidcountGroup)[j]]);
+                          }
+                      }
                         var dom = document.getElementById("container");
                         var myChart = echarts.init(dom);
                         var app = {};
@@ -214,10 +231,10 @@
                                 bottom: '3%',
                                 containLabel: true
                             },
-                            xAxis:  {
+                            yAxis:  {
                                 type: 'value'
                             },
-                            yAxis: {
+                            xAxis: {
                                 type: 'category',
                                 data: ['周一','周二','周三','周四','周五','周六','周日']
                             },
@@ -226,64 +243,34 @@
                                     name: '直接访问',
                                     type: 'bar',
                                     stack: '总量',
-                                    label: {
-                                        normal: {
-                                            show: true,
-                                            position: 'insideRight'
-                                        }
-                                    },
                                     data: [320, 302, 301, 334, 390, 330, 320]
                                 },
                                 {
                                     name: '邮件营销',
                                     type: 'bar',
                                     stack: '总量',
-                                    label: {
-                                        normal: {
-                                            show: true,
-                                            position: 'insideRight'
-                                        }
-                                    },
                                     data: [120, 132, 101, 134, 90, 230, 210]
                                 },
                                 {
                                     name: '联盟广告',
                                     type: 'bar',
                                     stack: '总量',
-                                    label: {
-                                        normal: {
-                                            show: true,
-                                            position: 'insideRight'
-                                        }
-                                    },
                                     data: [220, 182, 191, 234, 290, 330, 310]
                                 },
                                 {
                                     name: '视频广告',
                                     type: 'bar',
                                     stack: '总量',
-                                    label: {
-                                        normal: {
-                                            show: true,
-                                            position: 'insideRight'
-                                        }
-                                    },
                                     data: [150, 212, 201, 154, 190, 330, 410]
                                 },
                                 {
                                     name: '搜索引擎',
                                     type: 'bar',
                                     stack: '总量',
-                                    label: {
-                                        normal: {
-                                            show: true,
-                                            position: 'insideRight'
-                                        }
-                                    },
                                     data: [820, 832, 901, 934, 1290, 1330, 1320]
                                 }
                             ]
-                        };;
+                        };
                         if (option && typeof option === "object") {
                             myChart.setOption(option, true);
                         }
