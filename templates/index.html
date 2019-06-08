@@ -200,102 +200,20 @@
                     </div>
                   </div>
 
-                <div class="amiddboxtbott2 fl"><h2 class="tith2 pt1">案件统计</h2>
-                  <div class="amiddboxtbott2content">
-                  <div id="container" style="height: 100%; margin-bottom: 10%"></div>
-                    <script type="text/javascript">
-                      // console.log(D1per10min);
-                      groups = [];
-                      groupData = {};
-                      for(var i=0; i<Object.keys(D1per10min).length; i++){
-                          // console.log(D1per10min[i].sidcount);
-                          sidcountGroup = D1per10min[i].sidcount;
-                          console.log(sidcountGroup);
-                          console.log(Object.keys(sidcountGroup));
-                          for(var j in Object.keys(sidcountGroup)){
-                            if(Object.keys(sidcountGroup)[j] in sidcountGroup){
-                            }
-                            else{groups.push(Object.keys(sidcountGroup)[j])}
+		<div class="amiddboxtbott2 fl"><h2 class="tith2 pt1">案件统计</h2>
+			<div class="amiddboxtbott2content">
+			</div>
+		</div>
 
-                            console.log(Object.keys(sidcountGroup)[j]);
-                            console.log(sidcountGroup[Object.keys(sidcountGroup)[j]]);
-                          }
-                      }
-                        var dom = document.getElementById("container");
-                        var myChart = echarts.init(dom);
-                        var app = {};
-                        option = null;
-                        app.title = '堆叠条形图';
 
-                        option = {
-                            tooltip : {
-                                trigger: 'axis',
-                                axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-                                    type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
-                                }
-                            },
-                            legend: {
-                                data: ['直接访问', '邮件营销','联盟广告','视频广告','搜索引擎']
-                            },
-                            grid: {
-                                left: '3%',
-                                right: '4%',
-                                bottom: '3%',
-                                containLabel: true
-                            },
-                            yAxis:  {
-                                type: 'value'
-                            },
-                            xAxis: {
-                                type: 'category',
-                                data: ['周一','周二','周三','周四','周五','周六','周日']
-                            },
-                            series: [
-                                {
-                                    name: '直接访问',
-                                    type: 'bar',
-                                    stack: '总量',
-                                    data: [320, 302, 301, 334, 390, 330, 320]
-                                },
-                                {
-                                    name: '邮件营销',
-                                    type: 'bar',
-                                    stack: '总量',
-                                    data: [120, 132, 101, 134, 90, 230, 210]
-                                },
-                                {
-                                    name: '联盟广告',
-                                    type: 'bar',
-                                    stack: '总量',
-                                    data: [220, 182, 191, 234, 290, 330, 310]
-                                },
-                                {
-                                    name: '视频广告',
-                                    type: 'bar',
-                                    stack: '总量',
-                                    data: [150, 212, 201, 154, 190, 330, 410]
-                                },
-                                {
-                                    name: '搜索引擎',
-                                    type: 'bar',
-                                    stack: '总量',
-                                    data: [820, 832, 901, 934, 1290, 1330, 1320]
-                                }
-                            ]
-                        };
-                        if (option && typeof option === "object") {
-                            myChart.setOption(option, true);
-                        }
-                    </script>
-                </div>
-            </div>
+
             <!-- amidd_bott end -->
           </div>
       </div>
         <!-- mrbox_top end -->
         <div class="mrbox_top_right">
             <div class="arightboxtop"><h2 class="tith2">警力分析</h2>
-            <div class="lefttoday_tit"><p class="fl">状态：已调节</p><p class="fr">时间段：2018-06-10</p></div>
+            <!-- <div class="lefttoday_tit"><p class="fl">状态：已调节</p><p class="fr">时间段：2018-06-10</p></div>
             <div class="left2_table">
                <ul>
                     <li>
@@ -348,7 +266,312 @@
                     </li>
 
                </ul>
-            </div>
+			</div> -->
+			<div id="container" style="height: 100%; margin-bottom: 10%"></div>
+				
+				<script type="text/javascript">
+					// console.log(D1per10min);
+					groups = [];
+					groupData = [];
+					time = [];
+					for(var i in Object.keys(D1per10min)){
+						groups.push(Object.keys(D1per10min)[i]);
+						groupData.push(D1per10min[Object.keys(D1per10min)[i]]);
+						
+					}
+					for(var j=0; j<groupData[0].length; j++){
+						time.push(j * 10);
+					}
+					console.log(time);
+					// console.log(groups);
+					// console.log(groupData);
+
+					var dom = document.getElementById("container");
+					var myChart = echarts.init(dom);
+					var app = {};
+					option = null;
+					app.title = '堆叠条形图';
+
+					option = {
+						tooltip : {
+							trigger: 'axis',
+							axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+								type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+							}
+						},
+						// legend: {
+						// 	// data: ['直接访问', '邮件营销','联盟广告','视频广告','搜索引擎']
+						// 	data: groups
+						// },
+						grid: {
+							left: '3%',
+							right: '5%',
+							bottom: '10%',
+							containLabel: true
+						},
+						yAxis:  {
+							type: 'value'
+						},
+						xAxis: {
+							type: 'category',
+							// data: ['周一','周二','周三','周四','周五','周六','周日']
+							data: time
+						},
+						series: [
+							{
+								// name: '直接访问',
+								name: groups[0],
+								type: 'bar',
+								stack: '总量',
+								// data: [320, 302, 301, 334, 390, 330, 320]
+								data: groupData[0]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[1],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[1]
+							},
+							{
+								// name: '联盟广告',
+								name: groups[2],
+								type: 'bar',
+								stack: '总量',
+								// data: [220, 182, 191, 234, 290, 330, 310]
+								data: groupData[2]
+							},
+							{
+								// name: '视频广告',
+								name: groups[3],
+								type: 'bar',
+								stack: '总量',
+								// data: [150, 212, 201, 154, 190, 330, 410]
+								data: groupData[3]
+							},
+							{
+								// name: '搜索引擎',
+								name: groups[4],
+								type: 'bar',
+								stack: '总量',
+								// data: [820, 832, 901, 934, 1290, 1330, 1320]
+								data: groupData[4]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[5],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[5]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[6],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[6]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[7],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[7]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[8],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[8]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[9],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[9]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[10],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[10]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[11],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[11]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[12],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[12]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[13],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[13]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[14],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[14]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[15],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[15]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[16],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[16]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[17],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[17]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[18],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[18]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[19],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[19]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[20],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[20]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[21],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[21]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[22],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[22]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[23],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[23]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[24],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[24]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[25],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[25]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[26],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[26]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[27],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[27]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[28],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[28]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[29],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[29]
+							},
+							{
+								// name: '邮件营销',
+								name: groups[30],
+								type: 'bar',
+								stack: '总量',
+								// data: [120, 132, 101, 134, 90, 230, 210]
+								data: groupData[30]
+							}
+						]
+					};
+					if (option && typeof option === "object") {
+						myChart.setOption(option, true);
+					}
+				</script>
             </div>
             <div class="arightboxbott"><h2 class="tith2 ">人员构成</h2>
               <div id="arightboxbott" class="arightboxbottcont" style="">
