@@ -57,8 +57,7 @@ function drawMainActive(day_index){
                 compute[i] = d3.interpolate(color_light,color_dark);
                 color1[i] = color_light;
             }
-            var label_color = {'attendee':	'#000000','conference manager':'#FF0000','reporter':'#00FF00',
-            'worker':'#0000FF','guest':'#999900','cleaner':'#990099'};
+            var label_color = {'attendee':'#000000','manager':'#FF0000','reporter':'#00FF00','guest':'#999900','ordinary worker':'#990099'};
 
             svg.selectAll(".sensor")
                 .data(sensor)
