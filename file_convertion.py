@@ -318,5 +318,6 @@ with open("./static/data/day3.csv", "r") as file:
 #     for line in time_sensor_number[1406806:]:
 #         csv_write.writerow(line)
 
-# 计算每个人逗留传感器的最长时间以及对应的传感器
+# 计算每个人逗留传感器的最长时间以及对应的传感器 [id, max_time]
+print(data_day1)
 

@@ -38,11 +38,17 @@ option = {
         containLabel: true
     },
     yAxis:  {
-        type: 'value'
+        type: 'value',
+        axisLabel: {
+            color: 'white'
+        }
     },
     xAxis: {
         type: 'category',
-        data: time
+        data: time,
+        axisLabel: {
+            color: 'white'
+        }
     },
     series: [
         {
