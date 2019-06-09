@@ -9,7 +9,7 @@ zhuhuichang_jizhe = ['10419','10519','10609','10709','10809','10909','11009','11
                      '10427','10527','10627','10727','10827','10927','11027']
 erloukongdi = []
 kanmen = ['10110','11301','11402','11404','11405','11406','11407','11410','10119','11415','11417',
-          '10515','10518','10815','11115','10818','11118']
+          '10515','10518','10815','11115','10818','11118','11125','11121','11123']
 fuwu = ['register','service','door']
 xiaohuodong = ['room1','room2','room3','room6']
 xiaohuodong_people_list = [[],[],[],[]]
@@ -232,32 +232,8 @@ for x in people:
 fw.write("var business = "+str(business_id)+';\n')
 # print (business_id)
 
-# 只是来参观一下
-for x in people:
-    if people_mark[x] == 1:
-        continue
-    activity = people_map[x]
-    flag = 0
-    places = []
-    for i in range(0,len(activity)):
-        place = sensor[activity[i]['sid']]
-        if place not in places:
-            places.append(place)
-    for y in activity_places:
-        if y in places:
-            flag = 1
-    for y in huichang:
-        if y in places:
-            flag = 0
-            break
-    if flag == 1:
-        visitor_id.append(x)
-        people_mark[x] = 1
-# print (visitor_id)
-fw.write("var visitor = "+str(visitor_id)+';\n')
-
 #记者 存疑
-time = 1200
+time = 600
 sensor_tmp = copy.deepcopy(sensor)
 for x in zhuhuichang_jizhe:
     sensor_tmp[x] = 'jizhe'
@@ -308,10 +284,36 @@ fw.write("var attendee = "+str(attendee_id)+';\n')
 print (len(attendee_id))
 print (len(people))
 
+# 只是来参观一下
+for x in people:
+    if people_mark[x] == 1:
+        continue
+    activity = people_map[x]
+    flag = 0
+    places = []
+    for i in range(0,len(activity)):
+        place = sensor[activity[i]['sid']]
+        if place not in places:
+            places.append(place)
+    for y in activity_places:
+        if y in places:
+            flag = 1
+    for y in huichang:
+        if y in places:
+            flag = 0
+            break
+    if flag == 1:
+        visitor_id.append(x)
+        people_mark[x] = 1
+# print (visitor_id)
+
 # 不知道什么人
 for x in people:
     if people_mark[x] == 0:
         other_id.append(x)
+visitor_id += other_id
+other_id = []
+fw.write("var visitor = "+str(visitor_id)+';\n')
 fw.write("var other = "+str(other_id)+'\n')
 
 Map = {}

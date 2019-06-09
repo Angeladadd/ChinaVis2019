@@ -62,7 +62,7 @@ function drawMainActive(day_index, initial_time){
                 color1[i] = color_light;
             }
             // var label_color = {'attendee':'#000000','manager':'#FF0000','reporter':'#00FF00','guest':'#999900','ordinary worker':'#990099'};
-            var label_color = {'scholar':'#3399ff','waiter':"#00ff00",'assistant':"#ff00ff",'reporter':'#0000ff','attendee':'#000000','visitor':'#ffff00','business':'#00ffff','cook':'#33ff66','other':'#ff0000'};
+            var label_color = {'scholar':'#ff0000','waiter':"#00ff00",'assistant':"#ff00ff",'reporter':'#0000ff','attendee':'#000000','visitor':'#ffff00','business':'#00ffff','cook':'#33ff66'};
 
 
             // function path(d){
