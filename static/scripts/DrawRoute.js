@@ -13,7 +13,7 @@ function drawMainActive(day_index, initial_time){
             day = 2;
                     break;
             }
-            var sensor = sensor_all_floor;
+            var sensor = sensor_deployment;
     for(var i=0;i<sensor.length;i++){
            sensor_people_log[i] = new Array(0);
     }
@@ -153,7 +153,7 @@ function drawMainActive(day_index, initial_time){
                 .on("mouseover",function (d,i) {
                                 Tooltip
                                     .style("opacity", 1)
-                                    .text(sensor_people_log[i].toString())
+                                    .text(sensor[i].sid.toString())
                                     .attr("x", (d3.mouse(this)[0]+20) + "px")
                                     .attr("y", (d3.mouse(this)[1]) + "px");
                                 var p=document.getElementById("list");
