@@ -92,6 +92,7 @@ function drawMainActive(day_index, initial_time){
             //     .attr("opacity",1)
             //     .attr("d",path);
 
+    var old = svg.select('text'); if(old) old.remove();
     var Tooltip = svg.append("text")
             .style("opacity", 0)
             .style("font-size",14)
@@ -198,10 +199,10 @@ function drawMainActive(day_index, initial_time){
                 for(var i=0;i<this.people.length;i++){
                     if(!this.people[i][this.point[i]+1]) continue;
                     if(this.people[i][this.point[i]+1].time == currentTime) {
-                        console.log(i.toString());
+                        //console.log(i.toString());
 
                         var new_sensor = this.people[i][this.point[i]+1].sensor_simple_id;
-                        console.log(new_sensor.toString());
+                        //console.log(new_sensor.toString());
                         if(this.point[i]!= 0)
                         {
                             var old_sensor = this.people[i][this.point[i]].sensor_simple_id;

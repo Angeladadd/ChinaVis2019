@@ -173,6 +173,10 @@
         <svg id="day_route" class="day_route"></svg>
          <br>
                         <p id="time"></p>
+                        start:<input type="text" id="start_time" onchange="changeStartTime(this.value)">
+                        end:<input type="text" id="end_time" onchange="changeEndTime(this.value)">
+                        day:<input type="text" id="day" onchange="changeDay(this.value)">
+                        <button onclick="runRoute()">run</button>
                         <p id ="list"></p>
         <!--<button value="all" onclick="ChangeLabelChoose(value)">all</button>-->
         <!--<button value = 'ordinary worker' onclick="ChangeLabelChoose(value)">ordinary worker</button>-->
@@ -286,28 +290,45 @@
                 currentDay = val;
                 world_cloud.update_by_day(val);
             }
-            drawFlow();
-            {#drawBubble(1,currentTime);#}
+            //drawFlow();
+            //{#drawBubble(1,currentTime);#}
             drawChord();
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
             //第二天修改为2
-            var route = drawMainActive(0,37000);
+            route = drawMainActive(0,37000);
             function Update(currentTime){
                 // {#console.log(currentTime);#}
                 //console.log(currentTime);
                 route.update(currentTime);
             }
+            function changeStartTime(val){
+                tmp_currentTime = val;
+            }
+            function changeEndTime(val){
+                tmp_endTime = val;
+            }
+            function changeDay(val){
+                tmp_day=val;
+            }
+            function runRoute(){
+                currentTime = tmp_currentTime;
+                endTime = tmp_endTime;
+                route = drawMainActive(tmp_day,currentTime);
+            }
         </script>
     </body>
 <script>
     //当天的开始时间
-  var currentTime = 37000;
+  currentTime = 37000;
+  endTime = 45164;
+  //flag=true;
   var currentDay = 2;
   drawBubble(currentDay,currentTime);
     setTimeout(function () {
+        //if(!flag) return;
         //当天的结束时间
-    if(currentTime<45164){
+    if(currentTime<endTime){
         //console.log(currentTime);
         var p=document.getElementById("time");
         p.innerHTML = currentTime.toString();
