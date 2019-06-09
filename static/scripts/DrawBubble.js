@@ -7,7 +7,7 @@ function drawBubble(date,currentTime){
 	else t = (currentTime - 27000)/6000;
     dat = [];
     for(i in all_data){
-        console.log(i);
+        // console.log(i);
 
         if(i != 0){
         	if(all_data[i][t] != 0){

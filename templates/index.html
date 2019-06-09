@@ -4,14 +4,16 @@
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.js"></script>
 		<script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
-		<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
+      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
+      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
+      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
+      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
+      <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>
+      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
+      <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
         <script src="../static/scripts/d3.layout.cloud.js"></script>
         <script src="../static/scripts/d3-legend.min.js"></script>
         <script scr="../static/scripts/D1per10min.js"></script>
@@ -148,10 +150,7 @@
     </div>
     <div class="aleftboxtmidd">
       <h2 class="tith2">矛盾纠纷地区统计</h2>
-<!-- {#        <div id="liuyuxiang">#}
-{#            <select id="selectButton"></select>#}
-{#            <div id="vis1"></div>#}
-{#        </div>#} -->
+
       <div id="aleftboxtmidd" class="aleftboxtmiddcont"></div>
   </div>
   <div class="aleftboxtbott">
@@ -202,68 +201,11 @@
 			<div class="amiddboxtbott2content">
 			</div>
 		</div>
-
-
-
-            <!-- amidd_bott end -->
           </div>
       </div>
-        <!-- mrbox_top end -->
+
         <div class="mrbox_top_right">
             <div class="arightboxtop"><h2 class="tith2">人员分布统计图</h2>
-            <!-- <div class="lefttoday_tit"><p class="fl">状态：已调节</p><p class="fr">时间段：2018-06-10</p></div>
-            <div class="left2_table">
-               <ul>
-                    <li>
-                    <p class="fl"><b>康定市公安局</b><br>
-                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
-                    </p>
-                    <p class="fr pt17">2018-06-22</p>
-                    </li>
-                    <li class="bg">
-                    <p class="fl"><b>康定市公安局</b><br>
-                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
-                    </p>
-                    <p class="fr pt17">2018-06-22</p>
-                    </li>
-                    <li>
-                    <p class="fl"><b>康定市公安局</b><br>
-                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
-                    </p>
-                    <p class="fr pt17">2018-06-22</p>
-                    </li>
-                    <li class="bg">
-                    <p class="fl"><b>康定市公安局</b><br>
-                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
-                    </p>
-                    <p class="fr pt17">2018-06-22</p>
-                    </li>
-                    <li>
-                    <p class="fl"><b>康定市公安局</b><br>
-                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
-                    </p>
-                    <p class="fr pt17">2018-06-22</p>
-                    </li>
-                    <li class="bg">
-                    <p class="fl"><b>康定市公安局</b><br>
-                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
-                    </p>
-                    <p class="fr pt17">2018-06-22</p>
-                    </li>
-                    <li>
-                    <p class="fl"><b>康定市公安局</b><br>
-                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
-                    </p>
-                    <p class="fr pt17">2018-06-22</p>
-                    </li>
-                    <li class="bg">
-                    <p class="fl"><b>康定市公安局</b><br>
-                      村名王某因为被隔壁邻居的狗咬了，产生了纠纷，村名报警。<br>
-                    </p>
-                    <p class="fr pt17">2018-06-22</p>
-                    </li>
-               </ul>
-			</div> -->
 			<div id="container" style="height: 100%; margin-bottom: 10%"></div>
 			<script src="../static/scripts/DrawBar.js"></script>
             </div>
@@ -276,7 +218,6 @@
               </div>
             </div>
         </div>
-        <!-- mrbox_top_right end -->
 </div>
     </div>
 
