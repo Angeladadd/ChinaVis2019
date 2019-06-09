@@ -320,18 +320,18 @@ with open("./static/data/day3.csv", "r") as file:
 #         csv_write.writerow(line)
 
 # 计算每个人逗留传感器的最长时间以及对应的传感器 [id, max_time]
-people_time = {}
-people_start = {}
-for item in data_day1:
-    if item['id'] not in people_start.keys():
-        people_start[item['id']] = int(item['time'])
-        people_time[item['id']] = 0
-    else:
-        if int(item['time']) - people_start[item['id']] > people_time[item['id']]:
-            people_time[item['id']] = int(item['time']) - people_start[item['id']]
-            people_start[item['id']] = int(item['time'])
-        else:
-            people_start[item['id']] = int(item['time'])
+# people_time = {}
+# people_start = {}
+# for item in data_day1:
+#     if item['id'] not in people_start.keys():
+#         people_start[item['id']] = int(item['time'])
+#         people_time[item['id']] = 0
+#     else:
+#         if int(item['time']) - people_start[item['id']] > people_time[item['id']]:
+#             people_time[item['id']] = int(item['time']) - people_start[item['id']]
+#             people_start[item['id']] = int(item['time'])
+#         else:
+#             people_start[item['id']] = int(item['time'])
 
 # for item in data_day2:
 #     if item['id'] not in people_start.keys():
