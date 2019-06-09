@@ -1,20 +1,20 @@
-// console.log(D1per10min);
+// console.log(D3permin);
 groups = [];
 groupData = [];
 time = [];
-for(var i in Object.keys(D1per10min)){
-    groups.push(Object.keys(D1per10min)[i]);
-    groupData.push(D1per10min[Object.keys(D1per10min)[i]]);
+for(var i in Object.keys(D3permin)){
+    groups.push(Object.keys(D3permin)[i]);
+    groupData.push(D3permin[Object.keys(D3permin)[i]]);
     
 }
 for(var j=0; j<groupData[0].length; j++){
-    time.push(j * 10);
+    time.push(j);
 }
 // console.log(time);
 // console.log(groups);
 // console.log(groupData);
 
-var dom = document.getElementById("container");
+var dom = document.getElementById("containerlyx13");
 var myChart = echarts.init(dom);
 var app = {};
 option = null;
@@ -27,11 +27,18 @@ option = {
             type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
         }
     },
-    // legend: {
-    // 	data: groups
-    // },
+    legend: {
+        itemWidth: 14,
+        itemHeight: 7,
+        itemGap: 0,
+        textStyle: {
+            fontSize: 9,
+            color: '#777777'
+        },
+    	data: groups
+    },
     grid: {
-        top: '10%',
+        top: '24%',
         left: '3%',
         right: '5%',
         bottom: '10%',
@@ -41,6 +48,11 @@ option = {
         type: 'value',
         axisLabel: {
             color: 'white'
+        },
+        axisLine: {
+            lineStyle:{
+                color: 'white'
+            }
         }
     },
     xAxis: {
@@ -48,6 +60,11 @@ option = {
         data: time,
         axisLabel: {
             color: 'white'
+        },
+        axisLine: {
+            lineStyle:{
+                color: 'white'
+            }
         }
     },
     series: [
