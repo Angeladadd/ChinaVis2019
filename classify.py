@@ -30,7 +30,7 @@ other_id = [] #其他人
 
 people_mark = {}
 
-fw = open('./static/data/day3_cluster.js','w')
+fw = open('./static/data/day_cluster.js','w')
 
 for i in range(2,15):
     col = str(i)
@@ -46,6 +46,20 @@ with open("./static/data/SensorDeployment.csv", "r") as file:
         sensor[line[0]] = line[5]
 
 data_day = []
+with open("./static/data/day1.csv", "r") as file:
+    csvfile = csv.reader(file)
+    i = 0
+    for line in csvfile:
+        if i != 0:
+            data_day.append({'id': line[0], 'sid': line[1], 'time': line[2]})
+        i += 1
+with open("./static/data/day2.csv", "r") as file:
+    csvfile = csv.reader(file)
+    i = 0
+    for line in csvfile:
+        if i != 0:
+            data_day.append({'id': line[0], 'sid': line[1], 'time': line[2]})
+        i += 1
 with open("./static/data/day3.csv", "r") as file:
     csvfile = csv.reader(file)
     i = 0
@@ -65,43 +79,9 @@ for x in data_day:
 for x in people:
     people_mark[x] = 0
 # print (people_mark)
-#专家学者
-for x in people:
-    if people_mark[x] == 1:
-        continue
-    activity = people_map[x]
-    flag = 0
-    for y in activity:
-        for z in fenhuichang_dalao:
-            if y['sid'] == z:
-                flag = 1
-                break
-        if flag == 1:
-            break
-        else:
-            for z in zhuhuichang_dalao:
-                if y['sid'] == z:
-                    flag=1
-                    break
-        if flag == 1:
-            break
-        else:
-            for z in room5_dalao:
-                if y['sid'] == z:
-                    flag = 1
-                    break
-        if flag == 1:
-            break
-    if flag == 1:
-        scholar_id.append(x)
-        people_mark[x] = 1
-
-fw.write("var scholar = "+str(scholar_id)+';\n')
-# print ('scholar')
-# print (scholar_id)
 
 #服务员
-time = 7200
+time = 1800
 sensor_tmp = copy.deepcopy(sensor)
 for x in kanmen:
     sensor_tmp[x]='door'
@@ -144,9 +124,60 @@ for x in data_day:
             assistant_id += xiaohuodong_people_list[i][:11]
 assistant_id = list(set(assistant_id))
 for x in assistant_id:
+    if people_mark[x] == 1:
+        assistant_id.remove(x)
+for x in assistant_id:
     people_mark[x] = 1
+
+# 其他去过room6的人
+for x in people:
+    if people_mark[x] == 1:
+        continue
+    activity = people_map[x]
+    flag =0
+    for y in activity:
+        if sensor[y['sid']]=='room6':
+            flag =1
+    if flag ==1:
+        assistant_id.append(x)
 # print (assistant_id)
 fw.write("var assistant = "+str(assistant_id)+';\n')
+
+#专家学者
+for x in people:
+    if people_mark[x] == 1:
+        continue
+    activity = people_map[x]
+    flag = 0
+    for y in activity:
+        for z in fenhuichang_dalao:
+            if y['sid'] == z:
+                flag = 1
+                break
+        if flag == 1:
+            break
+        else:
+            for z in zhuhuichang_dalao:
+                if y['sid'] == z:
+                    flag=1
+                    break
+        if flag == 1:
+            break
+        else:
+            for z in room5_dalao:
+                if y['sid'] == z:
+                    flag = 1
+                    break
+        if flag == 1:
+            break
+    if flag == 1:
+        scholar_id.append(x)
+        people_mark[x] = 1
+
+fw.write("var scholar = "+str(scholar_id)+';\n')
+
+# print ('scholar')
+# print (scholar_id)
 
 #送饭的或蹭饭的 没有人
 for x in people:
@@ -226,7 +257,7 @@ for x in people:
 fw.write("var visitor = "+str(visitor_id)+';\n')
 
 #记者 存疑
-time = 1000
+time = 1200
 sensor_tmp = copy.deepcopy(sensor)
 for x in zhuhuichang_jizhe:
     sensor_tmp[x] = 'jizhe'
@@ -274,14 +305,32 @@ for x in people:
         attendee_id.append(x)
         people_mark[x] = 1
 fw.write("var attendee = "+str(attendee_id)+';\n')
-# print (len(attendee_id))
-# print (len(people))
+print (len(attendee_id))
+print (len(people))
 
 # 不知道什么人
 for x in people:
     if people_mark[x] == 0:
         other_id.append(x)
 fw.write("var other = "+str(other_id)+'\n')
+
+Map = {}
+for x in people:
+    if x in scholar_id:
+        Map[x] = 'scholar'
+    elif x in waiter_id:
+        Map[x] = 'waiter'
+    elif x in reporter_id:
+        Map[x] = 'reporter'
+    elif x in business_id:
+        Map[x] = 'business'
+    elif x in cooker_id:
+        Map[x] = 'cook'
+    elif x in attendee_id:
+        Map[x] = 'attendee'
+    else:
+        Map[x] = 'other'
+
 fw.write("var count=[['scholar',"+str(len(scholar_id))+\
          "],['waiter'," +str(len(waiter_id))+\
 "],['assistant'," +str(len(assistant_id))+\
@@ -291,4 +340,5 @@ fw.write("var count=[['scholar',"+str(len(scholar_id))+\
 "],['business'," +str(len(business_id))+\
 "],['cook'," +str(len(cooker_id))+\
 "],['other'," +str(len(other_id))+"]];\n")
-fw.write("var day3_obj = {count:count,list:[scholar,waiter,assistant,reporter,attendee,visitor,business,cook,other]};\n")
+fw.write("var map="+str(Map)+'\n')
+fw.write("var day_obj = {count:count,list:[scholar,waiter,assistant,reporter,attendee,visitor,business,cook,other],map:map};\n")
