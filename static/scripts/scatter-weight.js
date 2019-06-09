@@ -8,10 +8,10 @@ option = {
     //     subtext: '抽样调查来自: Heinz  2003'
     // },
     grid: {
-        top: '12%',
-        left: '0%',
-        right: '7%',
-        bottom: '3%',
+        top: '14%',
+        left: '16%',
+        right: '15%',
+        bottom: '0%',
         containLabel: true
     },
     tooltip : {
@@ -47,9 +47,16 @@ option = {
     brush: {
     },
     legend: {
+        orient: 'vertical',
+        itemWidth: 10,
+        itemHeight: 10,
+        symbolSize: 2,
         data: cate_names,
-        left: 'center',
-        color: '#555555'
+        left: '-1%',
+        textStyle: {
+            fontSize: 10,
+            color: '#777777'
+        }
     },
     xAxis : [
         {
@@ -63,7 +70,7 @@ option = {
             },
             axisLine: {
                 lineStyle:{
-                    color: '#555555'
+                    color: '#777777'
                 }
             }
         }
@@ -80,7 +87,7 @@ option = {
             },
             axisLine: {
                 lineStyle:{
-                    color: '#555555'
+                    color: '#777777'
                 }
             }
         }
@@ -99,22 +106,22 @@ option = {
                         borderWidth: 1,
                         borderType: 'dashed'
                     }
-                },
-                data: [[{
-                    name: cate_names[0] + '分布区间',
-                    xAxis: 'min',
-                    yAxis: 'min'
-                }, {
-                    xAxis: 'max',
-                    yAxis: 'max'
-                }]]
+                }
+                // data: [[{
+                //     name: cate_names[0] + '分布区间',
+                //     xAxis: 'min',
+                //     yAxis: 'min'
+                // }, {
+                //     xAxis: 'max',
+                //     yAxis: 'max'
+                // }]]
             },
-            markPoint : {
-                data : [
-                    {type : 'max', name: '最大值'},
-                    {type : 'min', name: '最小值'}
-                ]
-            },
+            // markPoint : {
+            //     data : [
+            //         {type : 'max', name: '最大值'},
+            //         {type : 'min', name: '最小值'}
+            //     ]
+            // },
             markLine : {
                 lineStyle: {
                     normal: {
@@ -122,8 +129,336 @@ option = {
                     }
                 },
                 data : [
-                    {type : 'average', name: '平均值'},
-                    { xAxis: 160 }
+                    {type : 'average', name: '平均值', textStyle: {fontSize: 0}}
+                    // { xAxis: 160 }
+                ]
+            }
+        },
+        {
+            symbolSize: 5,
+            name: cate_names[1],
+            type:'scatter',
+            data: cate_data[cate_names[1]],
+            markArea: {
+                silent: true,
+                itemStyle: {
+                    normal: {
+                        color: 'transparent',
+                        borderWidth: 1,
+                        borderType: 'dashed'
+                    }
+                }
+                // data: [[{
+                //     name: cate_names[1] + '分布区间',
+                //     xAxis: 'min',
+                //     yAxis: 'min'
+                // }, {
+                //     xAxis: 'max',
+                //     yAxis: 'max'
+                // }]]
+            },
+            // markPoint : {
+            //     data : [
+            //         {type : 'max', name: '最大值'},
+            //         {type : 'min', name: '最小值'}
+            //     ]
+            // },
+            markLine : {
+                lineStyle: {
+                    normal: {
+                        type: 'solid'
+                    }
+                },
+                data : [
+                    {type : 'average', name: '平均值', textStyle: {fontSize: 0}}
+                    // { xAxis: 160 }
+                ]
+            }
+        },
+        {
+            symbolSize: 5,
+            name: cate_names[2],
+            type:'scatter',
+            data: cate_data[cate_names[2]],
+            markArea: {
+                silent: true,
+                itemStyle: {
+                    normal: {
+                        color: 'transparent',
+                        borderWidth: 1,
+                        borderType: 'dashed'
+                    }
+                }
+                // data: [[{
+                //     name: cate_names[2] + '分布区间',
+                //     xAxis: 'min',
+                //     yAxis: 'min'
+                // }, {
+                //     xAxis: 'max',
+                //     yAxis: 'max'
+                // }]]
+            },
+            // markPoint : {
+            //     data : [
+            //         {type : 'max', name: '最大值'},
+            //         {type : 'min', name: '最小值'}
+            //     ]
+            // },
+            markLine : {
+                lineStyle: {
+                    normal: {
+                        type: 'solid'
+                    }
+                },
+                data : [
+                    {type : 'average', name: '平均值', textStyle: {fontSize: 0}}
+                    // { xAxis: 160 }
+                ]
+            }
+        },
+        {
+            symbolSize: 5,
+            name: cate_names[3],
+            type:'scatter',
+            data: cate_data[cate_names[3]],
+            markArea: {
+                silent: true,
+                itemStyle: {
+                    normal: {
+                        color: 'transparent',
+                        borderWidth: 1,
+                        borderType: 'dashed'
+                    }
+                }
+                // data: [[{
+                //     name: cate_names[3] + '分布区间',
+                //     xAxis: 'min',
+                //     yAxis: 'min'
+                // }, {
+                //     xAxis: 'max',
+                //     yAxis: 'max'
+                // }]]
+            },
+            // markPoint : {
+            //     data : [
+            //         {type : 'max', name: '最大值'},
+            //         {type : 'min', name: '最小值'}
+            //     ]
+            // },
+            markLine : {
+                lineStyle: {
+                    normal: {
+                        type: 'solid'
+                    }
+                },
+                data : [
+                    {type : 'average', name: '平均值', textStyle: {fontSize: 0}}
+                    // { xAxis: 160 }
+                ]
+            }
+        },
+        {
+            symbolSize: 5,
+            name: cate_names[4],
+            type:'scatter',
+            data: cate_data[cate_names[4]],
+            markArea: {
+                silent: true,
+                itemStyle: {
+                    normal: {
+                        color: 'transparent',
+                        borderWidth: 1,
+                        borderType: 'dashed'
+                    }
+                }
+                // data: [[{
+                //     name: cate_names[4] + '分布区间',
+                //     xAxis: 'min',
+                //     yAxis: 'min'
+                // }, {
+                //     xAxis: 'max',
+                //     yAxis: 'max'
+                // }]]
+            },
+            // markPoint : {
+            //     data : [
+            //         {type : 'max', name: '最大值'},
+            //         {type : 'min', name: '最小值'}
+            //     ]
+            // },
+            markLine : {
+                lineStyle: {
+                    normal: {
+                        type: 'solid'
+                    }
+                },
+                data : [
+                    {type : 'average', name: '平均值', textStyle: {fontSize: 0}}
+                    // { xAxis: 160 }
+                ]
+            }
+        },
+        {
+            symbolSize: 5,
+            name: cate_names[5],
+            type:'scatter',
+            data: cate_data[cate_names[5]],
+            markArea: {
+                silent: true,
+                itemStyle: {
+                    normal: {
+                        color: 'transparent',
+                        borderWidth: 1,
+                        borderType: 'dashed'
+                    }
+                }
+                // data: [[{
+                //     name: cate_names[5] + '分布区间',
+                //     xAxis: 'min',
+                //     yAxis: 'min'
+                // }, {
+                //     xAxis: 'max',
+                //     yAxis: 'max'
+                // }]]
+            },
+            // markPoint : {
+            //     data : [
+            //         {type : 'max', name: '最大值'},
+            //         {type : 'min', name: '最小值'}
+            //     ]
+            // },
+            markLine : {
+                lineStyle: {
+                    normal: {
+                        type: 'solid'
+                    }
+                },
+                data : [
+                    {type : 'average', name: '平均值', textStyle: {fontSize: 0}}
+                    // { xAxis: 160 }
+                ]
+            }
+        },
+        {
+            symbolSize: 5,
+            name: cate_names[6],
+            type:'scatter',
+            data: cate_data[cate_names[6]],
+            markArea: {
+                silent: true,
+                itemStyle: {
+                    normal: {
+                        color: 'transparent',
+                        borderWidth: 1,
+                        borderType: 'dashed'
+                    }
+                }
+                // data: [[{
+                //     name: cate_names[6] + '分布区间',
+                //     xAxis: 'min',
+                //     yAxis: 'min'
+                // }, {
+                //     xAxis: 'max',
+                //     yAxis: 'max'
+                // }]]
+            },
+            // markPoint : {
+            //     data : [
+            //         {type : 'max', name: '最大值'},
+            //         {type : 'min', name: '最小值'}
+            //     ]
+            // },
+            markLine : {
+                lineStyle: {
+                    normal: {
+                        type: 'solid'
+                    }
+                },
+                data : [
+                    {type : 'average', name: '平均值', textStyle: {fontSize: 0}}
+                    // { xAxis: 160 }
+                ]
+            }
+        },
+        {
+            symbolSize: 5,
+            name: cate_names[7],
+            type:'scatter',
+            data: cate_data[cate_names[7]],
+            markArea: {
+                silent: true,
+                itemStyle: {
+                    normal: {
+                        color: 'transparent',
+                        borderWidth: 1,
+                        borderType: 'dashed'
+                    }
+                }
+                // data: [[{
+                //     name: cate_names[7] + '分布区间',
+                //     xAxis: 'min',
+                //     yAxis: 'min'
+                // }, {
+                //     xAxis: 'max',
+                //     yAxis: 'max'
+                // }]]
+            },
+            // markPoint : {
+            //     data : [
+            //         {type : 'max', name: '最大值'},
+            //         {type : 'min', name: '最小值'}
+            //     ]
+            // },
+            markLine : {
+                lineStyle: {
+                    normal: {
+                        type: 'solid'
+                    }
+                },
+                data : [
+                    {type : 'average', name: '平均值', textStyle: {fontSize: 0}}
+                    // { xAxis: 160 }
+                ]
+            }
+        },
+        {
+            symbolSize: 5,
+            name: cate_names[8],
+            type:'scatter',
+            data: cate_data[cate_names[8]],
+            markArea: {
+                silent: true,
+                itemStyle: {
+                    normal: {
+                        color: 'transparent',
+                        borderWidth: 1,
+                        borderType: 'dashed'
+                    }
+                }
+                // data: [[{
+                //     name: cate_names[8] + '分布区间',
+                //     xAxis: 'min',
+                //     yAxis: 'min'
+                // }, {
+                //     xAxis: 'max',
+                //     yAxis: 'max'
+                // }]]
+            },
+            // markPoint : {
+            //     data : [
+            //         {type : 'max', name: '最大值'},
+            //         {type : 'min', name: '最小值'}
+            //     ]
+            // },
+            markLine : {
+                lineStyle: {
+                    normal: {
+                        type: 'solid'
+                    }
+                },
+                data : [
+                    {type : 'average', name: '平均值', textStyle: {fontSize: 0}}
+                    // { xAxis: 160 }
                 ]
             }
         }
