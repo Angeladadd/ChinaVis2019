@@ -122,6 +122,7 @@ function drawMainActive(day_index, initial_time){
                 sensor_people[sid]+=1;
                 sensor_people_log[sid].push(people[day][i][0].id);
             }
+            //console.log(sensor_people.toString());
 
 
             svg.selectAll(".sensor")
@@ -145,6 +146,7 @@ function drawMainActive(day_index, initial_time){
                 .attr("width",sensor_width)
                 .attr("height",sensor_width)
                 .attr("fill", function (d,i) {
+                    //console.log("here");
                     return compute[color_label[sensor[i].label]](color_linear(sensor_people[i]));
                 })
                 .style("opacity",0.5)
@@ -208,14 +210,14 @@ function drawMainActive(day_index, initial_time){
                             var old_sensor = this.people[i][this.point[i]].sensor_simple_id;
                             sensor_people[old_sensor] -= 1;
                             sensor_people_log[old_sensor].splice(sensor_people_log[old_sensor].indexOf(this.people[i][0].id),1);
-                            d3.select("#sensor"+old_sensor.toString())
-                            .attr("fill", compute[color_label[sensor[old_sensor].label]](color_linear(sensor_people[old_sensor])));
+                            //d3.select("#sensor"+old_sensor.toString())
+                            //.attr("fill", compute[color_label[sensor[old_sensor].label]](color_linear(sensor_people[old_sensor])));
                         }
                         sensor_people[new_sensor] += 1;
                         sensor_people_log[new_sensor].push(this.people[i][0].id);
                         //console.log(this.sensor_people_log[new_sensor].toString());
-                        d3.select("#sensor"+new_sensor.toString())
-                            .attr("fill", compute[color_label[sensor[new_sensor].label]](color_linear(sensor_people[new_sensor])));
+                        //d3.select("#sensor"+new_sensor.toString())
+                           // .attr("fill", compute[color_label[sensor[new_sensor].label]](color_linear(sensor_people[new_sensor])));
                         this.point[i]+=1;
                     }
                 }
@@ -231,12 +233,20 @@ function drawMainActive(day_index, initial_time){
                         if(d[point[i]].floor != "1")
                             base+=bias;
                         return base + yLinear(d[point[i]].y);})
+                    .attr("r",2)
                     .style("opacity",function (d,i) {
                     if(label_choose == 'all') return 1;
                     var id = d[0].id;
                     var label = id_label[id];
                     if(label == label_choose) return 1;
                     else return 0;
+                });
+                this.svg.selectAll(".sensor")
+                    .transition()
+                    .duration(100)
+                .attr("fill", function (d,i) {
+                    //console.log("here");
+                    return compute[color_label[sensor[i].label]](color_linear(sensor_people[i]));
                 });
             };
             return obj;
