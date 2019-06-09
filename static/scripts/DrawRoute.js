@@ -61,8 +61,8 @@ function drawMainActive(day_index, initial_time){
                 compute[i] = d3.interpolate(color_light,color_dark);
                 color1[i] = color_light;
             }
-            var label_color = {'attendee':'#000000','manager':'#FF0000','reporter':'#00FF00','guest':'#999900','ordinary worker':'#990099'};
-
+            // var label_color = {'attendee':'#000000','manager':'#FF0000','reporter':'#00FF00','guest':'#999900','ordinary worker':'#990099'};
+            var label_color = {'scholar':'#3399ff','waiter':"#00ff00",'assistant':"#ff00ff",'reporter':'#0000ff','attendee':'#000000','visitor':'#ffff00','business':'#00ffff','cook':'#33ff66','other':'#ff0000'};
 
 
             // function path(d){
@@ -177,13 +177,13 @@ function drawMainActive(day_index, initial_time){
                 .attr("r",2)
                 .style("fill", function (d,i) {
                     var id = d[0].id;
-                    var label = id_label[id];
+                    var label = day_obj[id];
                     return label_color[label];
                 })
                 .style("opacity",function (d,i) {
                     if(label_choose == 'all') return 1;
                     var id = d[0].id;
-                    var label = id_label[id];
+                    var label = day_obj.map[id];
                     if(label == label_choose) return 1;
                     else return 0;
                 });
@@ -234,10 +234,15 @@ function drawMainActive(day_index, initial_time){
                             base+=bias;
                         return base + yLinear(d[point[i]].y);})
                     .attr("r",2)
+                    .attr("fill",function (d,i) {
+                        var id = d[0].id;
+                        var label = day_obj.map[id];
+                        return label_color[label];
+                    })
                     .style("opacity",function (d,i) {
                     if(label_choose == 'all') return 1;
                     var id = d[0].id;
-                    var label = id_label[id];
+                    var label = day_obj.map[id];
                     if(label == label_choose) return 1;
                     else return 0;
                 });
