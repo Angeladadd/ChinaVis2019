@@ -14,9 +14,10 @@ var svg = d3.select("#person_distribution").append("svg")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
 var day = new Array(3);
-    day[0] = [['worker',976],['attendee',2273],['manager',36],['guest',158],['reporter',121]];
-    day[1] = [['attendee',2634],['worker',1349],['manager',45],['reporter',142],['guest',264]];
-    day[2] = [['worker',887],['attendee',1741],['guest',227],['manager',37],['reporter',38]];
+
+    day[0] = day1_obj.count;
+    day[1] = day2_obj.count;
+    day[2] = day3_obj.count;
 
   var myWords = new Array(0);
     var freq = new Array(0);
