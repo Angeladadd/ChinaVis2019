@@ -4,8 +4,8 @@
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.js"></script>
 		<script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
-        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
+        <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>-->
+        <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>-->
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
@@ -42,7 +42,9 @@
         <script src = "../static/data/day2_cluster.js"></script>
         <script src = "../static/data/day3_cluster.js"></script>
         <script src = "../static/scripts/DrawChord.js"></script>
+        <script src="../static/scripts/DrawProportion.js"></script>
 				<script src = "../static/scripts/DrawWordCloud.js"></script>
+        <script src="../static/data/proportion.js"></script>
         <link href="../static/css/style.css"  rel="stylesheet" type="text/css" media="all" />
         <style>
             /*#day_route{*/
@@ -233,7 +235,19 @@
 
                 <div class="aleftboxtmidd">
                     <h2 class="tith2">矛盾纠纷地区统计</h2>
-                    <div id="aleftboxtmidd" class="aleftboxtmiddcont"></div>
+                    <!--<div id="aleftboxtmidd" class="aleftboxtmiddcont">-->
+                        <svg id="idx_proportion">
+                        </svg>
+                        <svg id="proportion"></svg>
+                        <button value="scholar">scholar</button>
+                        <button value="reporter">reporter</button>
+                        <button value="business">business</button>
+                        <button value="attendee">attendee</button>
+                        <button value="visitor">visitor</button>
+                        <button value="cook">only for meal</button>
+                        <button value="waiter">waiter</button>
+                        <button value="assistant">assistant</button>
+                    <!--</div>-->
                 </div>
 
                 <div class="aleftboxtbott">
@@ -335,6 +349,7 @@
             //drawFlow();
             //{#drawBubble(1,currentTime);#}
             drawChord();
+            DrawProportion();
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
             //第二天修改为2
