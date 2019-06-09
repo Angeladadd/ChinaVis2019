@@ -114,122 +114,125 @@
                 sensor_all_floor.push(sensor_deployment[i]);
             }
         </script>
-
     </head>
 
     <body>
-    <div class="wpbox">
-<div class="bnt">
-  <div class="topbnt_left fl">
-      <!--这里是可以跳新页面的操作-->
-   <ul><li class="active"><a href="#">警情警力</a></li>
-      <li><a href="#">实有人口</a></li>
-      <li><a href="#">流动人口</a></li>
-      <li><a href="#">实名制</a></li>
-   </ul>
-  </div>
-  <h1 class="tith1 fl">China Vis 2019</h1>
-  <div class=" fr topbnt_right">
-    <ul>
-       <li><a href="#">返回</a></li>
-       <li><a href="#">分析报告</a></li>
-       <li><a href="#">交通</a></li>
-       <li><a href="#">舆情</a></li>
-    </ul>
-   </ul>
-  </div>
-</div>
-<!-- bnt end -->
-<div class="left1">
-    <div class="aleftboxttop"><h2 class="tith2">今日矛盾纠纷数据统计</h2>
-    <div class="lefttoday_tit" style=" height:8%"><p class="fl">地区：甘孜</p><p class="fr">2018-06-14</p></div>
-    <div class="lefttoday_number">
-      <div class="widget-inline-box text-center fl">
-      </div>
-    </div>
-    <!-- lefttoday_number end -->
-    </div>
-    <div class="aleftboxtmidd">
-      <h2 class="tith2">矛盾纠纷地区统计</h2>
+        <div class="wpbox">
+            <div class="bnt">
+                <div class="topbnt_left fl">
+                    <ul>
+                        <li class="active"><a href="#">警情警力</a></li>
+                        <li><a href="#">实有人口</a></li>
+                        <li><a href="#">流动人口</a></li>
+                        <li><a href="#">实名制</a></li>
+                    </ul>
+                </div>
 
-      <div id="aleftboxtmidd" class="aleftboxtmiddcont"></div>
-  </div>
-  <div class="aleftboxtbott">
-    <h2 class="tith2">矛盾纠纷类型统计</h2>
-    <div id="aleftboxtbott" class="aleftboxtbott_cont" >
-        <div id="chord">
-         <svg width="280" height="280"></svg>
-        </div>
-    </div>
-</div>
-</div>
-<!--  left1 end -->
-<div class="mrbox">
-      <div class="mrbox_topmidd" style="width: 69%;">
-          <div class="amiddboxttop">
-              <h2 class="tith2 pt1">实时监控统计</h2>
-                <div class="amiddboxttop_map" style="">
-                    <div id="main_active">
-        <svg id="day_route" class="day_route"></svg>
-         <br>
-                        <p id="time"></p>
-                        start:<input type="text" id="start_time" onchange="changeStartTime(this.value)">
-                        end:<input type="text" id="end_time" onchange="changeEndTime(this.value)">
-                        day:<input type="text" id="day" onchange="changeDay(this.value)">
-                        <button onclick="runRoute()">run</button>
-                        <p id ="list"></p>
-        <!--<button value="all" onclick="ChangeLabelChoose(value)">all</button>-->
-        <!--<button value = 'ordinary worker' onclick="ChangeLabelChoose(value)">ordinary worker</button>-->
-        <!--<button value = 'manager' onclick="ChangeLabelChoose(value)">manager</button>-->
-        <!--<button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>-->
-        <!--<button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>-->
-        <!--<button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>-->
-        </div>
+                <h1 class="tith1 fl">China Vis 2019</h1>
+                <div class=" fr topbnt_right">
+                    <ul>
+                        <li><a href="#">返回</a></li>
+                        <li><a href="#">分析报告</a></li>
+                        <li><a href="#">交通</a></li>
+                        <li><a href="#">舆情</a></li>
+                    </ul>
                 </div>
             </div>
-            <!--  amiddboxttop end-->
-                <div class="amidd_bott">
-                  <div class="amiddboxtbott1 fl" >
-                    <h2 class="tith2 pt1">矛盾纠纷环比分析</h2>
-                    <div id="amiddboxtbott1" class="amiddboxtbott1content" >
-                        <div id="bubble">
-		<svg width="350" height="250" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+
+
+            <div class="left1">
+                <div class="aleftboxttop"><h2 class="tith2">今日矛盾纠纷数据统计</h2>
+                    <div class="lefttoday_tit" style=" height:8%">
+                        <p class="fl">地区：甘孜</p>
+                        <p class="fr">2018-06-14</p>
+                    </div>
+
+                    <div class="lefttoday_number">
+                        <div class="widget-inline-box text-center fl"></div>
+                    </div>
+                </div>
+
+                <div class="aleftboxtmidd">
+                    <h2 class="tith2">矛盾纠纷地区统计</h2>
+                    <div id="aleftboxtmidd" class="aleftboxtmiddcont"></div>
+                </div>
+
+                <div class="aleftboxtbott">
+                    <h2 class="tith2">矛盾纠纷类型统计</h2>
+
+                    <div id="aleftboxtbott" class="aleftboxtbott_cont" >
+                        <div id="chord">
+                            <svg width="280" height="280"></svg>
                         </div>
                     </div>
-                  </div>
+                </div>
+            </div>
 
-		<div class="amiddboxtbott2 fl">
-			<h2 class="tith2 pt1">最长逗留时间分布</h2>
-			<div class="amiddboxtbott2content">
-				<div id="containerlyx2" style="height: 100%"></div>
-                <!-- <script src="../static/scripts/people_time_day1.js"></script> -->
-                <script src = "../static/scripts/people_time.js"></script>
-				<!-- <script src = "../static/scripts/DrawScatter.js"></script> -->
-				<script src = "../static/scripts/scatter-weight.js"></script>
-			</div>
-		</div>
 
-    </div>
-    </div>
+            <div class="mrbox">
+                <div class="mrbox_topmidd" style="width: 69%;">
+                    <div class="amiddboxttop">
+                        <h2 class="tith2 pt1">实时监控统计</h2>
+                        <div class="amiddboxttop_map">
+                            <div id="main_active">
+                                <svg id="day_route" class="day_route"></svg>
+                                <p id="time"></p>
+                                start:<input type="text" id="start_time" onchange="changeStartTime(this.value)">
+                                end:<input type="text" id="end_time" onchange="changeEndTime(this.value)">
+                                day:<input type="text" id="day" onchange="changeDay(this.value)">
+                                <button onclick="runRoute()">run</button>
+                                <p id ="list"></p>
+                                <!--<button value="all" onclick="ChangeLabelChoose(value)">all</button>-->
+                                <!--<button value = 'ordinary worker' onclick="ChangeLabelChoose(value)">ordinary worker</button>-->
+                                <!--<button value = 'manager' onclick="ChangeLabelChoose(value)">manager</button>-->
+                                <!--<button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>-->
+                                <!--<button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>-->
+                                <!--<button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>-->
+                            </div>
+                        </div>
+                    </div>
 
-        <div class="mrbox_top_right">
-            <div class="arightboxtop">
-				<h2 class="tith2">人员分布统计图</h2>
-				<div id="container" style="height: 100%; margin-bottom: 10%"></div>
-				<script src="../static/scripts/DrawBar.js"></script>
-			</div>
+                    <div class="amidd_bott">
+                        <div class="amiddboxtbott1 fl" >
+                            <h2 class="tith2 pt1">矛盾纠纷环比分析</h2>
 
-            <div class="arightboxbott"><h2 class="tith2 ">人员构成</h2>
-              <div id="arightboxbott" class="arightboxbottcont" style="">
-                  <div id="person_distribution"></div>
-                  <button value="0" onclick="ChangeDay(value)">day 1</button>
-                  <button value="1" onclick="ChangeDay(value)">day 2</button>
-                  <button value="2" onclick="ChangeDay(value)">day 3</button>
-              </div>
+                            <div id="amiddboxtbott1" class="amiddboxtbott1content" >
+                                <div id="bubble">
+                                    <svg width="350" height="250" font-family="sans-serif" font-size="10" text-anchor="middle"></svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="amiddboxtbott2 fl">
+                            <h2 class="tith2 pt1">最长逗留时间分布</h2>
+                            <div class="amiddboxtbott2content">
+                                <div id="containerlyx2" style="height: 100%"></div>
+                                <script src = "../static/scripts/people_time.js"></script>
+                                <script src = "../static/scripts/scatter-weight.js"></script>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mrbox_top_right">
+                    <div class="arightboxtop">
+                        <h2 class="tith2">人员分布统计图</h2>
+                        <div id="container" style="height: 100%; margin-bottom: 10%"></div>
+                        <script src="../static/scripts/DrawBar.js"></script>
+                    </div>
+
+                    <div class="arightboxbott">
+                        <h2 class="tith2 ">人员构成</h2>
+                        <div id="arightboxbott" class="arightboxbottcont">
+                            <div id="person_distribution"></div>
+                            <button value="0" onclick="ChangeDay(value)">day 1</button>
+                            <button value="1" onclick="ChangeDay(value)">day 2</button>
+                            <button value="2" onclick="ChangeDay(value)">day 3</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-</div>
-    </div>
 
         <script>
             label_choose = 'all';
@@ -269,30 +272,27 @@
             }
         </script>
     </body>
-<script>
-    //当天的开始时间
-  currentTime = 37000;
-  endTime = 45164;
-  //flag=true;
-  var currentDay = 2;
-  //drawBubble(currentDay,currentTime);
-    setTimeout(function () {
-        //if(!flag) return;
-        //当天的结束时间
-    if(currentTime<endTime){
-        //console.log(currentTime);
-        var p=document.getElementById("time");
-        p.innerHTML = currentTime.toString();
-      Update(currentTime);
-      currentTime++;
-      setTimeout(arguments.callee, 0.1)
-    }
-    else currentTime = 27070;
-  },0.1);
-</script>
 
+    <script>
+        //当天的开始时间
+        currentTime = 37000;
+        endTime = 45164;
+        //flag=true;
+        var currentDay = 2;
+        //drawBubble(currentDay,currentTime);
+            setTimeout(function () {
+                //if(!flag) return;
+                //当天的结束时间
+            if(currentTime<endTime){
+                //console.log(currentTime);
+                var p=document.getElementById("time");
+                p.innerHTML = currentTime.toString();
+            Update(currentTime);
+            currentTime++;
+            setTimeout(arguments.callee, 0.1)
+            }
+            else currentTime = 27070;
+        },0.1);
+    </script>
 
-<script type="text/javascript">
-	
-</script>
 </html>
