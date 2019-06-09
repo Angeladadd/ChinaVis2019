@@ -29,7 +29,7 @@ var day = new Array(3);
         //var min_freq = Math.min.apply(Math,freq);
         var linear = d3.scaleLinear()
         .domain([Math.min.apply(Math,freq),Math.max.apply(Math,freq)])
-        .range([20,45]);
+        .range([0,45]);
 
         for(var i=0;i<day[dayx].length;i++){
             myWords[i] = {};
