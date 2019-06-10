@@ -90,7 +90,7 @@ function drawChord(){
         .attr("dy", ".35em")
         .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180) translate(-16)" : null; })
         .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
-        .text(function(d) { console.log(d);return region[d.index]; });
+        .text(function(d) { return region[d.index]; });
 
     g.append("g")
         .attr("class", "ribbons")

@@ -4,8 +4,10 @@ function drawBubble(date,currentTime){
 	else if (date == 2) all_data = D2per10min;
 	else all_data = D1per10min;
 	if(currentTime < 27000) t = 0;
-	else t = (currentTime - 27000)/6000;
+	else t = Math.floor((currentTime - 27000)/600);
     dat = [];
+    console.log(t);
+    // console.log(all_data[t])
     for(i in all_data){
         // console.log(i);
 
@@ -25,6 +27,7 @@ function drawBubble(date,currentTime){
 		}
     }
     data = dat;
+    console.log(data);
 
 	let svg = d3.select('#bubble').select('svg');
 		let width = +svg.attr('width'); // get width in pixels

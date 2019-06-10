@@ -348,17 +348,27 @@
                 world_cloud.update_by_day(val);
             }
             //drawFlow();
-            drawBubble(1,24700);
+            // drawBubble(1,24700);
             drawChord();
             DrawProportion();
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
             //第二天修改为2
             route = drawMainActive(0,37000);
+            drawBubble(1,37000);
+            var tmp =0;
             function Update(currentTime){
                 // {#console.log(currentTime);#}
                 //console.log(currentTime);
                 route.update(currentTime);
+                tmp++;
+                if(tmp == 600){
+                    var svg = d3.select('#bubble').select('svg');
+                    svg.selectAll('*').remove();
+                    drawBubble(1,currentTime);
+                    tmp =0;
+                    console.log("change!!!!")
+                }
             }
             function changeStartTime(val){
                 tmp_currentTime = val;
