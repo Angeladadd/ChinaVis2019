@@ -1,6 +1,9 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <META HTTP-EQUIV="Pragma"CONTENT="no-cache">
+        <META HTTP-EQUIV="Cache-Control"CONTENT="no-cache">
+        <META HTTP-EQUIV="Expires"CONTENT="0">
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.js"></script>
 		<script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
@@ -19,6 +22,8 @@
         <script scr="../static/scripts/D1per10min.js"></script>
         <script src = "../static/scripts/DrawRoute.js"></script>
         <script src = "../static/scripts/d1transferper10min.js"></script>
+        <script src = "../static/scripts/d2transferper10min.js"></script>
+        <script src = "../static/scripts/d3transferper10min.js"></script>
 		<script src = "../static/scripts/d1labelcountper10min.js"></script>
 		<script src = "../static/scripts/d2labelcountper10min.js"></script>
 		<script src = "../static/scripts/d3labelcountper10min.js"></script>
@@ -349,23 +354,26 @@
             }
             //drawFlow();
             // drawBubble(1,24700);
-            drawChord();
             DrawProportion();
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
             //第二天修改为2
             route = drawMainActive(0,37000);
             drawBubble(1,37000);
+            drawChord(1,37000);
             var tmp =0;
             function Update(currentTime){
                 // {#console.log(currentTime);#}
                 //console.log(currentTime);
                 route.update(currentTime);
                 tmp++;
-                if(tmp == 600){
-                    var svg = d3.select('#bubble').select('svg');
-                    svg.selectAll('*').remove();
+                if(tmp == 60){
+                    var svg_bubble = d3.select('#bubble').select('svg');
+                    var svg_chord = d3.select('#chord').select("svg");
+                    svg_bubble.selectAll('*').remove();
+                    svg_chord.selectAll('*').remove();
                     drawBubble(1,currentTime);
+                    drawChord(1,currentTime);
                     tmp =0;
                     console.log("change!!!!")
                 }
@@ -389,7 +397,7 @@
 
     <script>
         //当天的开始时间
-        currentTime = 37000;
+        currentTime = 42000;
         endTime = 45164;
         //flag=true;
         var currentDay = 2;

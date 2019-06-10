@@ -1,38 +1,34 @@
-function drawChord(){
+function drawChord(date,currentTime){
 
-    // var region = ["venueA","venueB","venueC","venueD","main venue","poster","exhibition","WC1","WC2","WC3","room1","room2","room3","room4","room5","room6","sign-in","elevator","hall","service","leisure"
-    // ];
-    // var matrix = [
-    // [11975,  5871, 8916, 2868],
-    // [ 1951, 10048, 2060, 6171],
-    // [ 8010, 16145, 8090, 8045],
-    // [ 1013,   990,  940, 6907]
-    // ];
-    // console.log(matrix);
+    if(date === 3) all_data = D3trans;
+	else if (date === 2) all_data = D2trans;
+	else all_data = D1trans;
+	if(currentTime < 27000) t = 0;
+	else t = Math.floor((currentTime - 27000)/600);
 
     var region = [];
     for(i in D1trans[0]){
         region.push(i);
     }
     var m=[];
-    for(i in D1trans){
-        if(i==0){
-            // console.log(i);
-            for(j in D1trans[i]){
-                // console.log(j);
-                // console.log(D1trans[i][j]);
-                var tmp=[];
-                for(k in D1trans[i][j]){
-                    // console.log(D1trans[i][j][k]);
-                    tmp.push(D1trans[i][j][k]);
-                }
-                // console.log(tmp);
-                 m.push(tmp);
-            }
+    // console.log(all_data)
+    // console.log("t:"+t)
+    // console.log(all_data[t])
+    for(j in all_data[t]){
+        // console.log(j);
+        // console.log(all_data[t][j]);
+        var tmp=[];
+        for(k in all_data[t][j]){
+            // console.log(D1trans[i][j][k]);
+            tmp.push(all_data[t][j][k]);
         }
+        // console.log(tmp);
+         m.push(tmp);
     }
+
     // console.log(m);
     var matrix = m;
+    // console.log(matrix);
 
 
     var svg = d3.select('#chord').select("svg"),
