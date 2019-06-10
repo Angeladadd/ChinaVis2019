@@ -1,21 +1,11 @@
-// console.log(D2permin);
-groups = [];
-groupData = [];
-time = [];
-for(var i in Object.keys(D2permin)){
-    groups.push(Object.keys(D2permin)[i]);
-    groupData.push(D2permin[Object.keys(D2permin)[i]]);
-    
-}
-for(var j=0; j<groupData[0].length; j++){
-    time.push(j);
-}
-// console.log(time);
-// console.log(groups);
-// console.log(groupData);
+var groups = groups2;
+var groupData = groupData2;
+var time = time2;
+
+console.log("2");
 
 var dom = document.getElementById("containerlyx12");
-var myChart = echarts.init(dom);
+var myChart = echarts.init(dom, 'dark');
 var app = {};
 option = null;
 app.title = '堆叠条形图';
@@ -258,4 +248,5 @@ option = {
 };
 if (option && typeof option === "object") {
     myChart.setOption(option, true);
-}
+};
+console.log("2");

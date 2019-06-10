@@ -1,5 +1,5 @@
 var dom = document.getElementById("containerlyx2");
-var myChart = echarts.init(dom);
+var myChart = echarts.init(dom, 'dark');
 var app = {};
 option = null;
 option = {

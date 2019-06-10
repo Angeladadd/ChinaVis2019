@@ -17,6 +17,7 @@
         <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+        <script type="text/javascript" src="../static/scripts/dark.js"></script>
         <script src="../static/scripts/d3.layout.cloud.js"></script>
         <script src="../static/scripts/d3-legend.min.js"></script>
         <script scr="../static/scripts/D1per10min.js"></script>
@@ -70,6 +71,7 @@
             //         document.write(tmp+" ");
             //     }
             // }
+            var currentDay = 0;
             data_day1 = {{data_day1|tojson}}
             data_day2 = {{data_day2|tojson}}
             data_day3 = {{data_day3|tojson}}
@@ -218,12 +220,19 @@
                 <h1 class="tith1 fl">China Vis 2019</h1>
                 <div class=" fr topbnt_right">
                     <ul>
-                        <li><a href="#">返回</a></li>
+                        <!-- <li><a href="#">返回</a></li>
                         <li><a href="#">分析报告</a></li>
                         <li><a href="#">交通</a></li>
-                        <li><a href="#">舆情</a></li>
+                        <li><a href="#">舆情</a></li> -->
+                        <!-- <li><button value="0" onclick="ChangeDay(value)"> 自定义 </button></li>
+                        <li><button value="2" onclick="ChangeDay(value)"> 第三天 </button></li>
+                        <li><button value="1" onclick="ChangeDay(value)"> 第二天 </button></li>
+                        <li><button value="0" onclick="ChangeDay(value)"> 第一天 </button></li> -->
+                        <li value="0" onclick="ChangeDay(value)" style="cursor: pointer"> 自定义 </li>
+                        <li value="2" onclick="ChangeDay(value)" style="cursor: pointer"> 第三天 </li>
+                        <li value="1" onclick="ChangeDay(value)" style="cursor: pointer"> 第二天 </li>
+                        <li value="0" onclick="ChangeDay(value)" style="cursor: pointer"> 第一天 </li>
                     </ul>
-<!--&gt;>>>>>> 968baae0f934da5aece1952519d187906beb6b5c-->
                 </div>
             </div>
 
@@ -329,7 +338,7 @@
                             <div class="amiddboxtbott2content">
                                 <div id="containerlyx2" style="height: 100%"></div>
                                 <script src = "../static/scripts/people_time.js"></script>
-                                <script src = "../static/scripts/scatter-weight.js"></script>
+                                <script src = "../static/scripts/DrawScatter.js"></script>
                             </div>
                         </div>
                     </div>
@@ -338,26 +347,33 @@
                 <div class="mrbox_top_right">
                     <div class="arightboxtop">
                         <h2 class="tith2">人员分布统计图</h2>
+                        <script src="../static/scripts/DrawBarPre.js"></script>
                         <!-- <h3 class="tith2"> Day 1 </h3> -->
-                        <!-- <div id="containerlyx11" style="height: 100%"></div>
-                        <script src="../static/scripts/DrawBar1.js"></script> -->
+                        <div id="containerlyx11" style="height: 100%"></div>
+                        <script src="../static/scripts/DrawBar1.js"></script>
 
                         <!-- <h3 class="tith2"> Day 2 </h3> -->
-                        <!-- <div id="containerlyx12" style="height: 100%"></div>
-                        <script src="../static/scripts/DrawBar2.js"></script> -->
+                        <div id="containerlyx12" style="height: 100%"></div>
+                        <script src="../static/scripts/DrawBar2.js"></script>
 
                         <!-- <h3 class="tith2"> Day 3 </h3> -->
                         <div id="containerlyx13" style="height: 100%"></div>
                         <script src="../static/scripts/DrawBar3.js"></script>
+
+                        <script>
+                            var dom = document.getElementById("containerlyx11");
+                            dom.style.display = "";
+                            var dom = document.getElementById("containerlyx12");
+                            dom.style.display = "none";
+                            var dom = document.getElementById("containerlyx13");
+                            dom.style.display = "none";
+                        </script>
                     </div>
 
                     <div class="arightboxbott">
                         <h2 class="tith2 ">人员构成</h2>
                         <div id="arightboxbott" class="arightboxbottcont">
                             <div id="person_distribution"></div>
-                            <button value="0" onclick="ChangeDay(value)">day 1</button>
-                            <button value="1" onclick="ChangeDay(value)">day 2</button>
-                            <button value="2" onclick="ChangeDay(value)">day 3</button>
                         </div>
                     </div>
                 </div>
@@ -397,6 +413,8 @@
                 val=parseInt(val);
                 currentDay = val;
                 world_cloud.update_by_day(val);
+                console.log(val);
+                changeBar(val);
             }
             //drawFlow();
             // drawBubble(1,24700);
@@ -439,6 +457,48 @@
                 currentTime = tmp_currentTime;
                 endTime = tmp_endTime;
                 route = drawMainActive(tmp_day,currentTime);
+            }
+            function changeBar(val){
+                console.log(val);
+                if(val == 0){
+                    var dom = document.getElementById("containerlyx11");
+                    dom.style.display = "";
+                    var dom = document.getElementById("containerlyx12");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx13");
+                    dom.style.display = "none";
+
+                    // new_element=document.createElement("script");
+                    // new_element.setAttribute("type","text/javascript");
+                    // new_element.setAttribute("src","../static/scripts/DrawBar1.js");
+                    // document.body.appendChild(new_element);
+                }
+                if(val == 1){
+                    var dom = document.getElementById("containerlyx11");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx12");
+                    dom.style.display = "";
+                    var dom = document.getElementById("containerlyx13");
+                    dom.style.display = "none";
+
+                    // new_element=document.createElement("script");
+                    // new_element.setAttribute("type","text/javascript");
+                    // new_element.setAttribute("src","../static/scripts/DrawBar2.js");
+                    // document.body.appendChild(new_element);
+                }
+                if(val == 2){
+                    var dom = document.getElementById("containerlyx11");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx12");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx13");
+                    dom.style.display = "";
+
+                    // new_element=document.createElement("script");
+                    // new_element.setAttribute("type","text/javascript");
+                    // new_element.setAttribute("src","../static/scripts/DrawBar3.js");
+                    // document.body.appendChild(new_element);
+                }
             }
         </script>
     </body>
