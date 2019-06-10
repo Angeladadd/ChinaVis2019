@@ -1,11 +1,13 @@
 function drawBubble(date,currentTime){
 
-	if(date == 3) all_data = D3per10min;
-	else if (date == 2) all_data = D2per10min;
+	if(date === 3) all_data = D3per10min;
+	else if (date === 2) all_data = D2per10min;
 	else all_data = D1per10min;
 	if(currentTime < 27000) t = 0;
-	else t = (currentTime - 27000)/6000;
+	else t = Math.floor((currentTime - 27000)/600);
     dat = [];
+    console.log(t);
+    // console.log(all_data[t])
     for(i in all_data){
         // console.log(i);
 
@@ -25,6 +27,7 @@ function drawBubble(date,currentTime){
 		}
     }
     data = dat;
+    // console.log(data);
 
 	let svg = d3.select('#bubble').select('svg');
 		let width = +svg.attr('width'); // get width in pixels
@@ -160,6 +163,7 @@ function drawBubble(date,currentTime){
 			.attr('text-anchor', 'start')
 			.attr('transform','translate(20,30)')
 			.style('font-size','12px')
+			.attr("fill","rgb(255,255,255)")
 			.call(legendOrdinal);
 
 		let sizeScale = d3.scaleOrdinal()
@@ -188,84 +192,13 @@ function drawBubble(date,currentTime){
 				.append('xhtml:div')
 				.classed('circle-overlay__inner', true);
 
-		// infoBox.append('h2')
-		// 	.classed('circle-overlay__title', true)
-		// 	.text(d => d.name);
 
 		infoBox.append('p')
 			.classed('circle-overlay__body', true)
 			.html(d => d.desc);
 
 
-		// node.on('click', (currentNode) => {
-		// 	d3.event.stopPropagation();
-		// 	console.log('currentNode', currentNode);
-		// 	let currentTarget = d3.event.currentTarget; // the <g> el
-		//
-		// 	if (currentNode === focusedNode) {
-		// 		// no focusedNode or same focused node is clicked
-		// 		return;
-		// 	}
-		// 	let lastNode = focusedNode;
-		// 	focusedNode = currentNode;
-		//
-		// 	simulation.alphaTarget(0.2).restart();
-		// 	// hide all circle-overlay
-		// 	d3.selectAll('.circle-overlay').classed('hidden', true);
-		// 	d3.selectAll('.node-icon').classed('node-icon--faded', false);
-		//
-		// 	// don't fix last node to center anymore
-		// 	if (lastNode) {
-		// 		lastNode.fx = null;
-		// 		lastNode.fy = null;
-		// 		node.filter((d, i) => i === lastNode.index)
-		// 			.transition().duration(2000).ease(d3.easePolyOut)
-		// 			.tween('circleOut', () => {
-		// 				let irl = d3.interpolateNumber(lastNode.r, lastNode.radius);
-		// 				return (t) => {
-		// 					lastNode.r = irl(t);
-		// 				}
-		// 			})
-		// 			.on('interrupt', () => {
-		// 				lastNode.r = lastNode.radius;
-		// 			});
-		// 	}
-		//
-		// 	// if (!d3.event.active) simulation.alphaTarget(0.5).restart();
-		//
-		// 	d3.transition().duration(2000).ease(d3.easePolyOut)
-		// 		.tween('moveIn', () => {
-		// 			console.log('tweenMoveIn', currentNode);
-		// 			let ix = d3.interpolateNumber(currentNode.x, centerX);
-		// 			let iy = d3.interpolateNumber(currentNode.y, centerY);
-		// 			let ir = d3.interpolateNumber(currentNode.r, centerY * 0.5);
-		// 			return function (t) {
-		// 				// console.log('i', ix(t), iy(t));
-		// 				currentNode.fx = ix(t);
-		// 				currentNode.fy = iy(t);
-		// 				currentNode.r = ir(t);
-		// 				simulation.force('collide', forceCollide);
-		// 			};
-		// 		})
-		// 		.on('end', () => {
-		// 			simulation.alphaTarget(0);
-		// 			let $currentGroup = d3.select(currentTarget);
-		// 			$currentGroup.select('.circle-overlay')
-		// 				.classed('hidden', false);
-		// 			$currentGroup.select('.node-icon')
-		// 				.classed('node-icon--faded', true);
-		//
-		// 		})
-		// 		.on('interrupt', () => {
-		// 			console.log('move interrupt', currentNode);
-		// 			currentNode.fx = null;
-		// 			currentNode.fy = null;
-		// 			simulation.alphaTarget(0);
-		// 		});
-		//
-		// });
 
-		// blur
 		d3.select(document).on('click', () => {
 			let target = d3.event.target;
 			// check if click on document but not on the circle overlay
