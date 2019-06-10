@@ -15,7 +15,7 @@ for(var j=0; j<groupData[0].length; j++){
 // console.log(groupData);
 
 var dom = document.getElementById("containerlyx12");
-var myChart = echarts.init(dom);
+var myChart = echarts.init(dom, 'dark');
 var app = {};
 option = null;
 app.title = '堆叠条形图';
