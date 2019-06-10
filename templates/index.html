@@ -64,6 +64,7 @@
             //         document.write(tmp+" ");
             //     }
             // }
+            var currentDay = 0;
             data_day1 = {{data_day1|tojson}}
             data_day2 = {{data_day2|tojson}}
             data_day3 = {{data_day3|tojson}}
@@ -318,17 +319,27 @@
                 <div class="mrbox_top_right">
                     <div class="arightboxtop">
                         <h2 class="tith2">人员分布统计图</h2>
+                        <script src="../static/scripts/DrawBarPre.js"></script>
                         <!-- <h3 class="tith2"> Day 1 </h3> -->
                         <div id="containerlyx11" style="height: 100%"></div>
                         <script src="../static/scripts/DrawBar1.js"></script>
 
                         <!-- <h3 class="tith2"> Day 2 </h3> -->
-                        <!-- <div id="containerlyx12" style="height: 100%"></div>
-                        <script src="../static/scripts/DrawBar2.js"></script> -->
+                        <div id="containerlyx12" style="height: 100%"></div>
+                        <script src="../static/scripts/DrawBar2.js"></script>
 
                         <!-- <h3 class="tith2"> Day 3 </h3> -->
-                        <!-- <div id="containerlyx13" style="height: 100%"></div>
-                        <script src="../static/scripts/DrawBar3.js"></script> -->
+                        <div id="containerlyx13" style="height: 100%"></div>
+                        <script src="../static/scripts/DrawBar3.js"></script>
+
+                        <script>
+                            var dom = document.getElementById("containerlyx11");
+                            dom.style.display = "";
+                            var dom = document.getElementById("containerlyx12");
+                            dom.style.display = "none";
+                            var dom = document.getElementById("containerlyx13");
+                            dom.style.display = "none";
+                        </script>
                     </div>
 
                     <div class="arightboxbott">
@@ -351,6 +362,7 @@
                 currentDay = val;
                 world_cloud.update_by_day(val);
                 console.log(val);
+                changeBar(val);
             }
             //drawFlow();
             //{#drawBubble(1,currentTime);#}
@@ -378,6 +390,48 @@
                 currentTime = tmp_currentTime;
                 endTime = tmp_endTime;
                 route = drawMainActive(tmp_day,currentTime);
+            }
+            function changeBar(val){
+                console.log(val);
+                if(val == 0){
+                    var dom = document.getElementById("containerlyx11");
+                    dom.style.display = "";
+                    var dom = document.getElementById("containerlyx12");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx13");
+                    dom.style.display = "none";
+
+                    // new_element=document.createElement("script");
+                    // new_element.setAttribute("type","text/javascript");
+                    // new_element.setAttribute("src","../static/scripts/DrawBar1.js");
+                    // document.body.appendChild(new_element);
+                }
+                if(val == 1){
+                    var dom = document.getElementById("containerlyx11");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx12");
+                    dom.style.display = "";
+                    var dom = document.getElementById("containerlyx13");
+                    dom.style.display = "none";
+
+                    // new_element=document.createElement("script");
+                    // new_element.setAttribute("type","text/javascript");
+                    // new_element.setAttribute("src","../static/scripts/DrawBar2.js");
+                    // document.body.appendChild(new_element);
+                }
+                if(val == 2){
+                    var dom = document.getElementById("containerlyx11");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx12");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx13");
+                    dom.style.display = "";
+
+                    // new_element=document.createElement("script");
+                    // new_element.setAttribute("type","text/javascript");
+                    // new_element.setAttribute("src","../static/scripts/DrawBar3.js");
+                    // document.body.appendChild(new_element);
+                }
             }
         </script>
     </body>
