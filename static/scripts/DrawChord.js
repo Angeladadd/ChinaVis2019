@@ -1,13 +1,39 @@
 function drawChord(){
 
-    var region = ["venueA","venueB","venueC","venueD","main venue","poster","exhibition","WC1","WC2","WC3","room1","room2","room3","room4","room5","room6","sign-in","elevator","hall","service","leisure"
-    ];
-    var matrix = [
-    [11975,  5871, 8916, 2868],
-    [ 1951, 10048, 2060, 6171],
-    [ 8010, 16145, 8090, 8045],
-    [ 1013,   990,  940, 6907]
-    ];
+    // var region = ["venueA","venueB","venueC","venueD","main venue","poster","exhibition","WC1","WC2","WC3","room1","room2","room3","room4","room5","room6","sign-in","elevator","hall","service","leisure"
+    // ];
+    // var matrix = [
+    // [11975,  5871, 8916, 2868],
+    // [ 1951, 10048, 2060, 6171],
+    // [ 8010, 16145, 8090, 8045],
+    // [ 1013,   990,  940, 6907]
+    // ];
+    // console.log(matrix);
+
+    var region = [];
+    for(i in D1trans[0]){
+        region.push(i);
+    }
+    var m=[];
+    for(i in D1trans){
+        if(i==0){
+            // console.log(i);
+            for(j in D1trans[i]){
+                // console.log(j);
+                // console.log(D1trans[i][j]);
+                var tmp=[];
+                for(k in D1trans[i][j]){
+                    // console.log(D1trans[i][j][k]);
+                    tmp.push(D1trans[i][j][k]);
+                }
+                // console.log(tmp);
+                 m.push(tmp);
+            }
+        }
+    }
+    // console.log(m);
+    var matrix = m;
+
 
     var svg = d3.select('#chord').select("svg"),
         width = +svg.attr("width"),
@@ -29,8 +55,9 @@ function drawChord(){
         .radius(innerRadius);
 
     var color = d3.scaleOrdinal()
-        .domain(d3.range(4))
-        .range(["#000000", "#FFDD89", "#957244", "#F26223"]);
+        .domain(region)
+        .range([ "#FFDD89", "#957244", "#F26223", "#D2B48C","#FF6347","#A0522D","#8B4513","#B8860B", "#D2691E","#FFDD89", "#957244", "#F26223", "#D2B48C","#FF6347","#A0522D","#8B4513","#B8860B", "#D2691E","#FFDD89", "#957244", "#F26223", "#D2B48C","#FF6347","#A0522D","#8B4513","#B8860B", "#D2691E","#A0522D","#8B4513","#B8860B", "#D2691E"]);
+        // .range(['#99CC99','#99CCCC','#FFFFCC','#CCFFFF','#FFCCCC','#CCCCFF','#FF9966','#FF6666']);
 
     var g = svg.append("g")
         .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")")
@@ -46,7 +73,6 @@ function drawChord(){
         .style("fill", function(d) { return color(d.index); })
         .style("stroke", function(d) { return d3.rgb(color(d.index)).darker(); })
         .attr("d", arc)
-
 
     var groupTick = group.selectAll(".group-tick")
     .data(function(d) { return groupTicks(d, 1e3); })
@@ -64,7 +90,7 @@ function drawChord(){
         .attr("dy", ".35em")
         .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180) translate(-16)" : null; })
         .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
-        .text(function(d) { return formatValue(d.value); });
+        .text(function(d) { console.log(d);return region[d.index]; });
 
     g.append("g")
         .attr("class", "ribbons")
@@ -75,7 +101,7 @@ function drawChord(){
         .style("fill", function(d) { return color(d.target.index); })
         .style("stroke", function(d) { return d3.rgb(color(d.target.index)).darker(); })
         .append('title')
-        .text(function(d){return region[d.source.index]+':'+d.source.value +','+ region[d.target.index]+':'+d.target.value;})
+        .text(function(d){return 'from '+region[d.source.index]+' to '+region[d.target.index]+' : '+d.source.value +','+ 'from '+ region[d.target.index]+' to '+region[d.source.index]+' : '+d.target.value;});
     // Returns an array of tick angles and values for a given group and step.
     function groupTicks(d, step) {
     var k = (d.endAngle - d.startAngle) / d.value;
@@ -83,4 +109,25 @@ function drawChord(){
         return {value: value, angle: value * k + d.startAngle};
     });
     }
+
+    let legendOrdinal = d3.legendColor()
+            .shapeRadius(4)
+			.shape('circle')
+            .scale(color)
+            // .attr("r","8px")
+
+		let legend = svg.append('g')
+			.classed('legend-color', true)
+			.attr('text-anchor', 'start')
+			.attr('transform','translate(20,30)')
+			.style('font-size','9px')
+            .attr("fill","rgb(255,255,255)")
+			.call(legendOrdinal);
+
+
+		let legendSize = d3.legendSize()
+			.scale(region)
+			.shape('circle')
+			.shapePadding(10)
+			.labelAlign('end');
 }
