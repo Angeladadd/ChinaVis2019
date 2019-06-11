@@ -15,12 +15,17 @@ option = {
         showDelay : 0,
         formatter : function (params) {
             if (params.value.length > 1) {
+                var maxTime = params.value[1];
+                var maxTimeh = parseFloat(maxTime/3600).toFixed(1);
+
                 return params.seriesName + ' <br/>'
                 + 'Id: ' + params.value[0] + ' <br/>'
-                + 'Max time: ' + params.value[1];
+                + 'Max time: ' + maxTimeh + 'h';
             }
             else {
-                return params.name + ' : ' + params.value;
+                var maxTime = params.value;
+                var maxTimeh = parseFloat(maxTime/3600).toFixed(1);
+                return params.name + ' : ' + maxTimeh + 'h';
             }
         },
         // axisPointer:{
