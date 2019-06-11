@@ -22,7 +22,7 @@ function drawMainActive(day_index, initial_time){
             let margin = {top: 5, right: 5, bottom: 5, left: 5},
                 width = 320 - margin.left - margin.right,
                 height = 850 - margin.top - margin.bottom
-                ,bias = height/3*2+30;
+                ,bias = height/3*2+35;
             let svg = d3.select("#day_route")
                 .attr("height", width + margin.left + margin.right)
                 .attr("width", height + margin.top + margin.bottom);
@@ -227,7 +227,12 @@ function drawMainActive(day_index, initial_time){
                     return compute[color_label[sensor[i].label]](color_linear(sensor_people[i]));
                 });
             };
-            obj.show_route = function (classes) {
+            obj.show_route = function (val) {
+                if(val == null){
+                    var p=svg.select('#path_layer');
+                    if(p!=null) p.remove();
+                    return;
+                }
                 function path(d){
                 var path = d3.path();
                 var x = yLinear(d[1].y);
@@ -244,7 +249,9 @@ function drawMainActive(day_index, initial_time){
                 }
                 return path;
             }
-            svg.selectAll(".path")
+            var p = svg.select("#path_layer");
+                if(p!=null) p.remove();
+            svg.append('g').attr('id','path_layer').selectAll(".path")
             .data(people[day])
                 .enter()
                 .append("path")
@@ -254,13 +261,11 @@ function drawMainActive(day_index, initial_time){
                 .attr("stroke-width",.5)
                 .attr("opacity",1)
                 .attr("d",function (d,i) {
-                    if(day_obj.map[d[0].id]==classes)
+                    if(day_obj.map[d[0].id]==val)
                         return path(d);
                     else return null;
                 });
             };
             return obj;
 }
-function showRoute(classes) {
-    obj.show_route(classes);
-}
+
