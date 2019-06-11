@@ -4,7 +4,7 @@ var app = {};
 option = null;
 option = {
     grid: {
-        top: '14%',
+        top: '8%',
         left: '16%',
         right: '15%',
         bottom: '0%',
@@ -83,7 +83,7 @@ option = {
             minInterval: 7200,
             axisLabel : {
                 formatter: function(params){
-                    return params/3600 + 'h';
+                    return parseInt(params/3600) + 'h';
                 }
             },
             splitLine: {
