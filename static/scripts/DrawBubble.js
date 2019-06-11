@@ -1,7 +1,7 @@
 function drawBubble(date,currentTime){
 
-	if(date === 3) all_data = D3per10min;
-	else if (date === 2) all_data = D2per10min;
+	if(date === 2) all_data = D3per10min;
+	else if (date === 1) all_data = D2per10min;
 	else all_data = D1per10min;
 	if(currentTime < 27000) t = 0;
 	else t = Math.floor((currentTime - 27000)/600);
@@ -155,6 +155,7 @@ function drawBubble(date,currentTime){
 			.text(d => (d.name + '\n' + format(d.value)));
 
 		let legendOrdinal = d3.legendColor()
+			.shapeRadius(4)
 			.scale(scaleColor)
 			.shape('circle');
 
@@ -162,7 +163,7 @@ function drawBubble(date,currentTime){
 			.classed('legend-color', true)
 			.attr('text-anchor', 'start')
 			.attr('transform','translate(20,30)')
-			.style('font-size','12px')
+			.style('font-size','9px')
 			.attr("fill","rgb(255,255,255)")
 			.call(legendOrdinal);
 

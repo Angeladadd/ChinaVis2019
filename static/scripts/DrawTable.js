@@ -1,15 +1,15 @@
 function drawTable(date,currentTime){
 
-    if(date === 3) all_data = D3per10min;
-	else if (date === 2) all_data = D2per10min;
+    if(date === 2) all_data = D3per10min;
+	else if (date === 1) all_data = D2per10min;
 	else all_data = D1per10min;
 	if(currentTime < 27000) t = 0;
 	else t = Math.floor((currentTime - 27000)/600);
 
 
 	var data = [];
-    for(i in D1per10min){
-        var tmp = {region:i,flow:D1per10min[i][t]};
+    for(i in all_data){
+        var tmp = {region:i,flow:all_data[i][t]};
         // console.log(tmp);
         data.push(tmp);
     }

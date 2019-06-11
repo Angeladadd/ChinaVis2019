@@ -1,14 +1,15 @@
 function drawChord(date,currentTime){
 
-    if(date === 3) all_data = D3trans;
-	else if (date === 2) all_data = D2trans;
+    if(date === 2) all_data = D3trans;
+	else if (date === 1) all_data = D2trans;
 	else all_data = D1trans;
 	if(currentTime < 27000) t = 0;
 	else t = Math.floor((currentTime - 27000)/600);
 
     var region = [];
     for(i in D1trans[0]){
-        region.push(i);
+        if(i=='0') region.push('passage');
+        else region.push(i);
     }
     var m=[];
     // console.log(all_data)
