@@ -113,4 +113,5 @@ function DrawProportion() {
 }
 function changeClass(val){
     proportion_obj.update_by_class(val);
+    ChangeLabelChoose(val);
 }
