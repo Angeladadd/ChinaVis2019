@@ -214,6 +214,7 @@
                                 end:<input type="text" id="end_time" onchange="changeEndTime(this.value)">
                                 day:<input type="text" id="day" onchange="changeDay(this.value)">
                                 class:<input type="text" id = "class" onchange="ChangeLabelChoose(this.value)">
+                                <button onclick="showRoute()">route</button>
                                 <button onclick="runRoute()">run</button>
                             </div>
                         </div>
@@ -308,7 +309,6 @@
             label_choose = 'all';
             function ChangeLabelChoose(val){
                 label_choose = val;
-                showRoute(val);
             }
             function ChangeDay(val){
                 val=parseInt(val);
@@ -351,13 +351,22 @@
             function changeEndTime(val){
                 tmp_endTime = val;
             }
-            function changeDay(val){
-                tmp_day=val;
+            function changeDay(val) {
+                tmp_day = val;
             }
             function runRoute(){
                 currentTime = tmp_currentTime;
                 endTime = tmp_endTime;
                 route = drawMainActive(tmp_day,currentTime);
+            }
+
+            function showRoute() {
+                if(label_choose != "all"){
+                    route.show_route(label_choose);
+                }
+                else{
+                    route.show_route(null);
+                }
             }
             function changeBar(val){
                 console.log(val);
