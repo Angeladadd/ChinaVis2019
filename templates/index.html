@@ -45,6 +45,9 @@
         <script src="../static/scripts/DrawProportion.js"></script>
 				<script src = "../static/scripts/DrawWordCloud.js"></script>
         <script src="../static/data/proportion.js"></script>
+        <script src="../static/data/people_day1.js"></script>
+        <script src="../static/data/people_day2.js"></script>
+        <script src="../static/data/people_day3.js"></script>
         <link href="../static/css/style.css"  rel="stylesheet" type="text/css" media="all" />
         <style>
             /*#day_route{*/
@@ -53,14 +56,10 @@
         </style>
         <script>
             var currentDay = 0;
-            data_day1 = {{data_day1|tojson}}
-            data_day2 = {{data_day2|tojson}}
-            data_day3 = {{data_day3|tojson}}
             sensor_deployment = {{sensor|tojson}}
             //基本数据
             var sensor = {x_max:15,x_min:0,y_max:28,y_min:0};
             BASIC_DATA = {sensor:sensor,people_MAX:25};
-            var people_map = {};
             var sensor_map = {};
             for(var i=0;i<sensor_deployment.length;i++){
                 sensor_map[sensor_deployment[i].sid] = i;
@@ -68,49 +67,9 @@
             //统计一天的people，目前只处理了第一天的，还不知道这个代码到时候放哪
             //这个地方非常瓶颈，建议后端直接做成json，后端如果要加的话尽量把people做成这个数据结构8
             people = new Array(3);
-            people[0] = new Array(0);
-            people[1] = new Array(0);
-            people[2] = new Array(0);
-            var cnt = -1;
-            //为了加载快，这里只计算一天
-            //第二天修改所有的people[0]为 people[1], data_day1为data_day2
-            for(var i=0;i<data_day1.length;i++){
-                let id = data_day1[i].id;
-                let sid = data_day1[i].sid;
-                let time = data_day1[i].time;
-                var d_obj;
-                if(!people_map.hasOwnProperty(id)){
-                    cnt++;
-                    people_map[id] = cnt;
-                    people[0][cnt] = new Array(0);
-                    d_obj = {};
-                    var sensor_tmp = sensor_deployment[sensor_map[sid]];
-                    d_obj.x = parseInt(-1);
-                    d_obj.y = parseInt(-1);
-                    d_obj.floor = parseInt(sensor_tmp.floor);
-                    d_obj.time = parseInt(time);
-                    d_obj.id = parseInt(id);
-                    d_obj.sensor_simple_id = sensor_map[sid];
-                    people[0][cnt].push(d_obj);
-                }
-                var index = parseInt(people_map[id]);
-                var obj = {};
-                var sensor_tmp = sensor_deployment[sensor_map[sid]];
-                obj.x = parseInt(sensor_tmp.x);
-                obj.y = parseInt(sensor_tmp.y);
-                obj.floor = parseInt(sensor_tmp.floor);
-                obj.time = parseInt(time);
-                obj.id = parseInt(id);
-                obj.sensor_simple_id = sensor_map[sid];
-                if(people[0][index]) people[0][index].push(obj);
-            }
-            for(var i=0;i<people[0].length;i++)
-                people[0][i].push(d_obj);
-            MAP = {people_map:people_map,sensor_map:sensor_map};
-            sensor_all_floor = new Array(0);
-            for(let i=0;i<sensor_deployment.length;i++){
-                sensor_all_floor.push(sensor_deployment[i]);
-            }
+            people[0] = people_day1;
+            people[1] = people_day2;
+            people[2] = people_day3;
         </script>
     </head>
 
@@ -227,9 +186,9 @@
                         <script src="../static/scripts/DrawBar3.js"></script>
 
                         <script>
-                            console.log(D1permin);
-                            console.log(D2permin);
-                            console.log(D3permin);
+                            // console.log(D1permin);
+                            // console.log(D2permin);
+                            // console.log(D3permin);
                             var dom = document.getElementById("containerlyx11");
                             dom.style.display = "";
                             var dom = document.getElementById("containerlyx12");
@@ -282,13 +241,13 @@
                 route.show_route(null);
             }
             function ChangeDay(val){
-                tmp_day = val;
                 val=parseInt(val);
+                tmp_day = val;
                 currentDay = val;
                 world_cloud.update_by_day(val);
                 console.log(val);
                 changeBar(val);
-                route.update_day(currentDay,currentTime);
+                runRoute();
             }
             //drawFlow();
             // drawBubble(1,24700);
