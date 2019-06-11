@@ -1,0 +1,442 @@
+creditor,debtor,amount,
+venueA,venueA,3,3
+venueA,venueB,3,3
+venueA,venueC,7,7
+venueA,venueD,3,3
+venueA,main venue,3,3
+venueA,poster,4,4
+venueA,exhibition hall,3,3
+venueA,WC1,3,3
+venueA,WC2,3,3
+venueA,WC3,3,3
+venueA,room1,100,100
+venueA,room2,3,3
+venueA,room3,3,3
+venueA,room4,4,4
+venueA,room5,3,3
+venueA,room6,3,3
+venueA,sign-in,6,6
+venueA,elevator,3,3
+venueA,hall,3,3
+venueA,service,5,5
+venueA,leisure,3,3
+venueB,venueA,3,3
+venueB,venueB,3,3
+venueB,venueC,3,3
+venueB,venueD,4,4
+venueB,main venue,4,4
+venueB,poster,3,3
+venueB,exhibition hall,3,3
+venueB,WC1,3,3
+venueB,WC2,3,3
+venueB,WC3,3,3
+venueB,room1,30,30
+venueB,room2,3,3
+venueB,room3,3,3
+venueB,room4,3,3
+venueB,room5,3,3
+venueB,room6,40,40
+venueB,sign-in,3,3
+venueB,elevator,3,3
+venueB,hall,3,3
+venueB,service,3,3
+venueB,leisure,3,3
+venueC,venueA,3,3
+venueC,venueB,3,3
+venueC,venueC,4,4
+venueC,venueD,3,3
+venueC,main venue,3,3
+venueC,poster,3,3
+venueC,exhibition hall,3,3
+venueC,WC1,3,3
+venueC,WC2,60,60
+venueC,WC3,3,3
+venueC,room1,3,3
+venueC,room2,3,3
+venueC,room3,3,3
+venueC,room4,3,3
+venueC,room5,3,3
+venueC,room6,3,3
+venueC,sign-in,60,60
+venueC,elevator,0,0
+venueC,hall,0,0
+venueC,service,0,0
+venueC,leisure,0,0
+venueD,venueA,0,0
+venueD,venueB,0,0
+venueD,venueC,0,0
+venueD,venueD,0,0
+venueD,main venue,0,0
+venueD,poster,0,0
+venueD,exhibition hall,0,0
+venueD,WC1,0,0
+venueD,WC2,0,0
+venueD,WC3,0,0
+venueD,room1,0,0
+venueD,room2,0,0
+venueD,room3,0,0
+venueD,room4,80,80
+venueD,room5,0,0
+venueD,room6,0,0
+venueD,sign-in,0,0
+venueD,elevator,0,0
+venueD,hall,0,0
+venueD,service,0,0
+venueD,leisure,0,0
+main venue,venueA,0,0
+main venue,venueB,0,0
+main venue,venueC,0,0
+main venue,venueD,0,0
+main venue,main venue,0,0
+main venue,poster,0,0
+main venue,exhibition hall,0,0
+main venue,WC1,0,0
+main venue,WC2,0,0
+main venue,WC3,0,0
+main venue,room1,0,0
+main venue,room2,0,0
+main venue,room3,0,0
+main venue,room4,0,0
+main venue,room5,0,0
+main venue,room6,0,0
+main venue,sign-in,0,0
+main venue,elevator,0,0
+main venue,hall,0,0
+main venue,service,0,0
+main venue,leisure,10,10
+poster,venueA,0,0
+poster,venueB,0,0
+poster,venueC,0,0
+poster,venueD,0,0
+poster,main venue,0,0
+poster,poster,0,0
+poster,exhibition hall,0,0
+poster,WC1,0,0
+poster,WC2,0,0
+poster,WC3,0,0
+poster,room1,0,0
+poster,room2,0,0
+poster,room3,0,0
+poster,room4,0,0
+poster,room5,0,0
+poster,room6,0,0
+poster,sign-in,0,0
+poster,elevator,0,0
+poster,hall,0,0
+poster,service,0,0
+poster,leisure,0,0
+exhibition hall,venueA,0,0
+exhibition hall,venueB,0,0
+exhibition hall,venueC,0,0
+exhibition hall,venueD,0,0
+exhibition hall,main venue,0,0
+exhibition hall,poster,0,0
+exhibition hall,exhibition hall,0,0
+exhibition hall,WC1,0,0
+exhibition hall,WC2,0,0
+exhibition hall,WC3,0,0
+exhibition hall,room1,0,0
+exhibition hall,room2,0,0
+exhibition hall,room3,0,0
+exhibition hall,room4,0,0
+exhibition hall,room5,0,0
+exhibition hall,room6,0,0
+exhibition hall,sign-in,0,0
+exhibition hall,elevator,0,0
+exhibition hall,hall,0,0
+exhibition hall,service,0,0
+exhibition hall,leisure,0,0
+WC1,venueA,0,0
+WC1,venueB,0,0
+WC1,venueC,0,0
+WC1,venueD,0,0
+WC1,main venue,0,0
+WC1,poster,0,0
+WC1,exhibition hall,0,0
+WC1,WC1,0,0
+WC1,WC2,0,0
+WC1,WC3,0,0
+WC1,room1,0,0
+WC1,room2,0,0
+WC1,room3,0,0
+WC1,room4,0,0
+WC1,room5,0,0
+WC1,room6,0,0
+WC1,sign-in,0,0
+WC1,elevator,0,0
+WC1,hall,0,0
+WC1,service,0,0
+WC1,leisure,0,0
+WC2,venueA,0,0
+WC2,venueB,0,0
+WC2,venueC,0,0
+WC2,venueD,0,0
+WC2,main venue,0,0
+WC2,poster,0,0
+WC2,exhibition hall,0,0
+WC2,WC1,0,0
+WC2,WC2,0,0
+WC2,WC3,0,0
+WC2,room1,0,0
+WC2,room2,0,0
+WC2,room3,0,0
+WC2,room4,0,0
+WC2,room5,0,0
+WC2,room6,0,0
+WC2,sign-in,0,0
+WC2,elevator,0,0
+WC2,hall,0,0
+WC2,service,0,0
+WC2,leisure,0,0
+WC3,venueA,0,0
+WC3,venueB,0,0
+WC3,venueC,0,0
+WC3,venueD,0,0
+WC3,main venue,0,0
+WC3,poster,0,0
+WC3,exhibition hall,0,0
+WC3,WC1,0,0
+WC3,WC2,0,0
+WC3,WC3,0,0
+WC3,room1,0,0
+WC3,room2,0,0
+WC3,room3,0,0
+WC3,room4,0,0
+WC3,room5,0,0
+WC3,room6,0,0
+WC3,sign-in,0,0
+WC3,elevator,0,0
+WC3,hall,0,0
+WC3,service,0,0
+WC3,leisure,0,0
+room1,venueA,0,0
+room1,venueB,0,0
+room1,venueC,0,0
+room1,venueD,0,0
+room1,main venue,0,0
+room1,poster,0,0
+room1,exhibition hall,0,0
+room1,WC1,0,0
+room1,WC2,0,0
+room1,WC3,0,0
+room1,room1,0,0
+room1,room2,0,0
+room1,room3,0,0
+room1,room4,0,0
+room1,room5,0,0
+room1,room6,0,0
+room1,sign-in,0,0
+room1,elevator,0,0
+room1,hall,0,0
+room1,service,0,0
+room1,leisure,0,0
+room2,venueA,0,0
+room2,venueB,0,0
+room2,venueC,0,0
+room2,venueD,0,0
+room2,main venue,0,0
+room2,poster,0,0
+room2,exhibition hall,0,0
+room2,WC1,0,0
+room2,WC2,0,0
+room2,WC3,0,0
+room2,room1,0,0
+room2,room2,0,0
+room2,room3,0,0
+room2,room4,0,0
+room2,room5,0,0
+room2,room6,0,0
+room2,sign-in,0,0
+room2,elevator,0,0
+room2,hall,0,0
+room2,service,0,0
+room2,leisure,0,0
+room3,venueA,0,0
+room3,venueB,0,0
+room3,venueC,0,0
+room3,venueD,0,0
+room3,main venue,0,0
+room3,poster,0,0
+room3,exhibition hall,0,0
+room3,WC1,0,0
+room3,WC2,0,0
+room3,WC3,0,0
+room3,room1,3,3
+room3,room2,4,4
+room3,room3,3,3
+room3,room4,3,3
+room3,room5,4,4
+room3,room6,3,3
+room3,sign-in,3,3
+room3,elevator,3,3
+room3,hall,3,3
+room3,service,3,3
+room3,leisure,3,3
+room4,venueA,3,3
+room4,venueB,4,4
+room4,venueC,3,3
+room4,venueD,4,4
+room4,main venue,3,3
+room4,poster,3,3
+room4,exhibition hall,3,3
+room4,WC1,3,3
+room4,WC2,0,0
+room4,WC3,0,0
+room4,room1,0,0
+room4,room2,0,0
+room4,room3,0,0
+room4,room4,0,0
+room4,room5,0,0
+room4,room6,0,0
+room4,sign-in,0,0
+room4,elevator,0,0
+room4,hall,0,0
+room4,service,0,0
+room4,leisure,0,0
+room5,venueA,0,0
+room5,venueB,0,0
+room5,venueC,0,0
+room5,venueD,0,0
+room5,main venue,0,0
+room5,poster,0,0
+room5,exhibition hall,0,0
+room5,WC1,0,0
+room5,WC2,0,0
+room5,WC3,0,0
+room5,room1,0,0
+room5,room2,0,0
+room5,room3,0,0
+room5,room4,0,0
+room5,room5,0,0
+room5,room6,0,0
+room5,sign-in,0,0
+room5,elevator,0,0
+room5,hall,0,0
+room5,service,0,0
+room5,leisure,0,0
+room6,venueA,0,0
+room6,venueB,0,0
+room6,venueC,0,0
+room6,venueD,0,0
+room6,main venue,0,0
+room6,poster,0,0
+room6,exhibition hall,0,0
+room6,WC1,0,0
+room6,WC2,0,0
+room6,WC3,0,0
+room6,room1,0,0
+room6,room2,0,0
+room6,room3,0,0
+room6,room4,0,0
+room6,room5,0,0
+room6,room6,0,0
+room6,sign-in,0,0
+room6,elevator,0,0
+room6,hall,0,0
+room6,service,0,0
+room6,leisure,0,0
+sign-in,venueA,0,0
+sign-in,venueB,0,0
+sign-in,venueC,0,0
+sign-in,venueD,0,0
+sign-in,main venue,0,0
+sign-in,poster,0,0
+sign-in,exhibition hall,0,0
+sign-in,WC1,0,0
+sign-in,WC2,0,0
+sign-in,WC3,0,0
+sign-in,room1,0,0
+sign-in,room2,0,0
+sign-in,room3,3,3
+sign-in,room4,3,3
+sign-in,room5,4,4
+sign-in,room6,3,3
+sign-in,sign-in,3,3
+sign-in,elevator,3,3
+sign-in,hall,3,3
+sign-in,service,3,3
+sign-in,leisure,0,0
+elevator,venueA,0,0
+elevator,venueB,0,0
+elevator,venueC,0,0
+elevator,venueD,0,0
+elevator,main venue,0,0
+elevator,poster,0,0
+elevator,exhibition hall,0,0
+elevator,WC1,0,0
+elevator,WC2,0,0
+elevator,WC3,0,0
+elevator,room1,0,0
+elevator,room2,0,0
+elevator,room3,0,0
+elevator,room4,0,0
+elevator,room5,0,0
+elevator,room6,0,0
+elevator,sign-in,0,0
+elevator,elevator,0,0
+elevator,hall,0,0
+elevator,service,0,0
+elevator,leisure,0,0
+hall,venueA,0,0
+hall,venueB,0,0
+hall,venueC,0,0
+hall,venueD,0,0
+hall,main venue,0,0
+hall,poster,0,0
+hall,exhibition hall,0,0
+hall,WC1,0,0
+hall,WC2,0,0
+hall,WC3,0,0
+hall,room1,3,3
+hall,room2,5,5
+hall,room3,3,3
+hall,room4,5,5
+hall,room5,3,3
+hall,room6,3,3
+hall,sign-in,5,5
+hall,elevator,3,3
+hall,hall,4,4
+hall,service,3,3
+hall,leisure,3,3
+service,venueA,3,3
+service,venueB,3,3
+service,venueC,3,3
+service,venueD,3,3
+service,main venue,3,3
+service,poster,0,0
+service,exhibition hall,0,0
+service,WC1,0,0
+service,WC2,0,0
+service,WC3,0,0
+service,room1,0,0
+service,room2,0,0
+service,room3,0,0
+service,room4,0,0
+service,room5,0,0
+service,room6,0,0
+service,sign-in,0,0
+service,elevator,3,3
+service,hall,4,4
+service,service,3,3
+service,leisure,80,80
+leisure,venueA,0,0
+leisure,venueB,0,0
+leisure,venueC,0,0
+leisure,venueD,0,0
+leisure,main venue,0,0
+leisure,poster,0,0
+leisure,exhibition hall,0,0
+leisure,WC1,0,0
+leisure,WC2,80,80
+leisure,WC3,7,7
+leisure,room1,3,3
+leisure,room2,3,3
+leisure,room3,3,3
+leisure,room4,3,3
+leisure,room5,3,3
+leisure,room6,7,7
+leisure,sign-in,3,3
+leisure,elevator,3,3
+leisure,hall,7,7
+leisure,service,3,3
+leisure,leisure,7,7
