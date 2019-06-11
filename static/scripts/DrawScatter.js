@@ -1,12 +1,8 @@
 var dom = document.getElementById("containerlyx2");
-var myChart = echarts.init(dom);
+var myChart = echarts.init(dom, 'dark');
 var app = {};
 option = null;
 option = {
-    // title : {
-    //     text: '男性女性身高体重分布',
-    //     subtext: '抽样调查来自: Heinz  2003'
-    // },
     grid: {
         top: '14%',
         left: '16%',
@@ -19,22 +15,27 @@ option = {
         showDelay : 0,
         formatter : function (params) {
             if (params.value.length > 1) {
+                var maxTime = params.value[1];
+                var maxTimeh = parseFloat(maxTime/3600).toFixed(1);
+
                 return params.seriesName + ' <br/>'
-                + 'id: ' + params.value[0] + ' <br/>'
-                + 'max time: ' + params.value[1];
+                + 'Id: ' + params.value[0] + ' <br/>'
+                + 'Max time: ' + maxTimeh + 'h';
             }
             else {
-                return params.name + ' : ' + params.value;
+                var maxTime = params.value;
+                var maxTimeh = parseFloat(maxTime/3600).toFixed(1);
+                return params.name + ' : ' + maxTimeh + 'h';
             }
         },
-        axisPointer:{
-            show: true,
-            type : 'cross',
-            lineStyle: {
-                type : 'dashed',
-                width : 1
-            }
-        }
+        // axisPointer:{
+        //     show: true,
+        //     type : 'cross',
+        //     lineStyle: {
+        //         type : 'dashed',
+        //         width : 1
+        //     }
+        // }
     },
     toolbox: {
         feature: {
@@ -79,8 +80,11 @@ option = {
         {
             type : 'value',
             scale:true,
+            minInterval: 7200,
             axisLabel : {
-                formatter: '{value}'
+                formatter: function(params){
+                    return parseFloat(params/3600).toFixed(1) + 'h';
+                }
             },
             splitLine: {
                 show: false

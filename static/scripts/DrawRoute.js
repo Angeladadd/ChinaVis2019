@@ -22,7 +22,7 @@ function drawMainActive(day_index, initial_time){
             let margin = {top: 5, right: 5, bottom: 5, left: 5},
                 width = 320 - margin.left - margin.right,
                 height = 850 - margin.top - margin.bottom
-                ,bias = height/3*2+30;
+                ,bias = height/3*2+35;
             let svg = d3.select("#day_route")
                 .attr("height", width + margin.left + margin.right)
                 .attr("width", height + margin.top + margin.bottom);
@@ -65,32 +65,7 @@ function drawMainActive(day_index, initial_time){
             var label_color = {'scholar':'#ff0000','waiter':"#00ff00",'assistant':"#ff00ff",'reporter':'#0000ff','attendee':'#000000','visitor':'#ffff00','business':'#00ffff','cook':'#33ff66'};
 
 
-            // function path(d){
-            //     var path = d3.path();
-            //     var x = yLinear(d[1].y);
-            //     var y = xLinear(d[1].x);
-            //     if(d[1].floor == '2')
-            //         x+=bias;
-            //     path.moveTo(x,y);
-            //     for(var i=2;i<d.length-1;i++){
-            //         var x = yLinear(d[i].y);
-            //         var y = xLinear(d[i].x);
-            //         if(d[i].floor == '2')
-            //             x+=bias;
-            //         path.lineTo(x,y);
-            //     }
-            //     return path;
-            // }
-            // svg.selectAll(".path")
-            // .data(people[day])
-            //     .enter()
-            //     .append("path")
-            //     .attr("class","path")
-            //     .attr("fill","none")
-            //     .attr("stroke","lightgray")
-            //     .attr("stroke-width",.5)
-            //     .attr("opacity",1)
-            //     .attr("d",path);
+
 
     var old = svg.select('text'); if(old) old.remove();
     var Tooltip = svg.append("text")
@@ -156,8 +131,6 @@ function drawMainActive(day_index, initial_time){
                                     .text(sensor[i].sid.toString())
                                     .attr("x", (d3.mouse(this)[0]+20) + "px")
                                     .attr("y", (d3.mouse(this)[1]) + "px");
-                                var p=document.getElementById("list");
-                                p.innerHTML = sensor_people_log[i].toString();
                             })
                 .on("mouseout",function (d,i) {
                                 Tooltip.style("opacity",0);
@@ -254,5 +227,45 @@ function drawMainActive(day_index, initial_time){
                     return compute[color_label[sensor[i].label]](color_linear(sensor_people[i]));
                 });
             };
+            obj.show_route = function (val) {
+                if(val == null){
+                    var p=svg.select('#path_layer');
+                    if(p!=null) p.remove();
+                    return;
+                }
+                function path(d){
+                var path = d3.path();
+                var x = yLinear(d[1].y);
+                var y = xLinear(d[1].x);
+                if(d[1].floor == '2')
+                    x+=bias;
+                path.moveTo(x,y);
+                for(var i=2;i<d.length-1;i++){
+                    var x = yLinear(d[i].y);
+                    var y = xLinear(d[i].x);
+                    if(d[i].floor == '2')
+                        x+=bias;
+                    path.lineTo(x,y);
+                }
+                return path;
+            }
+            var p = svg.select("#path_layer");
+                if(p!=null) p.remove();
+            svg.append('g').attr('id','path_layer').selectAll(".path")
+            .data(people[day])
+                .enter()
+                .append("path")
+                .attr("class","path")
+                .attr("fill","none")
+                .attr("stroke","black")
+                .attr("stroke-width",.5)
+                .attr("opacity",1)
+                .attr("d",function (d,i) {
+                    if(day_obj.map[d[0].id]==val)
+                        return path(d);
+                    else return null;
+                });
+            };
             return obj;
 }
+

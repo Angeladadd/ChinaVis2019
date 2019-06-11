@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <META HTTP-EQUIV="Pragma"CONTENT="no-cache">
+        <META HTTP-EQUIV="Cache-Control"CONTENT="no-cache">
+        <META HTTP-EQUIV="Expires"CONTENT="0">
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.js"></script>
 		<script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
-        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
+        <script type="text/javascript" src="../static/scripts/dark.js"></script>
         <script src="../static/scripts/d3.layout.cloud.js"></script>
         <script src="../static/scripts/d3-legend.min.js"></script>
         <script scr="../static/scripts/D1per10min.js"></script>
         <script src = "../static/scripts/DrawRoute.js"></script>
+        <script src = "../static/scripts/DrawTable.js"></script>
+        <script src = "../static/scripts/d1transferper10min.js"></script>
+        <script src = "../static/scripts/d2transferper10min.js"></script>
+        <script src = "../static/scripts/d3transferper10min.js"></script>
 		<script src = "../static/scripts/d1labelcountper10min.js"></script>
 		<script src = "../static/scripts/d2labelcountper10min.js"></script>
 		<script src = "../static/scripts/d3labelcountper10min.js"></script>
@@ -42,7 +45,9 @@
         <script src = "../static/data/day2_cluster.js"></script>
         <script src = "../static/data/day3_cluster.js"></script>
         <script src = "../static/scripts/DrawChord.js"></script>
+        <script src="../static/scripts/DrawProportion.js"></script>
 				<script src = "../static/scripts/DrawWordCloud.js"></script>
+        <script src="../static/data/proportion.js"></script>
         <link href="../static/css/style.css"  rel="stylesheet" type="text/css" media="all" />
         <style>
             /*#day_route{*/
@@ -50,17 +55,7 @@
             /*}*/
         </style>
         <script>
-            // var label = [];
-            // for (var key in id_label){
-            //     var tmp = id_label[key];
-            //     if(label.indexOf(tmp)>=0){
-            //         continue;
-            //     }
-            //     else{
-            //         label.push(tmp);
-            //         document.write(tmp+" ");
-            //     }
-            // }
+            var currentDay = 0;
             data_day1 = {{data_day1|tojson}}
             data_day2 = {{data_day2|tojson}}
             data_day3 = {{data_day3|tojson}}
@@ -123,78 +118,6 @@
     </head>
 
     <body>
-<!--<<<<<<< HEAD-->
-    <!--<div class="wpbox">-->
-<!--<div class="bnt">-->
-  <!--<div class="topbnt_left fl">-->
-      <!--&lt;!&ndash;这里是可以跳新页面的操作&ndash;&gt;-->
-   <!--<ul><li class="active"><a href="#">警情警力</a></li>-->
-      <!--<li><a href="#">实有人口</a></li>-->
-      <!--<li><a href="#">流动人口</a></li>-->
-      <!--<li><a href="#">实名制</a></li>-->
-   <!--</ul>-->
-  <!--</div>-->
-  <!--<h1 class="tith1 fl">China Vis 2019</h1>-->
-  <!--<div class=" fr topbnt_right">-->
-    <!--<ul>-->
-       <!--<li><a href="#">返回</a></li>-->
-       <!--<li><a href="#">分析报告</a></li>-->
-       <!--<li><a href="#">交通</a></li>-->
-       <!--<li><a href="#">舆情</a></li>-->
-    <!--</ul>-->
-   <!--</ul>-->
-  <!--</div>-->
-<!--</div>-->
-<!--&lt;!&ndash; bnt end &ndash;&gt;-->
-<!--<div class="left1">-->
-    <!--<div class="aleftboxttop"><h2 class="tith2">今日矛盾纠纷数据统计</h2>-->
-    <!--<div class="lefttoday_tit" style=" height:8%"><p class="fl">地区：甘孜</p><p class="fr">2018-06-14</p></div>-->
-    <!--<div class="lefttoday_number">-->
-      <!--<div class="widget-inline-box text-center fl">-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash; lefttoday_number end &ndash;&gt;-->
-    <!--</div>-->
-    <!--<div class="aleftboxtmidd">-->
-      <!--<h2 class="tith2">矛盾纠纷地区统计</h2>-->
-      <!--<div id="aleftboxtmidd" class="aleftboxtmiddcont">-->
-          <!--<div id="proportion" style="height: 100%">-->
-              <!--<script src="../static/scripts/DrawProportion.js"></script>-->
-          <!--</div>-->
-      <!--</div>-->
-  <!--</div>-->
-  <!--<div class="aleftboxtbott">-->
-    <!--<h2 class="tith2">矛盾纠纷类型统计</h2>-->
-    <!--<div id="aleftboxtbott" class="aleftboxtbott_cont" >-->
-        <!--<div id="chord">-->
-         <!--<svg width="280" height="280"></svg>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--&lt;!&ndash;  left1 end &ndash;&gt;-->
-<!--<div class="mrbox">-->
-      <!--<div class="mrbox_topmidd" style="width: 69%;">-->
-          <!--<div class="amiddboxttop">-->
-              <!--<h2 class="tith2 pt1">实时监控统计</h2>-->
-                <!--<div class="amiddboxttop_map" style="">-->
-                    <!--<div id="main_active">-->
-        <!--<svg id="day_route" class="day_route"></svg>-->
-         <!--<br>-->
-                        <!--<p id="time"></p>-->
-                        <!--start:<input type="text" id="start_time" onchange="changeStartTime(this.value)">-->
-                        <!--end:<input type="text" id="end_time" onchange="changeEndTime(this.value)">-->
-                        <!--day:<input type="text" id="day" onchange="changeDay(this.value)">-->
-                        <!--<button onclick="runRoute()">run</button>-->
-                        <!--<p id ="list"></p>-->
-        <!--&lt;!&ndash;<button value="all" onclick="ChangeLabelChoose(value)">all</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button value = 'ordinary worker' onclick="ChangeLabelChoose(value)">ordinary worker</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button value = 'manager' onclick="ChangeLabelChoose(value)">manager</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>&ndash;&gt;-->
-        <!--</div>-->
-<!--=======-->
         <div class="wpbox">
             <div class="bnt">
                 <div class="topbnt_left fl">
@@ -206,34 +129,39 @@
                     </ul>
                 </div>
 
-                <h1 class="tith1 fl">China Vis 2019</h1>
+                <h1 class="tith1 fl">CICSC人员监测与分析</h1>
                 <div class=" fr topbnt_right">
                     <ul>
-                        <li><a href="#">返回</a></li>
-                        <li><a href="#">分析报告</a></li>
-                        <li><a href="#">交通</a></li>
-                        <li><a href="#">舆情</a></li>
+                        <li value="0" onclick="ChangeDay(value)" style="cursor: pointer"> 自定义 </li>
+                        <li value="2" onclick="ChangeDay(value)" style="cursor: pointer"> 第三天 </li>
+                        <li value="1" onclick="ChangeDay(value)" style="cursor: pointer"> 第二天 </li>
+                        <li value="0" onclick="ChangeDay(value)" style="cursor: pointer"> 第一天 </li>
                     </ul>
-<!--&gt;>>>>>> 968baae0f934da5aece1952519d187906beb6b5c-->
                 </div>
             </div>
 
 
             <div class="left1">
                 <div class="aleftboxttop"><h2 class="tith2">今日矛盾纠纷数据统计</h2>
-                    <div class="lefttoday_tit" style=" height:8%">
-                        <p class="fl">地区：甘孜</p>
-                        <p class="fr">2018-06-14</p>
+                    <div class="lefttoday_tit" style=" height:100%">
+                         <div id="person_distribution"></div>
                     </div>
 
-                    <div class="lefttoday_number">
-                        <div class="widget-inline-box text-center fl"></div>
-                    </div>
                 </div>
 
                 <div class="aleftboxtmidd">
-                    <h2 class="tith2">矛盾纠纷地区统计</h2>
-                    <div id="aleftboxtmidd" class="aleftboxtmiddcont"></div>
+                    <h2 class="tith2">出席天数统计</h2>
+                    <!--<div id="aleftboxtmidd" class="aleftboxtmiddcont">-->
+                        <svg id="proportion"></svg>
+                        <button value="scholar" onclick="changeClass(this.value)">scholar</button>
+                        <button value="reporter" onclick="changeClass(this.value)">reporter</button>
+                        <button value="business" onclick="changeClass(this.value)">business</button>
+                        <button value="attendee" onclick="changeClass(this.value)">attendee</button>
+                        <button value="visitor" onclick="changeClass(this.value)">visitor</button>
+                        <button value="cook" onclick="changeClass(this.value)">only for meal</button>
+                        <button value="waiter" onclick="changeClass(this.value)">waiter</button>
+                        <button value="assistant" onclick="changeClass(this.value)">assistant</button>
+                    <!--</div>-->
                 </div>
 
                 <div class="aleftboxtbott">
@@ -241,7 +169,7 @@
 
                     <div id="aleftboxtbott" class="aleftboxtbott_cont" >
                         <div id="chord">
-                            <svg width="280" height="280"></svg>
+                            <svg width="240" height="240"></svg>
                         </div>
                     </div>
                 </div>
@@ -255,18 +183,14 @@
                         <div class="amiddboxttop_map">
                             <div id="main_active">
                                 <svg id="day_route" class="day_route"></svg>
-                                <p id="time"></p>
+                                time :<span id="time"></span>
+                                <br>
                                 start:<input type="text" id="start_time" onchange="changeStartTime(this.value)">
                                 end:<input type="text" id="end_time" onchange="changeEndTime(this.value)">
                                 day:<input type="text" id="day" onchange="changeDay(this.value)">
+                                class:<input type="text" id = "class" onchange="ChangeLabelChoose(this.value)">
+                                <button onclick="showRoute()">route</button>
                                 <button onclick="runRoute()">run</button>
-                                <p id ="list"></p>
-                                <!--<button value="all" onclick="ChangeLabelChoose(value)">all</button>-->
-                                <!--<button value = 'ordinary worker' onclick="ChangeLabelChoose(value)">ordinary worker</button>-->
-                                <!--<button value = 'manager' onclick="ChangeLabelChoose(value)">manager</button>-->
-                                <!--<button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>-->
-                                <!--<button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>-->
-                                <!--<button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>-->
                             </div>
                         </div>
                     </div>
@@ -287,7 +211,7 @@
                             <div class="amiddboxtbott2content">
                                 <div id="containerlyx2" style="height: 100%"></div>
                                 <script src = "../static/scripts/people_time.js"></script>
-                                <script src = "../static/scripts/scatter-weight.js"></script>
+                                <script src = "../static/scripts/DrawScatter.js"></script>
                             </div>
                         </div>
                     </div>
@@ -296,31 +220,90 @@
                 <div class="mrbox_top_right">
                     <div class="arightboxtop">
                         <h2 class="tith2">人员分布统计图</h2>
+                        <script src="../static/scripts/DrawBarPre.js"></script>
                         <!-- <h3 class="tith2"> Day 1 </h3> -->
                         <div id="containerlyx11" style="height: 100%"></div>
                         <script src="../static/scripts/DrawBar1.js"></script>
 
                         <!-- <h3 class="tith2"> Day 2 </h3> -->
-{#                        <div id="containerlyx12" style="height: 100%"></div>#}
-{#                        <script src="../static/scripts/DrawBar2.js"></script>#}
+                        <div id="containerlyx12" style="height: 100%"></div>
+                        <script src="../static/scripts/DrawBar2.js"></script>
 
                         <!-- <h3 class="tith2"> Day 3 </h3> -->
-{#                        <div id="containerlyx13" style="height: 100%"></div>#}
-{#                        <script src="../static/scripts/DrawBar3.js"></script>#}
+                        <div id="containerlyx13" style="height: 100%"></div>
+                        <script src="../static/scripts/DrawBar3.js"></script>
+
+                        <script>
+                            console.log(D1permin);
+                            console.log(D2permin);
+                            console.log(D3permin);
+                            var dom = document.getElementById("containerlyx11");
+                            dom.style.display = "";
+                            var dom = document.getElementById("containerlyx12");
+                            dom.style.display = "none";
+                            var dom = document.getElementById("containerlyx13");
+                            dom.style.display = "none";
+                        </script>
                     </div>
 
                     <div class="arightboxbott">
                         <h2 class="tith2 ">人员构成</h2>
                         <div id="arightboxbott" class="arightboxbottcont">
-                            <div id="person_distribution"></div>
-                            <button value="0" onclick="ChangeDay(value)">day 1</button>
-                            <button value="1" onclick="ChangeDay(value)">day 2</button>
-                            <button value="2" onclick="ChangeDay(value)">day 3</button>
+                            <table width="260" border="1" id="table">
+                         <tr>
+                          <th align="middle">Region</th>
+                          <th align="middle">flow</th>
+                         </tr>
+                         <tr>
+                          <td align="midlle" id = "th11"></td>
+                          <td align="middle" id = "th12"></td>
+                         </tr>
+                         <tr>
+                          <td align="middle" id = "th21"></td>
+                          <td align="middle" id = "th22"></td>
+                         </tr>
+                         <tr>
+                          <td align="middle"id = "th31"></td>
+                          <td align="middle" id = "th32"></td>
+                         </tr>
+                            <tr>
+                          <td align="middle" id = "th41"></td>
+                          <td align="middle" id = "th42"></td>
+                         </tr>
+                            <tr>
+                          <td align="middle" id = "th51"></td>
+                          <td align="middle" id = "th52"></td>
+                         </tr>
+                        </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+<!--<script>-->
+<!--    var data = [];-->
+<!--    for(i in D1per10min){-->
+<!--        var tmp = {region:i,flow:D1per10min[i][0]};-->
+<!--        console.log(tmp);-->
+<!--        data.push(tmp);-->
+<!--    }-->
+<!--    console.log(data);-->
+<!--    data.sort(function(a,b){-->
+<!--			return  b.flow - a.flow;-->
+<!--		});-->
+<!--    console.log(data);-->
+<!--    document.getElementById("th11").innerText = data[0].region;-->
+<!--    document.getElementById("th12").innerText = data[0].flow;-->
+<!--    document.getElementById("th21").innerText = data[1].region;-->
+<!--    document.getElementById("th22").innerText = data[1].flow;-->
+<!--    document.getElementById("th31").innerText = data[2].region;-->
+<!--    document.getElementById("th32").innerText = data[2].flow;-->
+<!--    document.getElementById("th41").innerText = data[3].region;-->
+<!--    document.getElementById("th42").innerText = data[3].flow;-->
+<!--    document.getElementById("th51").innerText = data[4].region;-->
+<!--    document.getElementById("th52").innerText = data[4].flow;-->
+
+<!--</script>-->
 
         <script>
             label_choose = 'all';
@@ -331,18 +314,36 @@
                 val=parseInt(val);
                 currentDay = val;
                 world_cloud.update_by_day(val);
+                console.log(val);
+                changeBar(val);
             }
             //drawFlow();
-            //{#drawBubble(1,currentTime);#}
-            drawChord();
+            // drawBubble(1,24700);
+            var proportion_obj = DrawProportion();
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
             //第二天修改为2
             route = drawMainActive(0,37000);
+            drawBubble(1,37000);
+            drawChord(1,37000);
+            drawTable(1,37000);
+            var tmp =0;
             function Update(currentTime){
                 // {#console.log(currentTime);#}
                 //console.log(currentTime);
                 route.update(currentTime);
+                tmp++;
+                if(tmp == 60){
+                    var svg_bubble = d3.select('#bubble').select('svg');
+                    var svg_chord = d3.select('#chord').select("svg");
+                    svg_bubble.selectAll('*').remove();
+                    svg_chord.selectAll('*').remove();
+                    drawBubble(1,currentTime);
+                    drawChord(1,currentTime);
+                    drawTable(1,currentTime);
+                    tmp =0;
+                    console.log("change!!!!")
+                }
             }
             function changeStartTime(val){
                 tmp_currentTime = val;
@@ -350,24 +351,74 @@
             function changeEndTime(val){
                 tmp_endTime = val;
             }
-            function changeDay(val){
-                tmp_day=val;
+            function changeDay(val) {
+                tmp_day = val;
             }
             function runRoute(){
                 currentTime = tmp_currentTime;
                 endTime = tmp_endTime;
                 route = drawMainActive(tmp_day,currentTime);
             }
+
+            function showRoute() {
+                if(label_choose != "all"){
+                    route.show_route(label_choose);
+                }
+                else{
+                    route.show_route(null);
+                }
+            }
+            function changeBar(val){
+                console.log(val);
+                if(val == 0){
+                    var dom = document.getElementById("containerlyx11");
+                    dom.style.display = "";
+                    var dom = document.getElementById("containerlyx12");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx13");
+                    dom.style.display = "none";
+
+                    // new_element=document.createElement("script");
+                    // new_element.setAttribute("type","text/javascript");
+                    // new_element.setAttribute("src","../static/scripts/DrawBar1.js");
+                    // document.body.appendChild(new_element);
+                }
+                if(val == 1){
+                    var dom = document.getElementById("containerlyx11");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx12");
+                    dom.style.display = "";
+                    var dom = document.getElementById("containerlyx13");
+                    dom.style.display = "none";
+
+                    // new_element=document.createElement("script");
+                    // new_element.setAttribute("type","text/javascript");
+                    // new_element.setAttribute("src","../static/scripts/DrawBar2.js");
+                    // document.body.appendChild(new_element);
+                }
+                if(val == 2){
+                    var dom = document.getElementById("containerlyx11");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx12");
+                    dom.style.display = "none";
+                    var dom = document.getElementById("containerlyx13");
+                    dom.style.display = "";
+
+                    // new_element=document.createElement("script");
+                    // new_element.setAttribute("type","text/javascript");
+                    // new_element.setAttribute("src","../static/scripts/DrawBar3.js");
+                    // document.body.appendChild(new_element);
+                }
+            }
         </script>
     </body>
 
     <script>
-        //当天的开始时间
-        currentTime = 37000;
+        //当天的开始时间,修改这个要同时修改DrawMain的第二个参数
+        currentTime = 42000;
         endTime = 45164;
         //flag=true;
         var currentDay = 2;
-        //drawBubble(currentDay,currentTime);
             setTimeout(function () {
                 //if(!flag) return;
                 //当天的结束时间

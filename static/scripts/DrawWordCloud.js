@@ -3,9 +3,11 @@ function DrawWorldCloud(dayx){
 
 // set the dimensions and margins of the graph
 var margin = {top: 10, right: 10, bottom: 10, left: 10},
-    width = 350 - margin.left - margin.right,
-    height = 250 - margin.top - margin.bottom;
+    width = 200 - margin.left - margin.right,
+    height = 200 - margin.top - margin.bottom;
 
+
+var label_color = {'scholar':'#ff0000','waiter':"#00ff00",'assistant':"#ff00ff",'reporter':'#0000ff','attendee':'#ffffff','visitor':'#ffff00','business':'#00ffff','cook':'#33ff66'};
 // append the svg object to the body of the page
 var svg = d3.select("#person_distribution").append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -29,7 +31,7 @@ var day = new Array(3);
         //var min_freq = Math.min.apply(Math,freq);
         var linear = d3.scaleLinear()
         .domain([Math.min.apply(Math,freq),Math.max.apply(Math,freq)])
-        .range([0,45]);
+        .range([10,28]);
 
         for(var i=0;i<day[dayx].length;i++){
             myWords[i] = {};
@@ -84,7 +86,9 @@ function draw(words) {
         .data(words)
       .enter().append("text")
         .style("font-size", function(d) { return d.size; })
-        .style("fill", "white")
+        .style("fill", function (d) {
+            return label_color[d.text];
+        })
         .attr("text-anchor", "middle")
         .style("font-family", "Impact")
         .attr("transform", function(d) {
