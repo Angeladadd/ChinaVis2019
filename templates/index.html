@@ -249,6 +249,14 @@
                 console.log(val);
                 changeBar(val);
                 runRoute();
+                currentDay = val;
+                var svg_bubble = d3.select('#bubble').select('svg');
+                var svg_chord = d3.select('#chord').select("svg");
+                svg_bubble.selectAll('*').remove();
+                svg_chord.selectAll('*').remove();
+                drawBubble(currentDay,currentTime);
+                drawChord(currentDay,currentTime);
+                drawTable(currentDay,currentTime);
             }
             //drawFlow();
             // drawBubble(1,24700);
@@ -266,16 +274,17 @@
                 //console.log(currentTime);
                 route.update(currentTime);
                 tmp++;
-                if(tmp == 60){
+                if(tmp == 600){
                     var svg_bubble = d3.select('#bubble').select('svg');
                     var svg_chord = d3.select('#chord').select("svg");
                     svg_bubble.selectAll('*').remove();
                     svg_chord.selectAll('*').remove();
-                    drawBubble(0,currentTime);
-                    drawChord(0,currentTime);
-                    drawTable(0,currentTime);
+                    drawBubble(currentDay,currentTime);
+                    drawChord(currentDay,currentTime);
+                    drawTable(currentDay,currentTime);
                     tmp =0;
-                    console.log("change!!!!")
+                    console.log("change!!!!");
+                    console.log("currentDay:"+currentDay);
                 }
             }
             tmp_endTime = 45164;
