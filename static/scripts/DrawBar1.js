@@ -12,9 +12,31 @@ app.title = '堆叠条形图';
 
 option = {
     tooltip : {
-        trigger: 'axis',
-        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        //trigger: 'axis',
+    //     axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+    //         type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+    //     }
+    // },
+    // tooltip : {
+        // trigger: 'axis',
+        showDelay : 0,
+        formatter : function (params) {
+            if (params.value.length > 1) {
+                return params.seriesName + ' <br/>'
+                + 'id: ' + params.value[0] + ' <br/>'
+                + 'max time: ' + params.value[1];
+            }
+            else {
+                return params.name + ' : ' + params.value;
+            }
+        },
+        axisPointer:{
+            // show: true,
+            type : 'cross',
+            lineStyle: {
+                type : 'dashed',
+                width : 1
+            }
         }
     },
     legend: {
