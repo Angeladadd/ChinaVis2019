@@ -1,7 +1,7 @@
 function drawBubble(date,currentTime){
 
-	if(date === 2) all_data = D3per10min;
-	else if (date === 1) all_data = D2per10min;
+	if(date === 3) all_data = D3per10min;
+	else if (date === 2) all_data = D2per10min;
 	else all_data = D1per10min;
 	if(currentTime < 27000) t = 0;
 	else t = Math.floor((currentTime - 27000)/600);
@@ -39,7 +39,7 @@ function drawBubble(date,currentTime){
 
 		let format = d3.format(',d');
 
-		let scaleColor = d3.scaleOrdinal(['#99CC99','#99CCCC','#FFFFCC','#CCFFFF','#FFCCCC','#CCCCFF','#FF9966','#FF6666']);
+		let scaleColor = d3.scaleOrdinal(['#99CC99','#99CCCC','#FFFFCC','#CCFFFF','#FFCCCC','#CCCCFF','#FF9966','#FF6666','#99CC99','#99CCCC','#FFFFCC','#CCFFFF','#FFCCCC','#CCCCFF','#FF9966','#FF6666','#99CC99','#99CCCC','#FFFFCC','#CCFFFF','#FFCCCC','#CCCCFF','#FF9966','#FF6666','#99CC99','#99CCCC','#FFFFCC','#CCFFFF','#FFCCCC','#CCCCFF','#FF9966']);
 
 		// use pack to calculate radius of the circle
 		let pack = d3.pack()
@@ -92,6 +92,7 @@ function drawBubble(date,currentTime){
 			.data(nodes)
 			.enter().append('g')
 			.attr('class', 'node')
+			.attr('transform','translate(80,30)')
 			.call(d3.drag()
 				.on('start', (d) => {
 					if (!d3.event.active) simulation.alphaTarget(0.2).restart();
@@ -155,7 +156,7 @@ function drawBubble(date,currentTime){
 			.text(d => (d.name + '\n' + format(d.value)));
 
 		let legendOrdinal = d3.legendColor()
-			.shapeRadius(4)
+			 .shapeRadius(4)
 			.scale(scaleColor)
 			.shape('circle');
 
@@ -232,7 +233,7 @@ function drawBubble(date,currentTime){
 
 		function ticked() {
 			node
-				.attr('transform', d => `translate(${d.x},${d.y})`)
+				.attr('transform', d => `translate(${d.x+50},${d.y})`)
 				.select('circle')
 					.attr('r', d => d.r);
 		}

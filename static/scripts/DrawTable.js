@@ -28,4 +28,14 @@ function drawTable(date,currentTime){
     document.getElementById("th42").innerText = data[3].flow;
     document.getElementById("th51").innerText = data[4].region;
     document.getElementById("th52").innerText = data[4].flow;
+    document.getElementById("th61").innerText = data[5].region;
+    document.getElementById("th62").innerText = data[5].flow;
+    document.getElementById("th71").innerText = data[6].region;
+    document.getElementById("th72").innerText = data[6].flow;
+    document.getElementById("th81").innerText = data[7].region;
+    document.getElementById("th82").innerText = data[7].flow;
+    document.getElementById("th91").innerText = data[8].region;
+    document.getElementById("th92").innerText = data[8].flow;
+    document.getElementById("th101").innerText = data[9].region;
+    document.getElementById("th102").innerText = data[9].flow;
 }
