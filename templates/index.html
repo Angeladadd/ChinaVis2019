@@ -27,9 +27,6 @@
 		<script src = "../static/scripts/d1labelcountpermin.js"></script>
 		<script src = "../static/scripts/d2labelcountpermin.js"></script>
 		<script src = "../static/scripts/d3labelcountpermin.js"></script>
-        <script src = "../static/scripts/number_time_day1.js"></script>
-        <script src = "../static/scripts/number_time_day2.js"></script>
-        <script src = "../static/scripts/number_time_day3.js"></script>
     	<script src = "../static/scripts/sensor_deployment.js"></script>
         <script src = "../static/scripts/id_label.js"></script>
         <script src = "../static/scripts/D1permin.js"></script>
@@ -50,9 +47,13 @@
         <script src="../static/data/people_day3.js"></script>
         <link href="../static/css/style.css"  rel="stylesheet" type="text/css" media="all" />
         <style>
-            /*#day_route{*/
-                /*background: url(https://github.com/Angeladadd/ChinaVis2019/blob/cc86772a65976d4ad933450d589f0790444a1042/static/img/background.png);*/
-            /*}*/
+            button{
+                font-size: 14px;
+                color: white;
+                width: 70px;
+                height: 20px;
+                background-color: #2e6da4;
+            }
         </style>
         <script>
             var currentDay = 0;
@@ -79,8 +80,8 @@
                 <div class="topbnt_left fl">
                     <br>
                     <p style="font-size: 14px; margin-left: 50px; margin-top: 10px" >
-                        开始时间:<input type="text" size="10" id="start_time" onchange="changeStartTime(this.value)">
-                        结束时间:<input type="text" size="10" id="end_time" onchange="changeEndTime(this.value)">
+                        开始时间:<input type="text" size="10" id="start_time" value="11-38-00" onchange="changeStartTime(this.value)">
+                        结束时间:<input type="text" size="10" id="end_time" value="14-34-09" onchange="changeEndTime(this.value)">
                         <!--<br>-->
                         <button class="active" onclick="runRoute()" style="cursor: pointer">查看运行轨迹</button>
                     </p>
@@ -99,7 +100,7 @@
 
 
             <div class="left1">
-                <div class="aleftboxttop"><h2 class="tith2">今日矛盾纠纷数据统计</h2>
+                <div class="aleftboxttop"><h2 class="tith2">参会人员分类</h2>
                     <div class="lefttoday_tit" style=" height:100%">
                          <div id="person_distribution"></div>
                     </div>
@@ -280,10 +281,16 @@
             tmp_endTime = 45164;
             tmp_currentTime = 41000;
             function changeStartTime(val){
-                tmp_currentTime = val;
+                var dates = val.split("-");
+                if(dates.length != 3) return;
+                var date = parseInt(dates[0])*3600+parseInt(dates[1])*60+parseInt(dates[2]);
+                tmp_currentTime = date;
             }
             function changeEndTime(val){
-                tmp_endTime = val;
+                var dates = val.split("-");
+                if(dates.length!=3) return;
+                var date = parseInt(dates[0])*3600+parseInt(dates[1])*60+parseInt(dates[2]);
+                tmp_endTime = date;
             }
             function runRoute(){
                 currentTime = tmp_currentTime;
@@ -357,7 +364,7 @@
             if(currentTime<endTime){
                 //console.log(currentTime);
                 var p=document.getElementById("time");
-                p.innerHTML = currentTime.toString();
+                p.innerHTML = parseInt(currentTime/3600).toString()+"h"+parseInt(currentTime%3600 / 60) + "min"+parseInt(currentTime%60) + "s";
             Update(currentTime);
             currentTime++;
             setTimeout(arguments.callee, 0.1)
