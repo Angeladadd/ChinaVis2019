@@ -75,8 +75,11 @@ option = {
         {
             type : 'value',
             scale:true,
+            minInterval: 7200,
             axisLabel : {
-                formatter: '{value}'
+                formatter: function(params){
+                    return params/3600 + 'h';
+                }
             },
             splitLine: {
                 show: false
