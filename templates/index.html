@@ -121,12 +121,13 @@
         <div class="wpbox">
             <div class="bnt">
                 <div class="topbnt_left fl">
-                    <ul>
-                        <li class="active"><a href="#">警情警力</a></li>
-                        <li><a href="#">实有人口</a></li>
-                        <li><a href="#">流动人口</a></li>
-                        <li><a href="#">实名制</a></li>
-                    </ul>
+                    <br>
+                    <p style="font-size: 14px; margin-left: 50px; margin-top: 10px" >
+                        开始时间:<input type="text" size="10" id="start_time" onchange="changeStartTime(this.value)">
+                        结束时间:<input type="text" size="10" id="end_time" onchange="changeEndTime(this.value)">
+                        <!--<br>-->
+                        <button class="active" onclick="runRoute()" style="cursor: pointer">查看运行轨迹</button>
+                    </p>
                 </div>
 
                 <h1 class="tith1 fl">CICSC人员监测与分析</h1>
@@ -153,14 +154,6 @@
                     <h2 class="tith2">出席天数统计</h2>
                     <!--<div id="aleftboxtmidd" class="aleftboxtmiddcont">-->
                         <svg id="proportion"></svg>
-                        <button value="scholar" onclick="changeClass(this.value)">scholar</button>
-                        <button value="reporter" onclick="changeClass(this.value)">reporter</button>
-                        <button value="business" onclick="changeClass(this.value)">business</button>
-                        <button value="attendee" onclick="changeClass(this.value)">attendee</button>
-                        <button value="visitor" onclick="changeClass(this.value)">visitor</button>
-                        <button value="cook" onclick="changeClass(this.value)">only for meal</button>
-                        <button value="waiter" onclick="changeClass(this.value)">waiter</button>
-                        <button value="assistant" onclick="changeClass(this.value)">assistant</button>
                     <!--</div>-->
                 </div>
 
@@ -185,12 +178,15 @@
                                 <svg id="day_route" class="day_route"></svg>
                                 time :<span id="time"></span>
                                 <br>
-                                start:<input type="text" id="start_time" onchange="changeStartTime(this.value)">
-                                end:<input type="text" id="end_time" onchange="changeEndTime(this.value)">
-                                day:<input type="text" id="day" onchange="changeDay(this.value)">
-                                class:<input type="text" id = "class" onchange="ChangeLabelChoose(this.value)">
+                                <button value="scholar" onclick="changeClass(this.value)">scholar</button>
+                        <button value="reporter" onclick="changeClass(this.value)">reporter</button>
+                        <button value="business" onclick="changeClass(this.value)">business</button>
+                        <button value="attendee" onclick="changeClass(this.value)">attendee</button>
+                        <button value="visitor" onclick="changeClass(this.value)">visitor</button>
+                        <button value="cook" onclick="changeClass(this.value)">only for meal</button>
+                        <button value="waiter" onclick="changeClass(this.value)">waiter</button>
+                        <button value="assistant" onclick="changeClass(this.value)">assistant</button>
                                 <button onclick="showRoute()">route</button>
-                                <button onclick="runRoute()">run</button>
                             </div>
                         </div>
                     </div>
@@ -280,42 +276,22 @@
                 </div>
             </div>
         </div>
-<!--<script>-->
-<!--    var data = [];-->
-<!--    for(i in D1per10min){-->
-<!--        var tmp = {region:i,flow:D1per10min[i][0]};-->
-<!--        console.log(tmp);-->
-<!--        data.push(tmp);-->
-<!--    }-->
-<!--    console.log(data);-->
-<!--    data.sort(function(a,b){-->
-<!--			return  b.flow - a.flow;-->
-<!--		});-->
-<!--    console.log(data);-->
-<!--    document.getElementById("th11").innerText = data[0].region;-->
-<!--    document.getElementById("th12").innerText = data[0].flow;-->
-<!--    document.getElementById("th21").innerText = data[1].region;-->
-<!--    document.getElementById("th22").innerText = data[1].flow;-->
-<!--    document.getElementById("th31").innerText = data[2].region;-->
-<!--    document.getElementById("th32").innerText = data[2].flow;-->
-<!--    document.getElementById("th41").innerText = data[3].region;-->
-<!--    document.getElementById("th42").innerText = data[3].flow;-->
-<!--    document.getElementById("th51").innerText = data[4].region;-->
-<!--    document.getElementById("th52").innerText = data[4].flow;-->
-
-<!--</script>-->
 
         <script>
+            tmp_day = 0;
             label_choose = 'all';
             function ChangeLabelChoose(val){
                 label_choose = val;
+                route.show_route(null);
             }
             function ChangeDay(val){
+                tmp_day = val;
                 val=parseInt(val);
                 currentDay = val;
                 world_cloud.update_by_day(val);
                 console.log(val);
                 changeBar(val);
+                route.update_day(currentDay,currentTime);
             }
             //drawFlow();
             // drawBubble(1,24700);
@@ -323,10 +299,10 @@
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
             //第二天修改为2
-            route = drawMainActive(0,37000);
-            drawBubble(1,37000);
-            drawChord(1,37000);
-            drawTable(1,37000);
+            route = drawMainActive(0,41000);
+            drawBubble(0,41000);
+            drawChord(0,41000);
+            drawTable(0,41000);
             var tmp =0;
             function Update(currentTime){
                 // {#console.log(currentTime);#}
@@ -338,25 +314,25 @@
                     var svg_chord = d3.select('#chord').select("svg");
                     svg_bubble.selectAll('*').remove();
                     svg_chord.selectAll('*').remove();
-                    drawBubble(1,currentTime);
-                    drawChord(1,currentTime);
-                    drawTable(1,currentTime);
+                    drawBubble(0,currentTime);
+                    drawChord(0,currentTime);
+                    drawTable(0,currentTime);
                     tmp =0;
                     console.log("change!!!!")
                 }
             }
+            tmp_endTime = 45164;
+            tmp_currentTime = 41000;
             function changeStartTime(val){
                 tmp_currentTime = val;
             }
             function changeEndTime(val){
                 tmp_endTime = val;
             }
-            function changeDay(val) {
-                tmp_day = val;
-            }
             function runRoute(){
                 currentTime = tmp_currentTime;
                 endTime = tmp_endTime;
+                console.log(currentTime);
                 route = drawMainActive(tmp_day,currentTime);
             }
 
@@ -415,10 +391,10 @@
 
     <script>
         //当天的开始时间,修改这个要同时修改DrawMain的第二个参数
-        currentTime = 42000;
+        currentTime = 41000;
         endTime = 45164;
         //flag=true;
-        var currentDay = 2;
+        var currentDay = 0;
             setTimeout(function () {
                 //if(!flag) return;
                 //当天的结束时间
