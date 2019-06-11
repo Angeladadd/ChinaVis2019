@@ -7,14 +7,9 @@
         <meta charset="utf-8">
         <script src="https://d3js.org/d3.v4.js"></script>
 		<script src="https://unpkg.com/d3@5.6.0/dist/d3.min.js"></script>
-        <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>-->
-        <!--<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/china.js"></script>-->
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts.min.js"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-gl/echarts-gl.min.js"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts-stat/ecStat.min.js"></script>
-        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/dataTool.min.js"></script>
-        <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/map/js/world.js"></script>
-        <script type="text/javascript" src="https://api.map.baidu.com/api?v=2.0&ak=xfhhaTThl11qYVrqLZii6w8qE5ggnhrY&__ec_v__=20190126"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/extension/bmap.min.js"></script>
         <script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/simplex.js"></script>
         <script type="text/javascript" src="../static/scripts/dark.js"></script>
@@ -60,17 +55,6 @@
             /*}*/
         </style>
         <script>
-            // var label = [];
-            // for (var key in id_label){
-            //     var tmp = id_label[key];
-            //     if(label.indexOf(tmp)>=0){
-            //         continue;
-            //     }
-            //     else{
-            //         label.push(tmp);
-            //         document.write(tmp+" ");
-            //     }
-            // }
             var currentDay = 0;
             data_day1 = {{data_day1|tojson}}
             data_day2 = {{data_day2|tojson}}
@@ -134,78 +118,6 @@
     </head>
 
     <body>
-<!--<<<<<<< HEAD-->
-    <!--<div class="wpbox">-->
-<!--<div class="bnt">-->
-  <!--<div class="topbnt_left fl">-->
-      <!--&lt;!&ndash;这里是可以跳新页面的操作&ndash;&gt;-->
-   <!--<ul><li class="active"><a href="#">警情警力</a></li>-->
-      <!--<li><a href="#">实有人口</a></li>-->
-      <!--<li><a href="#">流动人口</a></li>-->
-      <!--<li><a href="#">实名制</a></li>-->
-   <!--</ul>-->
-  <!--</div>-->
-  <!--<h1 class="tith1 fl">China Vis 2019</h1>-->
-  <!--<div class=" fr topbnt_right">-->
-    <!--<ul>-->
-       <!--<li><a href="#">返回</a></li>-->
-       <!--<li><a href="#">分析报告</a></li>-->
-       <!--<li><a href="#">交通</a></li>-->
-       <!--<li><a href="#">舆情</a></li>-->
-    <!--</ul>-->
-   <!--</ul>-->
-  <!--</div>-->
-<!--</div>-->
-<!--&lt;!&ndash; bnt end &ndash;&gt;-->
-<!--<div class="left1">-->
-    <!--<div class="aleftboxttop"><h2 class="tith2">今日矛盾纠纷数据统计</h2>-->
-    <!--<div class="lefttoday_tit" style=" height:8%"><p class="fl">地区：甘孜</p><p class="fr">2018-06-14</p></div>-->
-    <!--<div class="lefttoday_number">-->
-      <!--<div class="widget-inline-box text-center fl">-->
-      <!--</div>-->
-    <!--</div>-->
-    <!--&lt;!&ndash; lefttoday_number end &ndash;&gt;-->
-    <!--</div>-->
-    <!--<div class="aleftboxtmidd">-->
-      <!--<h2 class="tith2">矛盾纠纷地区统计</h2>-->
-      <!--<div id="aleftboxtmidd" class="aleftboxtmiddcont">-->
-          <!--<div id="proportion" style="height: 100%">-->
-              <!--<script src="../static/scripts/DrawProportion.js"></script>-->
-          <!--</div>-->
-      <!--</div>-->
-  <!--</div>-->
-  <!--<div class="aleftboxtbott">-->
-    <!--<h2 class="tith2">矛盾纠纷类型统计</h2>-->
-    <!--<div id="aleftboxtbott" class="aleftboxtbott_cont" >-->
-        <!--<div id="chord">-->
-         <!--<svg width="280" height="280"></svg>-->
-        <!--</div>-->
-    <!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--&lt;!&ndash;  left1 end &ndash;&gt;-->
-<!--<div class="mrbox">-->
-      <!--<div class="mrbox_topmidd" style="width: 69%;">-->
-          <!--<div class="amiddboxttop">-->
-              <!--<h2 class="tith2 pt1">实时监控统计</h2>-->
-                <!--<div class="amiddboxttop_map" style="">-->
-                    <!--<div id="main_active">-->
-        <!--<svg id="day_route" class="day_route"></svg>-->
-         <!--<br>-->
-                        <!--<p id="time"></p>-->
-                        <!--start:<input type="text" id="start_time" onchange="changeStartTime(this.value)">-->
-                        <!--end:<input type="text" id="end_time" onchange="changeEndTime(this.value)">-->
-                        <!--day:<input type="text" id="day" onchange="changeDay(this.value)">-->
-                        <!--<button onclick="runRoute()">run</button>-->
-                        <!--<p id ="list"></p>-->
-        <!--&lt;!&ndash;<button value="all" onclick="ChangeLabelChoose(value)">all</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button value = 'ordinary worker' onclick="ChangeLabelChoose(value)">ordinary worker</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button value = 'manager' onclick="ChangeLabelChoose(value)">manager</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>&ndash;&gt;-->
-        <!--&lt;!&ndash;<button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>&ndash;&gt;-->
-        <!--</div>-->
-<!--=======-->
         <div class="wpbox">
             <div class="bnt">
                 <div class="topbnt_left fl">
@@ -220,14 +132,6 @@
                 <h1 class="tith1 fl">China Vis 2019</h1>
                 <div class=" fr topbnt_right">
                     <ul>
-                        <!-- <li><a href="#">返回</a></li>
-                        <li><a href="#">分析报告</a></li>
-                        <li><a href="#">交通</a></li>
-                        <li><a href="#">舆情</a></li> -->
-                        <!-- <li><button value="0" onclick="ChangeDay(value)"> 自定义 </button></li>
-                        <li><button value="2" onclick="ChangeDay(value)"> 第三天 </button></li>
-                        <li><button value="1" onclick="ChangeDay(value)"> 第二天 </button></li>
-                        <li><button value="0" onclick="ChangeDay(value)"> 第一天 </button></li> -->
                         <li value="0" onclick="ChangeDay(value)" style="cursor: pointer"> 自定义 </li>
                         <li value="2" onclick="ChangeDay(value)" style="cursor: pointer"> 第三天 </li>
                         <li value="1" onclick="ChangeDay(value)" style="cursor: pointer"> 第二天 </li>
@@ -271,19 +175,17 @@
                 </div>
 
                 <div class="aleftboxtmidd">
-                    <h2 class="tith2">矛盾纠纷地区统计</h2>
+                    <h2 class="tith2">出席天数统计</h2>
                     <!--<div id="aleftboxtmidd" class="aleftboxtmiddcont">-->
-<!--                        <svg id="idx_proportion">-->
-<!--                        </svg>-->
-<!--                        <svg id="proportion"></svg>-->
-                        <button value="scholar">scholar</button>
-                        <button value="reporter">reporter</button>
-                        <button value="business">business</button>
-                        <button value="attendee">attendee</button>
-                        <button value="visitor">visitor</button>
-                        <button value="cook">only for meal</button>
-                        <button value="waiter">waiter</button>
-                        <button value="assistant">assistant</button>
+                        <svg id="proportion"></svg>
+                        <button value="scholar" onclick="changeClass(this.value)">scholar</button>
+                        <button value="reporter" onclick="changeClass(this.value)">reporter</button>
+                        <button value="business" onclick="changeClass(this.value)">business</button>
+                        <button value="attendee" onclick="changeClass(this.value)">attendee</button>
+                        <button value="visitor" onclick="changeClass(this.value)">visitor</button>
+                        <button value="cook" onclick="changeClass(this.value)">only for meal</button>
+                        <button value="waiter" onclick="changeClass(this.value)">waiter</button>
+                        <button value="assistant" onclick="changeClass(this.value)">assistant</button>
                     <!--</div>-->
                 </div>
 
@@ -306,18 +208,13 @@
                         <div class="amiddboxttop_map">
                             <div id="main_active">
                                 <svg id="day_route" class="day_route"></svg>
-                                <p id="time"></p>
+                                time :<span id="time"></span>
+                                <br>
                                 start:<input type="text" id="start_time" onchange="changeStartTime(this.value)">
                                 end:<input type="text" id="end_time" onchange="changeEndTime(this.value)">
                                 day:<input type="text" id="day" onchange="changeDay(this.value)">
+                                class:<input type="text" id = "class" onchange="ChangeLabelChoose(this.value)">
                                 <button onclick="runRoute()">run</button>
-                                <p id ="list"></p>
-                                <!--<button value="all" onclick="ChangeLabelChoose(value)">all</button>-->
-                                <!--<button value = 'ordinary worker' onclick="ChangeLabelChoose(value)">ordinary worker</button>-->
-                                <!--<button value = 'manager' onclick="ChangeLabelChoose(value)">manager</button>-->
-                                <!--<button value = 'reporter' onclick="ChangeLabelChoose(value)">reporter</button>-->
-                                <!--<button value = 'guest' onclick="ChangeLabelChoose(value)">guest</button>-->
-                                <!--<button value = 'attendee' onclick="ChangeLabelChoose(value)">attendee</button>-->
                             </div>
                         </div>
                     </div>
@@ -411,6 +308,7 @@
             label_choose = 'all';
             function ChangeLabelChoose(val){
                 label_choose = val;
+                showRoute(val);
             }
             function ChangeDay(val){
                 val=parseInt(val);
@@ -421,7 +319,7 @@
             }
             //drawFlow();
             // drawBubble(1,24700);
-            DrawProportion();
+            var proportion_obj = DrawProportion();
             var world_cloud = DrawWorldCloud(0);
             //world_cloud.update_by_day(1);
             //第二天修改为2
@@ -507,7 +405,7 @@
     </body>
 
     <script>
-        //当天的开始时间
+        //当天的开始时间,修改这个要同时修改DrawMain的第二个参数
         currentTime = 42000;
         endTime = 45164;
         //flag=true;
