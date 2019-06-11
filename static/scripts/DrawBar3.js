@@ -2,8 +2,6 @@ var groups = groups3;
 var groupData = groupData3;
 var time = time3;
 
-console.log("3");
-
 var dom = document.getElementById("containerlyx13");
 var myChart = echarts.init(dom, 'dark');
 var app = {};
@@ -12,9 +10,18 @@ app.title = '堆叠条形图';
 
 option = {
     tooltip : {
-        trigger: 'axis',
-        axisPointer : {            // 坐标轴指示器，坐标轴触发有效
-            type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+        trigger: 'item',
+        showDelay : 0,
+        formatter : function (params) {
+            var current = parseInt(params.name);
+            var hour = parseInt(current/60) + 7;
+            var min = current - parseInt(current/60) * 60;
+            if(parseInt(min/10) == 0){
+                return 'Time: ' + hour +':0' + min + ' <br/> ' + 'Place: ' + params.seriesName + ' <br/> ' + 'Number: ' + params.value;
+            }
+            else{
+                return 'Time: ' + hour +':' + min + ' <br/> ' + 'Place: ' + params.seriesName + ' <br/> ' + 'Number: ' + params.value;
+            }
         }
     },
     legend: {
@@ -34,28 +41,28 @@ option = {
         bottom: '10%',
         containLabel: true
     },
-    yAxis:  {
-        type: 'value',
-        axisLabel: {
-            color: 'white'
-        },
-        axisLine: {
-            lineStyle:{
-                color: 'white'
-            }
-        }
-    },
     xAxis: {
         type: 'category',
         data: time,
-        axisLabel: {
-            color: 'white'
+        splitLine: {
+            show: false
         },
-        axisLine: {
-            lineStyle:{
-                color: 'white'
+        axisLabel: {
+            formatter: function(params){
+                var current = parseInt(params);
+                var hour = parseInt(current/60) + 7;
+                var min = current - parseInt(current/60) * 60;
+                if(parseInt(min/10) == 0){
+                    return hour +':0' + min;
+                }
+                else{
+                    return hour +':' + min;
+                }
             }
         }
+    },
+    yAxis:  {
+        type: 'value'
     },
     series: [
         {
@@ -243,10 +250,15 @@ option = {
             type: 'bar',
             stack: '总量',
             data: groupData[30]
+        },
+        {
+            name: groups[31],
+            type: 'bar',
+            stack: '总量',
+            data: groupData[31]
         }
     ]
 };
 if (option && typeof option === "object") {
     myChart.setOption(option, true);
 };
-console.log("3");
