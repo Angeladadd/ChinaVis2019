@@ -90,10 +90,10 @@
                 <h1 class="tith1 fl">CICSC人员监测与分析</h1>
                 <div class=" fr topbnt_right">
                     <ul>
-                        <li value="0" onclick="ChangeDay(value)" style="cursor: pointer"> 自定义 </li>
-                        <li value="2" onclick="ChangeDay(value)" style="cursor: pointer"> 第三天 </li>
-                        <li value="1" onclick="ChangeDay(value)" style="cursor: pointer"> 第二天 </li>
-                        <li value="0" onclick="ChangeDay(value)" style="cursor: pointer"> 第一天 </li>
+                        <!-- <li value="0" onclick="ChangeDay(value)" style="cursor: pointer"> 自定义 </li> -->
+                        <li value="2" class="day3" onclick="ChangeDay(value)" style="cursor: pointer" style.active="background-color='white'"> 第三天 </li>
+                        <li value="1" class="day2" onclick="ChangeDay(value)" style="cursor: pointer"> 第二天 </li>
+                        <li value="0" class="day1" onclick="ChangeDay(value)" style="cursor: pointer"> 第一天 </li>
                     </ul>
                 </div>
             </div>
@@ -326,6 +326,10 @@
                     var dom = document.getElementById("containerlyx13");
                     dom.style.display = "none";
 
+                    d3.select(".day1").style("background-color", 'lightblue');
+                    d3.select(".day2").style("background-color", "rgba(0,0,0,0)");
+                    d3.select(".day3").style("background-color", "rgba(0,0,0,0)");
+
                     // new_element=document.createElement("script");
                     // new_element.setAttribute("type","text/javascript");
                     // new_element.setAttribute("src","../static/scripts/DrawBar1.js");
@@ -339,6 +343,10 @@
                     var dom = document.getElementById("containerlyx13");
                     dom.style.display = "none";
 
+                    d3.select(".day1").style("background-color", "rgba(0,0,0,0)");
+                    d3.select(".day2").style("background-color", 'lightblue');
+                    d3.select(".day3").style("background-color", "rgba(0,0,0,0)");
+
                     // new_element=document.createElement("script");
                     // new_element.setAttribute("type","text/javascript");
                     // new_element.setAttribute("src","../static/scripts/DrawBar2.js");
@@ -351,6 +359,10 @@
                     dom.style.display = "none";
                     var dom = document.getElementById("containerlyx13");
                     dom.style.display = "";
+
+                    d3.select(".day1").style("background-color", "rgba(0,0,0,0)");
+                    d3.select(".day2").style("background-color", "rgba(0,0,0,0)");
+                    d3.select(".day3").style("background-color", 'lightblue');
 
                     // new_element=document.createElement("script");
                     // new_element.setAttribute("type","text/javascript");
