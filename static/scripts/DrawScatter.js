@@ -3,10 +3,6 @@ var myChart = echarts.init(dom, 'dark');
 var app = {};
 option = null;
 option = {
-    // title : {
-    //     text: '男性女性身高体重分布',
-    //     subtext: '抽样调查来自: Heinz  2003'
-    // },
     grid: {
         top: '14%',
         left: '16%',
@@ -20,21 +16,21 @@ option = {
         formatter : function (params) {
             if (params.value.length > 1) {
                 return params.seriesName + ' <br/>'
-                + 'id: ' + params.value[0] + ' <br/>'
-                + 'max time: ' + params.value[1];
+                + 'Id: ' + params.value[0] + ' <br/>'
+                + 'Max time: ' + params.value[1];
             }
             else {
                 return params.name + ' : ' + params.value;
             }
         },
-        axisPointer:{
-            show: true,
-            type : 'cross',
-            lineStyle: {
-                type : 'dashed',
-                width : 1
-            }
-        }
+        // axisPointer:{
+        //     show: true,
+        //     type : 'cross',
+        //     lineStyle: {
+        //         type : 'dashed',
+        //         width : 1
+        //     }
+        // }
     },
     toolbox: {
         feature: {
