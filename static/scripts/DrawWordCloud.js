@@ -17,9 +17,9 @@ var svg = d3.select("#person_distribution").append("svg")
           "translate(" + margin.left + "," + margin.top + ")");
 var day = new Array(3);
 
-    day[0] = day1_obj.count;
-    day[1] = day2_obj.count;
-    day[2] = day3_obj.count;
+    day[0] = [['scholar',217],['waiter',141],['assistant',43],['reporter',112],['attendee',2688],['visitor',249],['business',139]];
+    day[1] = [['scholar',248],['waiter',219],['assistant',47],['reporter',228],['attendee',2789],['visitor',764],['business',132],['cook',32]];
+    day[2] = [['scholar',139],['waiter',83],['assistant',45],['reporter',118],['attendee',2273],['visitor',243],['business',51]];
 
   var myWords = new Array(0);
     var freq = new Array(0);
@@ -63,7 +63,7 @@ obj.update_by_day=function (day_param){
         //var min_freq = Math.min.apply(Math,freq);
         var linear = d3.scaleLinear()
         .domain([Math.min.apply(Math,freq),Math.max.apply(Math,freq)])
-        .range([20,45]);
+        .range([14,30]);
 
         for(var i=0;i<day[day_param].length;i++){
             myWords[i] = {};
@@ -73,7 +73,13 @@ obj.update_by_day=function (day_param){
         }
         this.layout.words(myWords.map(function(d) { return {text: d.word, size:d.size}; }));
         this.layout.start();
-    }
+
+    };
+var Tooltip = svg.append("text")
+            .style("opacity", 0)
+            .style("font-size",14)
+    .attr("fill","white")
+            .attr("class", "tooltip");
 // This function takes the output of 'layout' above and draw the words
 // Wordcloud features that are THE SAME from one word to the other can be here
 function draw(words) {
@@ -81,7 +87,7 @@ function draw(words) {
     if(old!=null) old.remove();
   svg
     .append("g")
-      .attr("transform", "translate(" + layout.size()[0] / 2 + "," + layout.size()[1] / 2 + ")")
+      .attr("transform", "translate(" + (layout.size()[0] / 2+20) + "," + layout.size()[1] / 2 + ")")
       .selectAll("text")
         .data(words)
       .enter().append("text")
@@ -94,6 +100,16 @@ function draw(words) {
         .attr("transform", function(d) {
           return "translate(" + [d.x, d.y] + ")rotate(" + d.rotate + ")";
         })
+      .on("mouseover",function(d,i){
+          Tooltip
+                                    .style("opacity", 1)
+                                    .text(day[dayx][i][1])
+                                    .attr("x", "2px")
+                                    .attr("y", "10px");
+      })
+      .on("mouseout",function (d,i) {
+          Tooltip.style("opacity",0);
+      })
         .text(function(d) { return d.text; });
 }
 return obj;

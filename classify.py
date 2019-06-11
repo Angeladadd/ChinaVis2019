@@ -42,7 +42,7 @@ day = [[],[],[]]
 
 people_mark = {}
 
-# fw = open('./static/data/day_cluster.js','w')
+fw = open('./static/data/day3_cluster.js','w')
 
 for i in range(2,15):
     col = str(i)
@@ -58,22 +58,22 @@ with open("./static/data/SensorDeployment.csv", "r") as file:
         sensor[line[0]] = line[5]
 
 data_day = []
-with open("./static/data/day1.csv", "r") as file:
-    csvfile = csv.reader(file)
-    i = 0
-    for line in csvfile:
-        if i != 0:
-            data_day.append({'id': line[0], 'sid': line[1], 'time': line[2]})
-            day[0].append(line[0])
-        i += 1
-with open("./static/data/day2.csv", "r") as file:
-    csvfile = csv.reader(file)
-    i = 0
-    for line in csvfile:
-        if i != 0:
-            data_day.append({'id': line[0], 'sid': line[1], 'time': line[2]})
-            day[1].append(line[0])
-        i += 1
+# with open("./static/data/day1.csv", "r") as file:
+#     csvfile = csv.reader(file)
+#     i = 0
+#     for line in csvfile:
+#         if i != 0:
+#             data_day.append({'id': line[0], 'sid': line[1], 'time': line[2]})
+#             day[0].append(line[0])
+#         i += 1
+# with open("./static/data/day2.csv", "r") as file:
+#     csvfile = csv.reader(file)
+#     i = 0
+#     for line in csvfile:
+#         if i != 0:
+#             data_day.append({'id': line[0], 'sid': line[1], 'time': line[2]})
+#             day[1].append(line[0])
+#         i += 1
 with open("./static/data/day3.csv", "r") as file:
     csvfile = csv.reader(file)
     i = 0
@@ -118,7 +118,7 @@ for x in people:
         waiter_id.append(x)
         people_mark[x] = 1
 # print (waiter_id)
-# fw.write("var waiter = "+str(waiter_id)+';\n')
+fw.write("var waiter = "+str(waiter_id)+';\n')
 
 #room里发礼物的工作人员
 
@@ -161,7 +161,7 @@ for x in people:
     if flag ==1:
         assistant_id.append(x)
 # print (assistant_id)
-# fw.write("var assistant = "+str(assistant_id)+';\n')
+fw.write("var assistant = "+str(assistant_id)+';\n')
 
 #专家学者
 for x in people:
@@ -194,7 +194,7 @@ for x in people:
         scholar_id.append(x)
         people_mark[x] = 1
 
-# fw.write("var scholar = "+str(scholar_id)+';\n')
+fw.write("var scholar = "+str(scholar_id)+';\n')
 
 # print ('scholar')
 # print (scholar_id)
@@ -222,7 +222,7 @@ for x in people:
         cooker_id.append(x)
         people_mark[x] = 1
 # print (cooker_id)
-# fw.write("var cook = "+str(cooker_id)+';\n')
+fw.write("var cook = "+str(cooker_id)+';\n')
 
 #二楼闲聊
 time = 1200
@@ -249,7 +249,7 @@ for x in people:
     if flag == 1:
         business_id.append(x)
         people_mark[x] = 1
-# fw.write("var business = "+str(business_id)+';\n')
+fw.write("var business = "+str(business_id)+';\n')
 # print (business_id)
 
 #记者 存疑
@@ -277,7 +277,7 @@ for x in people:
         reporter_id.append(x)
         people_mark[x] = 1
 # print (reporter_id)
-# fw.write("var reporter = "+str(reporter_id)+';\n')
+fw.write("var reporter = "+str(reporter_id)+';\n')
 
 # 与会者，这里会与很多类别有交集，优先考虑其他类别
 time = 600
@@ -300,7 +300,7 @@ for x in people:
     if flag == 1:
         attendee_id.append(x)
         people_mark[x] = 1
-# fw.write("var attendee = "+str(attendee_id)+';\n')
+fw.write("var attendee = "+str(attendee_id)+';\n')
 print (len(attendee_id))
 print (len(people))
 
@@ -333,8 +333,8 @@ for x in people:
         other_id.append(x)
 visitor_id = visitor_id + other_id[:]
 other_id = []
-# fw.write("var visitor = "+str(visitor_id)+';\n')
-# fw.write("var other = "+str(other_id)+'\n')
+fw.write("var visitor = "+str(visitor_id)+';\n')
+fw.write("var other = "+str(other_id)+'\n')
 
 Map = {}
 for x in people:
@@ -356,33 +356,33 @@ for x in people:
         Map[x] = 'visitor'
     else:
         Map[x] = 'other'
-# fw.write("var count=[['scholar',"+str(len(scholar_id))+\
-#          "],['waiter'," +str(len(waiter_id))+\
-# "],['assistant'," +str(len(assistant_id))+\
-# "],['reporter'," +str(len(reporter_id))+\
-# "],['attendee'," +str(len(attendee_id))+\
-# "],['visitor'," +str(len(visitor_id))+\
-# "],['business'," +str(len(business_id))+\
-# "],['cook'," +str(len(cooker_id))+\
-# "],['other'," +str(len(other_id))+"]];\n")
-# fw.write("var map="+str(Map)+'\n')
-# fw.write("var day_obj = {count:count,list:[scholar,waiter,assistant,reporter,attendee,visitor,business,cook,other],map:map};\n")
-for x in people:
-    if (x in day[0]) and (x in day[1]) and (x in day[2]):
-        porpotion[Map[x]][0] += 1
-    elif (x in day[0]) and (x in day[1]):
-        porpotion[Map[x]][1] += 1
-    elif (x in day[0]) and (x in day[2]):
-        porpotion[Map[x]][2] += 1
-    elif (x in day[1]) and (x in day[2]):
-        porpotion[Map[x]][3] += 1
-    elif x in day[0]:
-        porpotion[Map[x]][4] += 1
-    elif x in day[1]:
-        porpotion[Map[x]][5] += 1
-    elif x in day[2]:
-        porpotion[Map[x]][6] += 1
-
-
-fw1 = open('./static/data/proportion.js','w')
-fw1.write('var people_proportion = '+str(porpotion)+'\n')
+fw.write("var count=[['scholar',"+str(len(scholar_id))+\
+         "],['waiter'," +str(len(waiter_id))+\
+"],['assistant'," +str(len(assistant_id))+\
+"],['reporter'," +str(len(reporter_id))+\
+"],['attendee'," +str(len(attendee_id))+\
+"],['visitor'," +str(len(visitor_id))+\
+"],['business'," +str(len(business_id))+\
+"],['cook'," +str(len(cooker_id))+\
+"],['other'," +str(len(other_id))+"]];\n")
+fw.write("var map="+str(Map)+'\n')
+fw.write("var day3_obj = {count:count,list:[scholar,waiter,assistant,reporter,attendee,visitor,business,cook,other],map:map};\n")
+# for x in people:
+#     if (x in day[0]) and (x in day[1]) and (x in day[2]):
+#         porpotion[Map[x]][0] += 1
+#     elif (x in day[0]) and (x in day[1]):
+#         porpotion[Map[x]][1] += 1
+#     elif (x in day[0]) and (x in day[2]):
+#         porpotion[Map[x]][2] += 1
+#     elif (x in day[1]) and (x in day[2]):
+#         porpotion[Map[x]][3] += 1
+#     elif x in day[0]:
+#         porpotion[Map[x]][4] += 1
+#     elif x in day[1]:
+#         porpotion[Map[x]][5] += 1
+#     elif x in day[2]:
+#         porpotion[Map[x]][6] += 1
+#
+#
+# fw1 = open('./static/data/proportion.js','w')
+# fw1.write('var people_proportion = '+str(porpotion)+'\n')
