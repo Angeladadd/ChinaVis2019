@@ -1,4 +1,4 @@
-function DrawWorldCloud(dayx){
+function DrawWorldCloud(list){
    // var myWords = [{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"} ]
 
 // set the dimensions and margins of the graph
@@ -15,15 +15,15 @@ var svg = d3.select("#person_distribution").append("svg")
   .append("g")
     .attr("transform",
           "translate(" + margin.left + "," + margin.top + ")");
-var day = new Array(3);
-
-    day[0] = [['attendee',2688],['visitor',249],['scholar',217],['waiter',141],['business',139],['reporter',112],['assistant',43]];
-    day[1] = [['attendee',2789],['visitor',764],['scholar',248],['reporter',228],['waiter',219],['business',132],['assistant',47],['cook',32]];
-    day[2] = [['attendee',2273],['visitor',243],['scholar',139],['reporter',118],['waiter',83],['business',51],['assistant',45]];
+// var day = new Array(3);
+//
+//     day[0] = [['attendee',2688],['visitor',249],['scholar',217],['waiter',141],['business',139],['reporter',112],['assistant',43]];
+//     day[1] = [['attendee',2789],['visitor',764],['scholar',248],['reporter',228],['waiter',219],['business',132],['assistant',47],['cook',32]];
+//     day[2] = [['attendee',2273],['visitor',243],['scholar',139],['reporter',118],['waiter',83],['business',51],['assistant',45]];
   var myWords = new Array(0);
     var freq = new Array(0);
-        for(var i=0;i<day[dayx].length;i++){
-            freq[i] = parseInt(day[dayx][i][1]);
+        for(var i=0;i<list.length;i++){
+            freq[i] = parseInt(list[i][1]);
             //console.log(freq[i]);
         }
         //var max_freq = Math.max.apply(Math,freq);
@@ -32,9 +32,9 @@ var day = new Array(3);
         .domain([Math.min.apply(Math,freq),Math.max.apply(Math,freq)])
         .range([16,32]);
 
-        for(var i=0;i<day[dayx].length;i++){
+        for(var i=0;i<list.length;i++){
             myWords[i] = {};
-            myWords[i].word = day[dayx][i][0];
+            myWords[i].word = list[i][0];
             //console.log(myWords)
             myWords[i].size = linear(freq[i]);
         }
@@ -51,11 +51,11 @@ var layout = d3.layout.cloud()
 layout.start();
 var obj={};
 obj.layout = layout;
-obj.update_by_day=function (day_param){
+obj.update_by_day=function (list){
     var myWords = new Array(0);
     var freq = new Array(0);
-        for(var i=0;i<day[day_param].length;i++){
-            freq[i] = parseInt(day[day_param][i][1]);
+        for(var i=0;i<list.length;i++){
+            freq[i] = parseInt(list[i][1]);
             //console.log(freq[i]);
         }
         //var max_freq = Math.max.apply(Math,freq);
@@ -64,9 +64,9 @@ obj.update_by_day=function (day_param){
         .domain([Math.min.apply(Math,freq),Math.max.apply(Math,freq)])
         .range([14,30]);
 
-        for(var i=0;i<day[day_param].length;i++){
+        for(var i=0;i<list.length;i++){
             myWords[i] = {};
-            myWords[i].word = day[day_param][i][0];
+            myWords[i].word = list[i][0];
             //console.log(myWords)
             myWords[i].size = linear(freq[i]);
         }
@@ -102,7 +102,7 @@ function draw(words) {
       .on("mouseover",function(d,i){
           Tooltip
                                     .style("opacity", 1)
-                                    .text(day[dayx][i][1])
+                                    .text(list[i][1])
                                     .attr("x", "2px")
                                     .attr("y", "10px");
       })
@@ -111,9 +111,7 @@ function draw(words) {
       })
         .text(function(d) { return d.text; });
 }
-obj.update_interact=function list() {
 
-};
 return obj;
 
 }

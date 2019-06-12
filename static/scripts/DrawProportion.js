@@ -85,6 +85,8 @@ function DrawProportion() {
 
     obj.u = u;
     obj.update_by_class = function (classes) {
+        var p = document.getElementById("hhh");
+        p.innerHTML="人员类型："+classes;
         var data = new Array(7);
         for (var i=0;i<7;i++){
             data[day_number[i]] = people_proportion[classes][i];

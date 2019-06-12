@@ -126,27 +126,30 @@ function drawMainActive(day_index, initial_time){
                                 }
                                 var people_list = new Array(0);
                                 for (var x in people_dep){
-                                    var tmp_obj = {};
-                                    tmp_obj.text = x;
-                                    tmp_obj.data = people_dep[x];
+                                    var tmp_obj = new Array(0);
+                                    tmp_obj[0] = x;
+                                    tmp_obj[1]= people_dep[x];
+                                    if(tmp_obj[1]==0) continue;
                                     people_list.push(tmp_obj);
                                 }
-                                Tooltip
-                                    .style("opacity", 1)
-                                    .text(function () {
-                                        var str = "";
-                                        for(var j=0;j<people_list.length;j++){
-                                            str += people_list[j].text+":"+people_list[j].data+"人";
-                                        }
-                                        return str;
-                                    })
-                                    .attr("x", (d3.mouse(this)[0]+20) + "px")
-                                    .attr("y", (d3.mouse(this)[1]) + "px")
-                                    .call(wrap, 60);
+                                world_cloud.update_by_day(people_list);
+                                // Tooltip
+                                //     .style("opacity", 1)
+                                //     .text(function () {
+                                //         var str = "";
+                                //         for(var j=0;j<people_list.length;j++){
+                                //             str += people_list[j].text+":"+people_list[j].data+"人";
+                                //         }
+                                //         return str;
+                                //     })
+                                //     .attr("x", (d3.mouse(this)[0]+20) + "px")
+                                //     .attr("y", (d3.mouse(this)[1]) + "px")
+                                //     .call(wrap, 60);
 
                             })
                 .on("mouseout",function (d,i) {
-                                Tooltip.style("opacity",0);
+                                // Tooltip.style("opacity",0);
+                    world_cloud.update_by_day(dayw[day]);
                             });
             var old = svg.select('#people_layer');
             if(old != null) old.remove();

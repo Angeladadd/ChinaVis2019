@@ -111,6 +111,7 @@
                     <h2 class="tith2">出席天数统计</h2>
                     <!--<div id="aleftboxtmidd" class="aleftboxtmiddcont">-->
                         <svg id="proportion"></svg>
+                    <p id="hhh">人员类型：scholar</p>
                     <!--</div>-->
                 </div>
 
@@ -253,6 +254,11 @@
         </div>
 
         <script>
+                        dayw = new Array(3);
+
+    dayw[0] = [['attendee',2688],['visitor',249],['scholar',217],['waiter',141],['business',139],['reporter',112],['assistant',43]];
+    dayw[1] = [['attendee',2789],['visitor',764],['scholar',248],['reporter',228],['waiter',219],['business',132],['assistant',47],['cook',32]];
+    dayw[2] = [['attendee',2273],['visitor',243],['scholar',139],['reporter',118],['waiter',83],['business',51],['assistant',45]];
             tmp_day = 0;
             label_choose = 'all';
             function ChangeLabelChoose(val){
@@ -263,7 +269,7 @@
                 val=parseInt(val);
                 tmp_day = val;
                 currentDay = val;
-                world_cloud.update_by_day(val);
+                world_cloud.update_by_day(dayw[val]);
                 changeBar(val);
                 runRoute();
                 currentDay = val;
@@ -278,7 +284,7 @@
             //drawFlow();
             // drawBubble(1,24700);
             var proportion_obj = DrawProportion();
-            var world_cloud = DrawWorldCloud(0);
+            var world_cloud = DrawWorldCloud(dayw[0]);
             //world_cloud.update_by_day(1);
             //第二天修改为2
             route = drawMainActive(0,41000);
