@@ -4,7 +4,7 @@ function DrawProportion() {
     var margin = {top: 0, right: 0, bottom: 0, left: 0},
         width = 240 - margin.left - margin.right,
         height = 185 - margin.top - margin.bottom;
-    var classes = ['scholar','waiter','assistant','visitor','attendee','reporter','business','cook'];
+    var classes = ['all','scholar','waiter','assistant','visitor','attendee','reporter','business','cook'];
     var day_number = ['全到','1,2天到','1,3天到','2,3天到','只第1天','只第2天','只第3天'];
     var radius = Math.min(width-20, height-30) / 2;
     var color = d3.scaleOrdinal()
@@ -50,7 +50,7 @@ function DrawProportion() {
         .style("font-size",12);
     var data = new Array(7);
         for (var i=0;i<7;i++){
-            data[day_number[i]] = people_proportion['visitor'][i];
+            data[day_number[i]] = people_proportion['all'][i];
         }
         console.log(data);
     var svg = d3.select("#proportion")
