@@ -127,7 +127,10 @@ function drawMainActive(day_index, initial_time){
                 .on("mouseout",function (d,i) {
                                 Tooltip.style("opacity",0);
                             });
-            svg.selectAll(".position")
+            var old = svg.select('#people_layer');
+            if(old != null) old.remove();
+            svg.append('g').attr('id',"people_layer")
+                .selectAll(".position")
                 .data(people[day])
                 .enter()
                 .append("circle")
@@ -188,6 +191,7 @@ function drawMainActive(day_index, initial_time){
                 }
                 //console.log("666");
                 var point = this.point;
+                // console.log(point);
                 this.svg.selectAll(".position")
                     .transition()
                     .duration(100)
