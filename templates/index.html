@@ -35,7 +35,6 @@
         <script src = "../static/scripts/D1per10min.js"></script>
         <script src = "../static/scripts/D2per10min.js"></script>
         <script src = "../static/scripts/D3per10min.js"></script>
-    	<!-- <script src = "../static/scripts/sensor_deployment.js"></script> -->
         <script src = "../static/scripts/DrawBubble.js"></script>
         <script src = "../static/data/day_cluster.js"></script>
         <script src = "../static/scripts/DrawChord.js"></script>
@@ -83,7 +82,7 @@
                         开始时间:<input type="text" size="10" id="start_time" value="11-23-20" onchange="changeStartTime(this.value)">
                         结束时间:<input type="text" size="10" id="end_time" value="14-34-09" onchange="changeEndTime(this.value)">
                         <!--<br>-->
-                        <button class="active" onclick="runRoute()" style="cursor: pointer">查看运行轨迹</button>
+                        <button class="active" onclick="runRoute()" style="cursor: pointer">查看人员分布</button>
                     </p>
                 </div>
 
@@ -172,7 +171,7 @@
             <div class="mrbox">
                 <div class="mrbox_topmidd" style="width: 69%;">
                     <div class="amiddboxttop">
-                        <h2 class="tith2 pt1">实时监控统计</h2>
+                        <h2 class="tith2 pt1">查看人员移动与分布</h2>
                         <div class="amiddboxttop_map">
                             <div id="main_active">
                                 <svg id="day_route" class="day_route"></svg>
@@ -231,9 +230,6 @@
                         <script src="../static/scripts/DrawBar3.js"></script>
 
                         <script>
-                            // console.log(D1permin);
-                            // console.log(D2permin);
-                            // console.log(D3permin);
                             var dom = document.getElementById("containerlyx11");
                             dom.style.display = "";
                             var dom = document.getElementById("containerlyx12");
@@ -267,7 +263,6 @@
                 tmp_day = val;
                 currentDay = val;
                 world_cloud.update_by_day(val);
-                console.log(val);
                 changeBar(val);
                 runRoute();
                 currentDay = val;
@@ -291,8 +286,6 @@
             drawTable(0,41000);
             var tmp =0;
             function Update(currentTime){
-                // {#console.log(currentTime);#}
-                //console.log(currentTime);
                 route.update(currentTime);
                 tmp++;
                 if(tmp == 600){
@@ -304,8 +297,6 @@
                     drawChord(currentDay,currentTime);
                     drawTable(currentDay,currentTime);
                     tmp =0;
-                    console.log("change!!!!");
-                    console.log("currentDay:"+currentDay);
                 }
             }
             tmp_endTime = 45164;
@@ -325,7 +316,6 @@
             function runRoute(){
                 currentTime = tmp_currentTime;
                 endTime = tmp_endTime;
-                console.log(currentTime);
                 route = drawMainActive(tmp_day,currentTime);
             }
 
@@ -338,7 +328,6 @@
                 }
             }
             function changeBar(val){
-                console.log(val);
                 if(val == 0){
                     var dom = document.getElementById("containerlyx11");
                     dom.style.display = "";
@@ -350,11 +339,6 @@
                     d3.select(".day1").style("background-color", 'lightblue');
                     d3.select(".day2").style("background-color", "rgba(0,0,0,0)");
                     d3.select(".day3").style("background-color", "rgba(0,0,0,0)");
-
-                    // new_element=document.createElement("script");
-                    // new_element.setAttribute("type","text/javascript");
-                    // new_element.setAttribute("src","../static/scripts/DrawBar1.js");
-                    // document.body.appendChild(new_element);
                 }
                 if(val == 1){
                     var dom = document.getElementById("containerlyx11");
@@ -367,11 +351,6 @@
                     d3.select(".day1").style("background-color", "rgba(0,0,0,0)");
                     d3.select(".day2").style("background-color", 'lightblue');
                     d3.select(".day3").style("background-color", "rgba(0,0,0,0)");
-
-                    // new_element=document.createElement("script");
-                    // new_element.setAttribute("type","text/javascript");
-                    // new_element.setAttribute("src","../static/scripts/DrawBar2.js");
-                    // document.body.appendChild(new_element);
                 }
                 if(val == 2){
                     var dom = document.getElementById("containerlyx11");
@@ -385,26 +364,18 @@
                     d3.select(".day2").style("background-color", "rgba(0,0,0,0)");
                     d3.select(".day3").style("background-color", 'lightblue');
 
-                    // new_element=document.createElement("script");
-                    // new_element.setAttribute("type","text/javascript");
-                    // new_element.setAttribute("src","../static/scripts/DrawBar3.js");
-                    // document.body.appendChild(new_element);
                 }
             }
         </script>
     </body>
 
     <script>
-        //当天的开始时间,修改这个要同时修改DrawMain的第二个参数
         currentTime = 41000;
         endTime = 45164;
-        //flag=true;
         var currentDay = 0;
             setTimeout(function () {
-                //if(!flag) return;
                 //当天的结束时间
             if(currentTime<endTime){
-                //console.log(currentTime);
                 var p=document.getElementById("time");
                 p.innerHTML = parseInt(currentTime/3600).toString()+"h"+parseInt(currentTime%3600 / 60) + "min"+parseInt(currentTime%60) + "s";
             Update(currentTime);
