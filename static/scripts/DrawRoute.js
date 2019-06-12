@@ -59,6 +59,7 @@ function drawMainActive(day_index, initial_time){
 
 
     var old = svg.select('text'); if(old) old.remove();
+    var old = svg.select('.people_poe'); if(old) old.remove();
     var Tooltip = svg.append("text")
             .style("opacity", 0)
             .style("font-size",14)
@@ -118,11 +119,31 @@ function drawMainActive(day_index, initial_time){
                 })
                 .style("opacity",0.5)
                 .on("mouseover",function (d,i) {
+
+                                var people_dep = {'scholar':0,'attendee':0,'reporter':0,'business':0,'visitor':0,'cook':0,'assistant':0,'waiter':0};
+                                for(var j=0;j<sensor_people_log[i].length;j++){
+                                    people_dep[day_obj.map[sensor_people_log[i][j]]] += 1;
+                                }
+                                var people_list = new Array(0);
+                                for (var x in people_dep){
+                                    var tmp_obj = {};
+                                    tmp_obj.text = x;
+                                    tmp_obj.data = people_dep[x];
+                                    people_list.push(tmp_obj);
+                                }
                                 Tooltip
                                     .style("opacity", 1)
-                                    .text(sensor[i].sid.toString())
+                                    .text(function () {
+                                        var str = "";
+                                        for(var j=0;j<people_list.length;j++){
+                                            str += people_list[j].text+":"+people_list[j].data+"人";
+                                        }
+                                        return str;
+                                    })
                                     .attr("x", (d3.mouse(this)[0]+20) + "px")
-                                    .attr("y", (d3.mouse(this)[1]) + "px");
+                                    .attr("y", (d3.mouse(this)[1]) + "px")
+                                    .call(wrap, 60);
+
                             })
                 .on("mouseout",function (d,i) {
                                 Tooltip.style("opacity",0);
@@ -156,15 +177,12 @@ function drawMainActive(day_index, initial_time){
                     else return 0;
                 });
 
-             var Tooltip = svg.append("text")
-            .style("opacity", 0)
-            .style("font-size",14)
-            .attr("class", "tooltip");
             // for(var i=0;i<sensor_people.length;i++){
             //     console.log(sensor_people[i]);
             // }
             obj.update = function(currentTime){
                 var Tooltip = obj.Tooltip;
+
                // console.log(this.people);
                 for(var i=0;i<this.people.length;i++){
                     if(!this.people[i][this.point[i]+1]) continue;
@@ -266,4 +284,29 @@ function drawMainActive(day_index, initial_time){
 }
 function route_change_day(day){
     route = drawMainActive(day,currentTime);
+}
+function wrap(text, width) {
+    text.each(function() {
+        var text = d3.select(this),
+            words = text.text().split(/\s+/).reverse(),
+            word,
+            line = [],
+            lineNumber = 0,
+            lineHeight = 1.4, // ems
+            y = text.attr("y"),
+            x = text.attr("x"),
+            dy = parseFloat(text.attr("dy")),
+            tspan = text.text(null).append("tspan").attr("x", x).attr("y", y).attr("dy", dy + "em");
+
+        while (word = words.pop()) {
+            line.push(word);
+            tspan.text(line.join(" "));
+            if (tspan.node().getComputedTextLength() > width) {
+                line.pop();
+                tspan.text(line.join(" "));
+                line = [word];
+                tspan = text.append("tspan").attr("x", x).attr("y", y).attr("dy", ++lineNumber * lineHeight + dy + "em").text(word);
+            }
+        }
+    });
 }
