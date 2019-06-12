@@ -35,7 +35,7 @@ function drawChord(date,currentTime){
     var svg = d3.select('#chord').select("svg"),
         width = +svg.attr("width"),
         height = +svg.attr("height"),
-        outerRadius = Math.min(width, height) * 0.5 - 70,
+        outerRadius = Math.min(width, height) * 0.5 - 80,
         innerRadius = outerRadius - 20;
 
     var formatValue = d3.formatPrefix(",.0", 1e3);
