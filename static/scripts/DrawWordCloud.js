@@ -6,7 +6,7 @@ var margin = {top: 0, right: 0, bottom: 0, left: 0},
     width = 200 - margin.left - margin.right,
     height = 190 - margin.top - margin.bottom;
 
-
+var dayx = dayx;
 var label_color = {'scholar':'#ff0000','waiter':"#00ff00",'assistant':"#ff00ff",'reporter':'#0000ff','attendee':'#ffffff','visitor':'#ffff00','business':'#00ffff','cook':'#33ff66'};
 // append the svg object to the body of the page
 var svg = d3.select("#person_distribution").append("svg")
@@ -111,6 +111,9 @@ function draw(words) {
       })
         .text(function(d) { return d.text; });
 }
+obj.update_interact=function list() {
+
+};
 return obj;
 
 }
