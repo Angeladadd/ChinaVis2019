@@ -2,9 +2,9 @@ function DrawWorldCloud(dayx){
    // var myWords = [{word: "Running", size: "10"}, {word: "Surfing", size: "20"}, {word: "Climbing", size: "50"}, {word: "Kiting", size: "30"}, {word: "Sailing", size: "20"}, {word: "Snowboarding", size: "60"} ]
 
 // set the dimensions and margins of the graph
-var margin = {top: 10, right: 10, bottom: 10, left: 10},
+var margin = {top: 0, right: 0, bottom: 0, left: 0},
     width = 200 - margin.left - margin.right,
-    height = 200 - margin.top - margin.bottom;
+    height = 190 - margin.top - margin.bottom;
 
 
 var label_color = {'scholar':'#ff0000','waiter':"#00ff00",'assistant':"#ff00ff",'reporter':'#0000ff','attendee':'#ffffff','visitor':'#ffff00','business':'#00ffff','cook':'#33ff66'};
@@ -17,10 +17,9 @@ var svg = d3.select("#person_distribution").append("svg")
           "translate(" + margin.left + "," + margin.top + ")");
 var day = new Array(3);
 
-    day[0] = [['scholar',217],['waiter',141],['assistant',43],['reporter',112],['attendee',2688],['visitor',249],['business',139]];
-    day[1] = [['scholar',248],['waiter',219],['assistant',47],['reporter',228],['attendee',2789],['visitor',764],['business',132],['cook',32]];
-    day[2] = [['scholar',139],['waiter',83],['assistant',45],['reporter',118],['attendee',2273],['visitor',243],['business',51]];
-
+    day[0] = [['attendee',2688],['visitor',249],['scholar',217],['waiter',141],['business',139],['reporter',112],['assistant',43]];
+    day[1] = [['attendee',2789],['visitor',764],['scholar',248],['reporter',228],['waiter',219],['business',132],['assistant',47],['cook',32]];
+    day[2] = [['attendee',2273],['visitor',243],['scholar',139],['reporter',118],['waiter',83],['business',51],['assistant',45]];
   var myWords = new Array(0);
     var freq = new Array(0);
         for(var i=0;i<day[dayx].length;i++){
@@ -29,9 +28,9 @@ var day = new Array(3);
         }
         //var max_freq = Math.max.apply(Math,freq);
         //var min_freq = Math.min.apply(Math,freq);
-        var linear = d3.scaleLinear()
+        var linear = d3.scaleLog()
         .domain([Math.min.apply(Math,freq),Math.max.apply(Math,freq)])
-        .range([10,28]);
+        .range([16,32]);
 
         for(var i=0;i<day[dayx].length;i++){
             myWords[i] = {};
