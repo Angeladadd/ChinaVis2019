@@ -2,6 +2,8 @@ sensor_people_log = new Array(0);
 function drawMainActive(day_index, initial_time){
     //处理参数
     var day = parseInt(day_index);
+   // console.log(day);
+   // console.log(people[day]);
     var sensor = sensor_deployment;
     for(var i=0;i<sensor.length;i++){
            sensor_people_log[i] = new Array(0);
@@ -131,7 +133,6 @@ function drawMainActive(day_index, initial_time){
                 .append("circle")
                 .attr("class","position")
                 .attr("cy", function (d,i) {
-                    console.log(d[0].x);
                         return xLinear(d[0].x);})
                 .attr("cx", function (d,i) {
                     var base = 0;
@@ -161,6 +162,7 @@ function drawMainActive(day_index, initial_time){
             // }
             obj.update = function(currentTime){
                 var Tooltip = obj.Tooltip;
+               // console.log(this.people);
                 for(var i=0;i<this.people.length;i++){
                     if(!this.people[i][this.point[i]+1]) continue;
                     if(this.people[i][this.point[i]+1].time == currentTime) {
@@ -217,72 +219,6 @@ function drawMainActive(day_index, initial_time){
                     return compute[color_label[sensor[i].label]](color_linear(sensor_people[i]));
                 });
             };
-            // obj.update_day = function (currentDay,currentTime){
-            //     //if(currentTime!=initial_time) currentTime=initial_time;
-            //     var day = parseInt(currentDay);
-            //     console.log("current day: "+day);
-            //     var currenTime = parseInt(currentTime);
-            //     var Tooltip = obj.Tooltip;
-            //     this.people = people[day];
-            //     for(var i=0;i<this.people.length;i++){
-            //         if(!this.people[i][this.point[i]+1]) continue;
-            //         if(this.people[i][this.point[i]+1].time == currentTime) {
-            //             //console.log(i.toString());
-            //
-            //             var new_sensor = this.people[i][this.point[i]+1].sensor_simple_id;
-            //             //console.log(new_sensor.toString());
-            //             if(this.point[i]!= 0)
-            //             {
-            //                 var old_sensor = this.people[i][this.point[i]].sensor_simple_id;
-            //                 sensor_people[old_sensor] -= 1;
-            //                 sensor_people_log[old_sensor].splice(sensor_people_log[old_sensor].indexOf(this.people[i][0].id),1);
-            //                 //d3.select("#sensor"+old_sensor.toString())
-            //                 //.attr("fill", compute[color_label[sensor[old_sensor].label]](color_linear(sensor_people[old_sensor])));
-            //             }
-            //             sensor_people[new_sensor] += 1;
-            //             sensor_people_log[new_sensor].push(this.people[i][0].id);
-            //             //console.log(this.sensor_people_log[new_sensor].toString());
-            //             //d3.select("#sensor"+new_sensor.toString())
-            //                // .attr("fill", compute[color_label[sensor[new_sensor].label]](color_linear(sensor_people[new_sensor])));
-            //             this.point[i]+=1;
-            //         }
-            //     }
-            //     //console.log("666");
-            //     var point = this.point;
-            //     this.svg.selectAll(".position")
-            //         .data(people[day])
-            //         .enter()
-            //         .append("cycle")
-            //         .transition()
-            //         .duration(100)
-            //         .attr("cy", function (d,i) {
-            //             return xLinear(d[point[i]].x);})
-            //         .attr("cx", function (d,i) {
-            //             var base = 0;
-            //             if(d[point[i]].floor != "1")
-            //                 base+=bias;
-            //             return base + yLinear(d[point[i]].y);})
-            //         .attr("r",2)
-            //         .attr("fill",function (d,i) {
-            //             var id = d[0].id;
-            //             var label = day_obj.map[id];
-            //             return label_color[label];
-            //         })
-            //         .style("opacity",function (d,i) {
-            //         if(label_choose == 'all') return 1;
-            //         var id = d[0].id;
-            //         var label = day_obj.map[id];
-            //         if(label == label_choose) return 1;
-            //         else return 0;
-            //     });
-            //     this.svg.selectAll(".sensor")
-            //         .transition()
-            //         .duration(100)
-            //     .attr("fill", function (d,i) {
-            //         //console.log("here");
-            //         return compute[color_label[sensor[i].label]](color_linear(sensor_people[i]));
-            //     });
-            // };
             obj.show_route = function (val) {
                 if(val == null){
                     var p=svg.select('#path_layer');
