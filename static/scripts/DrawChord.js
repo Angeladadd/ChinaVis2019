@@ -1,14 +1,15 @@
 function drawChord(date,currentTime){
 
-    if(date === 3) all_data = D3trans;
-	else if (date === 2) all_data = D2trans;
+    if(date === 2) all_data = D3trans;
+	else if (date === 1) all_data = D2trans;
 	else all_data = D1trans;
 	if(currentTime < 27000) t = 0;
 	else t = Math.floor((currentTime - 27000)/600);
 
     var region = [];
     for(i in D1trans[0]){
-        region.push(i);
+        if(i=='0') region.push('passage');
+        else region.push(i);
     }
     var m=[];
     // console.log(all_data)
@@ -34,8 +35,8 @@ function drawChord(date,currentTime){
     var svg = d3.select('#chord').select("svg"),
         width = +svg.attr("width"),
         height = +svg.attr("height"),
-        outerRadius = Math.min(width, height) * 0.5 - 40,
-        innerRadius = outerRadius - 30;
+        outerRadius = Math.min(width, height) * 0.5 - 80,
+        innerRadius = outerRadius - 20;
 
     var formatValue = d3.formatPrefix(",.0", 1e3);
 
@@ -60,6 +61,7 @@ function drawChord(date,currentTime){
         .datum(chord(matrix));
 
     var group = g.append("g")
+         .attr("transform", "translate(70,0)")
         .attr("class", "groups")
     .selectAll("g")
     .data(function(chords) { return chords.groups; })
@@ -84,12 +86,13 @@ function drawChord(date,currentTime){
     .append("text")
         .attr("x", 8)
         .attr("dy", ".35em")
-        .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180) translate(-16)" : null; })
+        .attr("transform", function(d) { return d.angle > Math.PI ? "rotate(180) translate(0)" : null; })
         .style("text-anchor", function(d) { return d.angle > Math.PI ? "end" : null; })
         .text(function(d) { return region[d.index]; });
 
     g.append("g")
         .attr("class", "ribbons")
+        .attr("transform", "translate(70,0)")
     .selectAll("path")
     .data(function(chords) { return chords; })
     .enter().append("path")
@@ -106,19 +109,42 @@ function drawChord(date,currentTime){
     });
     }
 
-    let legendOrdinal = d3.legendColor()
+    var color1 = d3.scaleOrdinal()
+        .domain(region.slice(0,16))
+        .range([ "#FFDD89", "#957244", "#F26223", "#D2B48C","#FF6347","#A0522D","#8B4513","#B8860B", "#D2691E","#FFDD89", "#957244", "#F26223", "#D2B48C","#FF6347","#A0522D","#8B4513"]);
+    var color2 = d3.scaleOrdinal()
+        .domain(region.slice(16,32))
+        .range([ "#B8860B", "#D2691E","#FFDD89", "#957244", "#F26223", "#D2B48C","#FF6347","#A0522D","#8B4513","#B8860B", "#D2691E","#A0522D","#8B4513","#B8860B", "#D2691E"]);
+    let legendOrdinal1 = d3.legendColor()
             .shapeRadius(4)
 			.shape('circle')
-            .scale(color)
+            // .scale(11,3)
+            .scale(color1)
+
             // .attr("r","8px")
 
-		let legend = svg.append('g')
+		let legend1= svg.append('g')
 			.classed('legend-color', true)
 			.attr('text-anchor', 'start')
 			.attr('transform','translate(20,30)')
 			.style('font-size','9px')
             .attr("fill","rgb(255,255,255)")
-			.call(legendOrdinal);
+			.call(legendOrdinal1);
+    let legendOrdinal2 = d3.legendColor()
+            .shapeRadius(4)
+			.shape('circle')
+            // .scale(11,3)
+            .scale(color2)
+
+            // .attr("r","8px")
+
+		let legend2 = svg.append('g')
+			.classed('legend-color', true)
+			.attr('text-anchor', 'start')
+			.attr('transform','translate(90,30)')
+			.style('font-size','9px')
+            .attr("fill","rgb(255,255,255)")
+			.call(legendOrdinal2);
 
 
 		let legendSize = d3.legendSize()

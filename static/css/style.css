@@ -122,9 +122,9 @@ html,body{ font-family: 微软雅黑, MicrosoftYahei, sans-serif; color:#fff; ba
 .fr{ float: right;}
 .topbnt_left{width: 33%}
 .topbnt_left ul{ padding-top: 38px; padding-left: 10%; width: 100%}
-.topbnt_left li { background:url(../img/bnt.png) center; font-size: 14px; line-height: 33px;background-repeat: no-repeat;width:18%; height:35px;float: left; text-align: center; margin-left: 1%}
-.topbnt_left li.active,.topbnt_right li.active{background:url(../img/bntactive.png) no-repeat center; }
-.topbnt_left li a{ text-decoration: none; color: #fff;}
+.topbnt_left li, .active { background:url(../img/bnt.png) center; font-size: 14px; line-height: 33px;background-repeat: no-repeat;width:18%; height:35px;float: left; text-align: center; margin-left: 1%}
+.topbnt_left .active,.topbnt_right li.active{background:url(../img/bntactive.png) no-repeat center; }
+.topbnt_left li a, .active{ text-decoration: none; color: #fff;}
 .tith1{ width: 33%; text-align: center; padding-top: 16px; font-weight: bold; letter-spacing:8px; font-size: 36px;}
 .topbnt_right{padding-top: 2%; padding-right:2.5%; width: 27%}
 .topbnt_right li { background:url(../img/bnt.png) center; font-size: 14px; line-height: 33px;background-repeat: no-repeat;width:22%; height:35px;float: right; text-align: center; margin-right:1%}
