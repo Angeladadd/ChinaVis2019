@@ -10,10 +10,9 @@ function drawTable(date,currentTime){
 	var data = [];
     for(i in D1per10min){
         var tmp = {region:i,flow:D1per10min[i][t]};
-        // console.log(tmp);
         data.push(tmp);
     }
-    // console.log(data);
+
     data.sort(function(a,b){
 			return  b.flow - a.flow;
 		});

@@ -338,9 +338,9 @@
                     var svg_chord = d3.select('#chord').select("svg");
                     svg_bubble.selectAll('*').remove();
                     svg_chord.selectAll('*').remove();
-                    drawBubble(1,currentTime);
-                    drawChord(1,currentTime);
-                    drawTable(1,currentTime);
+                    drawBubble(currentDay,currentTime);
+                    drawChord(currentDay,currentTime);
+                    drawTable(currentDay,currentTime);
                     tmp =0;
                     console.log("change!!!!")
                 }
